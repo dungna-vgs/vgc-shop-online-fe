@@ -18,7 +18,7 @@ export default function SearchVGACode() {
       }
     }, 500)
     return () => clearTimeout(id)
-  }, [keyword, setSeachVGA, searchVGA])
+  }, [keyword])
   return (
     <div className='relative ml-auto flex-1 md:grow-0 my-4 md:my-0'>
       <Search className='absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground ' />

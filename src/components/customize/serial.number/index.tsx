@@ -38,17 +38,18 @@ export default function SerialNumber(props: TSerialNumber) {
   const { setVgas, vgas, searchVGA, setSeachVGA, vgaSearchAll, feeSearchAll } =
     useGlobalStore()
 
+  const handleSearchVGA = (params: TParamsSearchVGA) => {
+    apiSearchVGA(params).then((res) => {
+      console.log(res.data)
+      setVgas(res.data)
+    })
+  }
+
   useEffect(() => {
-    const handleSearchVGA = (params: TParamsSearchVGA) => {
-      apiSearchVGA(params).then((res) => {
-        console.log(res.data)
-        setVgas(res.data)
-      })
-    }
     if (Object.keys(searchVGA).length) {
       handleSearchVGA(searchVGA)
     }
-  }, [setVgas, searchVGA])
+  }, [searchVGA])
 
   let data = props.infoVGA.data
   if (isClient && Object.keys(searchVGA).length) {
@@ -61,13 +62,13 @@ export default function SerialNumber(props: TSerialNumber) {
       if (keyword?.trim()) {
         setSeachVGA({ vga: keyword })
       } else {
-        const copySearchVGA = { ...searchVGA }
+        let copySearchVGA = { ...searchVGA }
         delete copySearchVGA.vga
         setSeachVGA(copySearchVGA)
       }
     }, 300)
     return () => clearTimeout(id)
-  }, [keyword, setSeachVGA, searchVGA])
+  }, [keyword, setSeachVGA])
 
   if (vgaSearchAll.length || feeSearchAll.length) return null
 

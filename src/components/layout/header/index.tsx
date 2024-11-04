@@ -13,6 +13,7 @@ type THeader = {
 }
 
 const Header: React.FC<THeader> = ({ showSearch = true }) => {
+  
   return (
     <div className='bg-background fixed top-0 right-0 left-0 z-[999] shadow-[0_-6px_10px_5px_rgba(0,0,0,0.2)]'>
       <div className='max-w-[1200px] mx-auto px-4'>

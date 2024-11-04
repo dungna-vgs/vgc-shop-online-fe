@@ -32,7 +32,7 @@ export const useGlobalStore = create<THomeStore>((set, get) => ({
   setVgas: (vgas) => set({ vgas }),
   setFees: (fees) => set({ fees }),
   setSeachVGA: (searchVGA) => {
-    const oldSearchVGA = get().searchVGA
+    let oldSearchVGA = get().searchVGA
     if (
       Object.hasOwn(searchVGA, 'money_from') ||
       Object.hasOwn(searchVGA, 'money_to')

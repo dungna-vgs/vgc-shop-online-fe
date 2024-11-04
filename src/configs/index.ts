@@ -19,5 +19,5 @@ export enum API_INTERNAL_ENDPOINT {
   SEARCH_ALL = '/api/search-all',
   GET_SIGNIFICANCES = '/api/get-significances',
   SEARCH_VGA = '/api/search-vga',
-  SEARCH_GOLFER = '/api/search-golfer'
+  SEARCH_GOLFER = '/api/search-golfer',
 }

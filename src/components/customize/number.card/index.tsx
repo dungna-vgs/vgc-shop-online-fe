@@ -37,9 +37,7 @@ export default function CardNumber(props: TCardNumberProps) {
         </div>
 
         <div className='lg:p-1 p-0 w-full flex md:flex-row  flex-col gap-1 justify-between items-center text-[#FAFF00] font-semibold'>
-          <span className='block lg:text-[16px] text-[12px]'>
-            {formatCurrency(props.vga.amount)}đ
-          </span>
+          <span className='block lg:text-[16px] text-[12px]'>{formatCurrency(props.vga.amount)}đ</span>
           <Link href={`/buy-vga/${props.vga.id}`} className={styles.btnBuy}>
             Mua ngay
           </Link>

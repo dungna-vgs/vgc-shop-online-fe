@@ -1,5 +1,7 @@
 import { TYPE_ENVIRONMENT } from '@/configs'
 import { NextRequest } from 'next/server'
+import { headers } from 'next/headers'
+import { EDevice } from '@/types/type'
 
 export const isURL = (stringUrl: string): boolean => {
   try {
@@ -64,6 +66,8 @@ export function getQueryRequest<T>(req: NextRequest) {
   } as TRequest<T>
 }
 
+
+
 export function formatCurrency(number: number) {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }

@@ -8,6 +8,8 @@ import clsx from 'clsx'
 import { poppins, yeseva } from 'fonts'
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
+import Header from '@layout/header'
+import Footer from '@layout/footer'
 import BackToTop from '@/components/ui/scroll-to-top'
 
 export const metadata: Metadata = {
@@ -70,7 +72,9 @@ export default function RootLayout({
   return (
     <html lang='vi'>
       <body className={clsx(poppins.variable, yeseva.variable)}>
+        <Header />
         {children}
+        <Footer />
         <BackToTop />
       </body>
     </html>
