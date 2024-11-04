@@ -1,0 +1,3 @@
+export const CUSTOM_EVENT_BROWSER = {
+  OPEN_NEW_PAGE: 'OPEN_NEW_PAGE'
+}
