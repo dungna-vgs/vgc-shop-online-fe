@@ -1,7 +1,6 @@
 import { TYPE_ENVIRONMENT } from '@/configs'
 import { NextRequest } from 'next/server'
-import { headers } from 'next/headers'
-import { EDevice } from '@/types/type'
+import { TFeePackage, TPaymentInfo } from '@/types/type'
 
 export const isURL = (stringUrl: string): boolean => {
   try {
@@ -66,8 +65,29 @@ export function getQueryRequest<T>(req: NextRequest) {
   } as TRequest<T>
 }
 
-
-
 export function formatCurrency(number: number) {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+}
+
+export function getMembershipPackageName(feePackage: TFeePackage) {
+  if (feePackage.sub_name.startsWith('Pre')) {
+    return `Premium ${feePackage.year_add}`
+  }
+  return feePackage.sub_name
+}
+
+export function generateVietQR({
+  bank_account,
+  bank_code,
+  bank_id,
+  money
+}: TPaymentInfo['bank']) {
+  const baseUrl = `https://img.vietqr.io/image/970428-${bank_id}-compact.png`
+  const params = new URLSearchParams({
+    amount: money ? money.toString() : '',
+    addInfo: bank_code || '',
+    accountName: bank_account || ''
+  })
+
+  return `${baseUrl}?${params.toString()}`
 }

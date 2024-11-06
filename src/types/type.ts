@@ -2,6 +2,8 @@ export type TVga = {
   id: number
   amount: number
   loai_ma: string | null
+  original_amount?: number
+  discount?: string
 }
 
 export type TFeePackage = {
@@ -17,6 +19,8 @@ export type TFeePackage = {
   year_add: number
   type_upgrade: number
   refund: number
+  original_amount?: number
+  discount?: string
 }
 
 export type TTypeVGA = {
@@ -107,4 +111,25 @@ export type TGolfer = {
   expried_time: Date
   gender: number
   golfer_id: number
+}
+
+export type TPaymentInfo = {
+  bank: {
+    bank_account: string
+    bank_name: string
+    bank_addess: string
+    bank_id: string
+    bank_code: string
+    money: number
+  }
+  transaction_id: number
+}
+
+export type TPaymentStatus = {
+  transaction: {
+    id: TPaymentInfo['transaction_id']
+    status: number
+    type: string
+    updated_at: Date
+  }
 }

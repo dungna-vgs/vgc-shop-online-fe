@@ -3,84 +3,10 @@ import { useState } from 'react'
 import Image from 'next/image'
 import styles from './style.module.css'
 
-import Countdown from '@/components/customize/timer'
-import RecipientCard from '@/app/[locale]/_components/recipient'
-import DummyInvoice from '@/app/[locale]/_components/dummy-invoice'
-import VGABill from '@/app/[locale]/_components/vga-bill'
-import InforBill from '@/app/[locale]/_components/infor-bill'
-import SuccessAlert from '@/app/[locale]/_components/success.alert'
 import ContentFillForm from '@/components/customize/content.fill.form'
+import ContentCheck from '@/app/[locale]/_components/content-check'
+import Receipt from '@/app/[locale]/_components/receipt'
 
-type TItemProps = {
-  setSteps: (step: number) => void
-  vgacode: string
-}
-
-function ContentCheck(props: TItemProps) {
-  return (
-    <div className='content-check'>
-      <div>
-        <p className='font-bold text-center text-[28px] uppercase pb-12'>
-          KIỂM TRA THÔNG TIN MUA MÃ VGA
-        </p>
-        <div className='grid lg:grid-cols-2 grid-cols-1 gap-4'>
-          <RecipientCard />
-          {/* COLS 2  */}
-          <DummyInvoice />
-        </div>
-      </div>
-      <div className='flex justify-center md:justify-end items-center gap-6 mt-16'>
-        <button
-          className='text-black leading-[64px]  hover:text-white hover:border-none  bg-white hover:bg-gradient-to-r from-[#17573C] to-[#4AC486] rounded-[6px] border-[1px] border-[#000 flex justify-center w-40 md:w-[250px] h-16 text-[16px]'
-          onClick={() => props.setSteps(0)}
-        >
-          Quay về
-        </button>
-        <button
-          className='text-white leading-[64px] hover:bg-gradient-to-r from-[#17573C] to-[#4AC486] bg-[#979797] rounded-[6px] flex justify-center w-40 md:w-[250px] h-16 text-[16px]'
-          onClick={() => props.setSteps(2)}
-        >
-          Tiếp theo
-        </button>
-      </div>
-    </div>
-  )
-}
-function Receipt(props: TItemProps) {
-  return (
-    <div>
-      <div className='text-center'>
-        <p className='text-[28px] font-bold uppercase'>THANH TOÁN MUA MÃ VGA</p>
-        <div className='flex flex-col justify-center items-center'>
-          <span className='text-[18px] mb-2'>
-            Giao dịch sẽ tự động huỷ sau:{' '}
-          </span>
-          <p className='w-12 h-12 text-sm flex justify-center text-red-500 items-center rounded-full border border-red-500'>
-            <Countdown />
-          </p>
-        </div>
-      </div>
-      <div className='grid lg:grid-cols-2 grid-cols-1 gap-6'>
-        {/* COL 1 */}
-        <VGABill />
-        {/* {COL 2} */}
-        <InforBill />
-      </div>
-      <div className='receipt flex  justify-center md:justify-end items-center gap-6 mt-6'>
-        <button
-          className='text-black leading-[64px] hover:text-white hover:border-none  bg-white hover:bg-gradient-to-r from-[#17573C] to-[#4AC486] rounded-[6px] border-[1px] border-[#000 flex justify-center w-40 md:w-[250px] h-16 text-[16px]'
-          onClick={() => props.setSteps(1)}
-        >
-          Quay về
-        </button>
-        <SuccessAlert />
-
-        {/* MÃ ĐÃ ĐƯỢC MUA  */}
-        {/* <HasPurchased /> */}
-      </div>
-    </div>
-  )
-}
 type TTabsProps = {
   items: {
     title: string
@@ -147,9 +73,7 @@ type TBuyVGAProps = {
   }
 }
 
-export default function BuyVGA(props: TBuyVGAProps) {
-  console.log(props)
-
+export default function BuyVGA({ params }: TBuyVGAProps) {
   const [currentStep, setCurrentStep] = useState(0)
   const steps = [
     {
@@ -157,10 +81,7 @@ export default function BuyVGA(props: TBuyVGAProps) {
       src: '/images/Location.svg',
       description: 'Điền thông tin',
       content: (
-        <ContentFillForm
-          vgacode={props.params.vgacode}
-          setSteps={setCurrentStep}
-        />
+        <ContentFillForm vgacode={params.vgacode} setSteps={setCurrentStep} />
       )
     },
     {
@@ -168,19 +89,14 @@ export default function BuyVGA(props: TBuyVGAProps) {
       src: '/images/Shipping.svg',
       description: 'Kiểm tra',
       content: (
-        <ContentCheck
-          vgacode={props.params.vgacode}
-          setSteps={setCurrentStep}
-        />
+        <ContentCheck vgacode={params.vgacode} setSteps={setCurrentStep} />
       )
     },
     {
       title: 'Bước 3',
       src: '/images/Payment.svg',
       description: 'Thanh toán',
-      content: (
-        <Receipt vgacode={props.params.vgacode} setSteps={setCurrentStep} />
-      )
+      content: <Receipt vgacode={params.vgacode} setSteps={setCurrentStep} />
     }
   ]
   return (
