@@ -69,6 +69,26 @@ export function formatCurrency(number: number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
 }
 
+export const calculateDiscountedPrice = (
+  originalPrice: number,
+  discountPercentage: number,
+	typediscount: string
+): number => {
+  const discountAmount = calculateDiscountAmount(
+    originalPrice,
+    discountPercentage,
+		typediscount
+  )
+  return originalPrice - discountAmount
+}
+export const calculateDiscountAmount = (
+  originalPrice: number,
+  discountValue: number,
+  typediscount: string
+): number => {
+  if (typediscount == 'direct_discount') return Math.floor(discountValue)
+  return (originalPrice * discountValue) / 100
+}
 export function getMembershipPackageName(feePackage: TFeePackage) {
   if (feePackage.sub_name.startsWith('Pre')) {
     return `Premium ${feePackage.year_add}`

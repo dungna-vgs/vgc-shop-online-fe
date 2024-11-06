@@ -11,6 +11,7 @@ import './globals.css'
 import Header from '@layout/header'
 import Footer from '@layout/footer'
 import BackToTop from '@/components/ui/scroll-to-top'
+import { GlobalToast } from '@/components/ui/toast'
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -72,6 +73,7 @@ export default function RootLayout({
   return (
     <html lang='vi'>
       <body className={clsx(poppins.variable, yeseva.variable)}>
+        <GlobalToast />
         <Header />
         {children}
         <Footer />

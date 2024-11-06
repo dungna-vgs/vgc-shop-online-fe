@@ -133,3 +133,22 @@ export type TPaymentStatus = {
     updated_at: Date
   }
 }
+export type TVoucher = {
+  id: number
+  type: string
+  discount: number
+}
+export type TEmployee = {
+  id: number
+  name: string
+  employee_code: string
+}
+
+export type TVoucherResponse = {
+  error_code: number
+  data: TVoucher
+}
+export type TEmployeeResponse = {
+  error_code: number
+  data: TEmployee
+}

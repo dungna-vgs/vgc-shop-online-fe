@@ -16,7 +16,9 @@ export enum API_ENDPOINT {
   ECOMMERCE_BANNERS_BY_PARTNER = '/other/ecommerce-banners-by-partner',
   PROMOTION_PROGRAM = '/other/get-promotion-program',
   CREATE_TRANSACTION = '/other/create-payment',
-  CHECK_TRANSACTION_STATUS = '/other/check-payment-status'
+  CHECK_TRANSACTION_STATUS = '/other/check-payment-status',
+  CHECK_DISCOUNT_CODE = '/other/check-ecommerce-discount',
+  CHECK_EMPLOYEE_CODE = '/other/check-employee-code'
 }
 
 export enum API_INTERNAL_ENDPOINT {
@@ -27,5 +29,7 @@ export enum API_INTERNAL_ENDPOINT {
   GET_MEMBERSHIP_PACKAGE = '/api/get-membership-package',
   SEARCH_GOLFER = '/api/search-golfer',
   CREATE_TRANSACTION = '/api/create-transaction',
-  CHECK_TRANSACTION_STATUS = '/api/check-transaction-status'
+  CHECK_TRANSACTION_STATUS = '/api/check-transaction-status',
+  CHECK_DISCOUNT_CODE = '/api/check-discount-code',
+  CHECK_EMPLOYEE_CODE = '/api/check-employee-code'
 }

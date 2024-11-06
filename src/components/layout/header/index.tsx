@@ -25,7 +25,7 @@ const Header: React.FC<THeader> = ({ showSearch = true }) => {
               height={31}
               alt='Handicap Logo'
             />
-            <span className='text-[#33B4B0] font-bold text-[26px] hidden md:block'>
+            <span className='text-[#33B4B0] font-bold text-[26px] md:block'>
               vHandicap
             </span>
           </Link>
@@ -33,7 +33,7 @@ const Header: React.FC<THeader> = ({ showSearch = true }) => {
             {showSearch && <SearchInput />}
             {/* //LIST-ITEM  */}
             <div>
-              <nav className='hidden  flex-col gap-6 text-lg font-medium lg:flex lg:flex-row lg:items-center lg:gap-5 lg:text-sm'>
+              <nav className='flex-col gap-6 text-lg font-medium lg:flex lg:flex-row lg:items-center lg:gap-5 lg:text-sm'>
                 <Link
                   href='/'
                   className='text-foreground w-[80px] flex justify-center transition-colors hover:text-foreground'
@@ -86,7 +86,7 @@ const Header: React.FC<THeader> = ({ showSearch = true }) => {
               </Sheet>
             </div>
             {/* END LIST ITEM  */}
-            <div className='hidden lg:block'>
+            <div className='lg:block'>
               <LanguageChanger />
             </div>
           </div>
