@@ -1,0 +1,16 @@
+.scrollToTop {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  background: #4ac385 !important;
+  border-radius: 50% !important;
+}
+.scrollToTop svg {
+  fill: white !important;
+}
+.colorIcon {
+  color: #fff !important;
+}

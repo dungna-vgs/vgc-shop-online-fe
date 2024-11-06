@@ -1,0 +1,30 @@
+.listCard {
+  position: relative;
+}
+
+.borderCode {
+  width: 80%;
+  padding: 2px 16px;
+  transform: skew(-20deg);
+  border: 1px solid #ffe040;
+  border-radius: 12px;
+  color: #ffe040;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+}
+.borderCode span {
+  transform: skew(20deg);
+}
+.btnBuy {
+  color: #fff !important;
+  background: linear-gradient(
+    108.81deg,
+    #ff8a00 2.1%,
+    #ffb51f 50.23%,
+    #ffe03e 98.37%
+  ) !important;
+  font-weight: 400;
+  padding: 4px 20px !important;
+  height: 33px !important;
+}
