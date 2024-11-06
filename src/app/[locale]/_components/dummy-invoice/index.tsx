@@ -7,9 +7,14 @@ import {
   CardTitle
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
+import { formatCurrency } from '@/utils'
 import React from 'react'
 
-export default function DummyInvoice() {
+type Props = {
+  amount: number
+}
+
+export default function DummyInvoice({ amount }: Props) {
   return (
     <div>
       <Card className='text-black'>
@@ -52,7 +57,7 @@ export default function DummyInvoice() {
             <div className='mt-6 flex flex-col gap-2 text-[16px]'>
               <div className='flex justify-between items-center'>
                 <span className=' uppercase'>Tổng cộng</span>
-                <span>15.000.000đ</span>
+                <span>{formatCurrency(amount)}đ</span>
               </div>
               <div className='flex justify-between items-center'>
                 <span className='text-[#545454]'>Giảm giá</span>
@@ -60,7 +65,7 @@ export default function DummyInvoice() {
               </div>
               <div className='flex justify-between items-center'>
                 <span>Thành tiền</span>
-                <span className='font-semibold'>15.000.000đ</span>
+                <span className='font-semibold'>{formatCurrency(amount)}đ</span>
               </div>
             </div>
           </CardContent>

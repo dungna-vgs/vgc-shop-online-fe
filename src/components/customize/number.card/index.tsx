@@ -3,11 +3,16 @@ import styles from './style.module.css'
 import Link from 'next/link'
 import { TVga } from '@/types/type'
 import { formatCurrency } from '@/utils'
+import clsx from 'clsx'
 
 type TCardNumberProps = {
   vga: TVga
+  showBuyButton?: boolean
 }
-export default function CardNumber(props: TCardNumberProps) {
+export default function CardNumber({
+  vga,
+  showBuyButton = true
+}: TCardNumberProps) {
   return (
     <div className={styles.listCard}>
       <div className=''>
@@ -15,7 +20,7 @@ export default function CardNumber(props: TCardNumberProps) {
           src='/images/bg-CardNumber.png'
           width={256}
           height={168}
-          alt={`vga: ${props.vga.id} - type ${props.vga.loai_ma}`}
+          alt={`vga: ${vga.id} - type ${vga.loai_ma}`}
           quality={75}
           style={{
             width: '100%',
@@ -33,14 +38,23 @@ export default function CardNumber(props: TCardNumberProps) {
           quality={75}
         />
         <div className={styles.borderCode}>
-          <span className='text-[24px] xl:text-[36px]'>{props.vga.id}</span>
+          <span className='text-[24px] xl:text-[36px]'>{vga.id}</span>
         </div>
 
-        <div className='lg:p-1 p-0 w-full flex md:flex-row  flex-col gap-1 justify-between items-center text-[#FAFF00] font-semibold'>
-          <span className='block lg:text-[16px] text-[12px]'>{formatCurrency(props.vga.amount)}đ</span>
-          <Link href={`/buy-vga/${props.vga.id}`} className={styles.btnBuy}>
-            Mua ngay
-          </Link>
+        <div
+          className={clsx(
+            'lg:p-1 p-0 w-full flex md:flex-row  flex-col gap-1 items-center text-[#FAFF00] font-semibold',
+            showBuyButton ? 'justify-between' : 'justify-center'
+          )}
+        >
+          <span className='block lg:text-[16px] text-[12px]'>
+            {formatCurrency(vga.amount)}đ
+          </span>
+          {showBuyButton && (
+            <Link href={`/buy-vga/${vga.id}`} className={styles.btnBuy}>
+              Mua ngay
+            </Link>
+          )}
         </div>
       </div>
     </div>
