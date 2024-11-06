@@ -77,5 +77,5 @@
     "node": ">=18.20.0",
     "npm": ">=10.5.0"
   },
-  "engine-strict": true
+  "engine-strict": false
 }
