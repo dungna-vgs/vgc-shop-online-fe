@@ -3,7 +3,7 @@ import React from 'react'
 import VGABill from '../vga-bill'
 import InforBill from '../infor-bill'
 import SuccessAlert from '../success.alert'
-import { useGlobalStore } from '@/stores'
+import { useGlobalStore, useDiscountStore, useEmployeeStore } from '@/stores'
 
 type Props = {
   vgacode?: string
@@ -13,7 +13,8 @@ type Props = {
 
 const Receipt = ({ vgacode, setSteps }: Props) => {
   const { buyer, vga, feePackage, paymentInfo } = useGlobalStore()
-
+  const { setDiscount } = useDiscountStore()
+  const { setEmployee } = useEmployeeStore()
   if (!buyer || !paymentInfo || (!vga && !feePackage)) return null
 
   return (
@@ -42,7 +43,9 @@ const Receipt = ({ vgacode, setSteps }: Props) => {
       <div className='receipt flex  justify-center md:justify-end items-center gap-6 mt-6'>
         <button
           className='text-black leading-[64px] bg-white rounded-[6px] border-[1px] border-[#000] flex justify-center w-40 md:w-[250px] h-16 text-[16px]'
-          onClick={() => setSteps(1)}
+          onClick={() => {
+            setSteps(1); setDiscount(undefined); setEmployee(undefined);
+          }}
         >
           Quay về
         </button>

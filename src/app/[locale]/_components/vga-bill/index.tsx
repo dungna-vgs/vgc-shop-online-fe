@@ -1,12 +1,19 @@
 import CardNumber from '@/components/customize/number.card'
 import PackageCard from '@/components/customize/package.card'
 import { Card } from '@/components/ui/card'
-import { useGlobalStore } from '@/stores'
-import { formatCurrency, getMembershipPackageName } from '@/utils'
+import { useGlobalStore, useDiscountStore, useEmployeeStore } from '@/stores'
+import {
+  formatCurrency,
+  getMembershipPackageName,
+  calculateDiscountedPrice,
+	calculateDiscountAmount
+} from '@/utils'
 import React from 'react'
 
 export default function VGABill() {
   const { buyer, vga, feePackage } = useGlobalStore()
+  const { discount } = useDiscountStore()
+  const { employee } = useEmployeeStore()
 
   if (!buyer || (!vga && !feePackage)) return null
 
@@ -60,18 +67,41 @@ export default function VGABill() {
                 </div>
                 <div className='flex justify-between items-center'>
                   <span className='text-[#545454]'>Giảm giá</span>
-                  <span className='text-[#07AC39]'>0đ</span>
-                </div>
-                <div className='flex justify-between gap-2 items-center'>
-                  <span className='text-[#545454]'>Mã nhân viên tư vấn</span>
-                  <span>
-                    123465 - <span>Nguyễn Văn A</span>
+                  <span className='text-[#07AC39]'>
+                    {' '}
+                    <span className='font-semibold'>
+                      {discount
+                        ? formatCurrency(
+													calculateDiscountAmount(
+                              money,
+                              discount.discount,
+                              discount.type
+                            )
+                          )
+                        : 0}
+                      đ
+                    </span>
                   </span>
                 </div>
+                {employee && (
+                  <div className='flex justify-between gap-2 items-center'>
+                    <span className='text-[#545454]'>Mã nhân viên tư vấn</span>
+                    <span>{`${employee.employee_code}-${employee.name}`}</span>
+                  </div>
+                )}
                 <div className='flex justify-between items-center'>
                   <span>Thành tiền</span>
                   <span className='font-semibold'>
-                    {formatCurrency(money)}đ
+                    {discount
+                      ? formatCurrency(
+                          calculateDiscountedPrice(
+                            money,
+                            discount.discount,
+                            discount.type
+                          )
+                        )
+                      : formatCurrency(money)}
+                    đ
                   </span>
                 </div>
               </div>

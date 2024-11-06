@@ -1,5 +1,12 @@
 import { TParamsSearchVGA } from '@/apis/internals/clients/search.vga'
-import { TVga, TFeePackage, TGolfer, TPaymentInfo } from '@/types/type'
+import {
+  TVga,
+  TFeePackage,
+  TGolfer,
+  TPaymentInfo,
+  TVoucher,
+  TEmployee
+} from '@/types/type'
 import { create } from 'zustand'
 
 export type THomeStore = {
@@ -72,4 +79,41 @@ export const useGlobalStore = create<THomeStore>((set, get) => ({
   setVga: (vga) => set({ vga }),
   setFeePackage: (feePackage) => set({ feePackage }),
   setPaymentInfo: (paymentInfo) => set({ paymentInfo })
+}))
+
+type ToastType = 'success' | 'error'
+type ToastState = {
+  open: boolean
+  message: string
+  duration: number
+  type: ToastType
+  showToast: (message: string, type: ToastType, duration?: number) => void
+  hideToast: () => void
+}
+
+export const useToastStore = create<ToastState>((set) => ({
+  open: false,
+  message: '',
+  duration: 3000,
+  type: 'success',
+  showToast: (message, type = 'success', duration = 3000) =>
+    set({ open: true, message, type, duration }),
+  hideToast: () =>
+    set({ open: false, message: '', type: 'success', duration: 3000 })
+}))
+
+export const useDiscountStore = create<{
+  discount: TVoucher | undefined
+  setDiscount: (discount: TVoucher | undefined) => void
+}>((set) => ({
+  discount: undefined,
+  setDiscount: (discount) => set({ discount })
+}))
+
+export const useEmployeeStore = create<{
+  employee: TEmployee | undefined
+  setEmployee: (employee: TEmployee | undefined) => void
+}>((set) => ({
+  employee: undefined,
+  setEmployee: (employee) => set({ employee })
 }))

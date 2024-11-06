@@ -1,10 +1,15 @@
-import { useGlobalStore } from '@/stores'
-import { generateVietQR } from '@/utils'
+import { useGlobalStore, useDiscountStore } from '@/stores'
+import {
+  generateVietQR,
+  calculateDiscountAmount,
+  calculateDiscountedPrice
+} from '@/utils'
 import Image from 'next/image'
 import React from 'react'
 
 export default function InforBill() {
   const { paymentInfo } = useGlobalStore()
+  const { discount, setDiscount } = useDiscountStore()
 
   if (!paymentInfo) return null
 
@@ -61,7 +66,16 @@ export default function InforBill() {
           <div className='p-4 border border-[#F1F1F1] rounded-[7px] flex justify-between items-center gap-4'>
             <p className='text-[#979797]'>
               Số tiền:{' '}
-              <span className='text-black uppercase'>{bank.money}</span>
+              <span className='text-black uppercase'>
+                {' '}
+                {discount
+                  ? calculateDiscountedPrice(
+                      bank.money,
+                      discount.discount,
+                      discount.type
+                    )
+                  : bank.money}
+              </span>
             </p>
             <Image
               src='/images/copy.svg'

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import RecipientCard from '../recipient'
 import DummyInvoice from '../dummy-invoice'
-import { useGlobalStore } from '@/stores'
+import { useGlobalStore, useDiscountStore, useEmployeeStore } from '@/stores'
 import { apiCreateTransaction } from '@/apis/internals/clients/create.transaction'
 import {
   ETransactionProvider,
@@ -25,7 +25,8 @@ type Props = {
 const ContentCheck = ({ vgacode, packageId, setSteps }: Props) => {
   const { buyer, vga, feePackage, setPaymentInfo } = useGlobalStore()
   const [loading, setLoading] = useState<boolean>(false)
-
+  const { setDiscount } = useDiscountStore()
+  const { setEmployee } = useEmployeeStore()
   const onSubmit = async () => {
     if (!buyer) return
 
@@ -83,7 +84,11 @@ const ContentCheck = ({ vgacode, packageId, setSteps }: Props) => {
       <div className='flex justify-center md:justify-end items-center gap-6 mt-16'>
         <button
           className='text-black leading-[64px] bg-white rounded-[6px] border-[1px] border-[#000] flex justify-center w-40 md:w-[250px] h-16 text-[16px]'
-          onClick={() => setSteps(0)}
+          onClick={() => {
+            setSteps(0)
+            setDiscount(undefined)
+            setEmployee(undefined)
+          }}
         >
           Quay về
         </button>
