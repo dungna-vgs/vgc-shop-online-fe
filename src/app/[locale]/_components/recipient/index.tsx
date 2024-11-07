@@ -1,3 +1,4 @@
+// import CardNumber from '@/components/customize/number.card'
 import PackageCard from '@/components/customize/package.card'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { TFeePackage, TGolfer, TVga } from '@/types/type'
@@ -29,9 +30,8 @@ export default function RecipientCard({ golfer, feePackage }: Props) {
           </div>
         </div>
       </div>
-
-      {/* MÃ VGA  */}
-      {/* {!!vga && (
+      {/* MÃ VGA
+      {!!vga && (
         <div>
           <p className='text-[24px] mb-4 font-semibold'>Mã VGA</p>
           <div className='block sm:flex min-w-[246px]  gap-4 justify-between'>
@@ -43,7 +43,6 @@ export default function RecipientCard({ golfer, feePackage }: Props) {
           </div>
         </div>
       )} */}
-
       {/* ĐÓNG PHÍ HỘI VIÊN */}
       {!!feePackage && (
         <div className=''>
