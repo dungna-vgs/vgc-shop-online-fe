@@ -2,18 +2,21 @@
 import LanguageChanger from '@customize/languages/LanguageChanger'
 import Image from 'next/image'
 import React from 'react'
+import { Input } from '@/components/ui/input'
 import Link from 'next/link'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
-import { AlignJustify } from 'lucide-react'
-import SearchInput from '@/components/customize/search.input'
+import { AlignJustify, Search } from 'lucide-react'
+import { usePathname } from 'next/navigation'
 
-type THeader = {
-  showSearch?: boolean
-}
-
-const Header: React.FC<THeader> = ({ showSearch = true }) => {
-  
+const navLinks = [
+  { name: 'Trang chủ', href: '/' },
+  { name: 'Mã VGA', href: '/vgacode' },
+  { name: 'Phí hội viên', href: '/package-price' }
+]
+const Header: React.FC = () => {
+  const pathname = usePathname()
+  console.log(pathname)
   return (
     <div className='bg-background fixed top-0 right-0 left-0 z-[999] shadow-[0_-6px_10px_5px_rgba(0,0,0,0.2)]'>
       <div className='max-w-[1200px] mx-auto px-4'>
@@ -25,34 +28,40 @@ const Header: React.FC<THeader> = ({ showSearch = true }) => {
               height={31}
               alt='Handicap Logo'
             />
-            <span className='text-[#33B4B0] font-bold text-[26px] md:block'>
+            <span className='text-[#33B4B0] font-bold text-[26px] hidden md:block'>
               vHandicap
             </span>
           </Link>
           <div className='flex items-center gap-[24px]'>
-            {showSearch && <SearchInput />}
+            <div className='relative ml-auto flex-1'>
+              <Search className='absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground ' />
+              <Input
+                type='search'
+                placeholder='Tìm kiếm'
+                className='text-sm w-full sm:w-[280] flex-1 rounded-lg bg-[#F5F5F5] border-none pl-8 xl:w-[420] lg:w-[500px]'
+              />
+            </div>
             {/* //LIST-ITEM  */}
             <div>
-              <nav className='flex-col gap-6 text-lg font-medium lg:flex lg:flex-row lg:items-center lg:gap-5 lg:text-sm'>
-                <Link
-                  href='/'
-                  className='text-foreground w-[80px] flex justify-center transition-colors hover:text-foreground'
-                >
-                  Trang chủ
-                </Link>
-                <Link
-                  href='/vgacode'
-                  className='text-muted-foreground w-[80px] flex justify-center transition-colors hover:text-foreground'
-                >
-                  Mã VGA
-                </Link>
-                <Link
-                  href='/package-price'
-                  className='text-muted-foreground w-[80px] flex justify-center transition-colors hover:text-foreground'
-                >
-                  Phí hội viên
-                </Link>
+              <nav className='hidden flex-col gap-6 text-lg font-medium lg:flex lg:flex-row lg:items-center lg:gap-5 lg:text-sm'>
+                {navLinks.map((link) => {
+                  const isActive = pathname == link.href
+                  return (
+                    <Link
+                      href={link.href}
+                      key={link.name}
+                      className={
+                        isActive
+                          ? 'text-foreground w-[80px] flex justify-center transition-colors hover:text-foreground'
+                          : 'text-muted-foreground  w-[80px] flex justify-center transition-colors hover:text-foreground'
+                      }
+                    >
+                      {link.name}
+                    </Link>
+                  )
+                })}
               </nav>
+
               <Sheet>
                 <SheetTrigger asChild>
                   <Button
@@ -86,7 +95,7 @@ const Header: React.FC<THeader> = ({ showSearch = true }) => {
               </Sheet>
             </div>
             {/* END LIST ITEM  */}
-            <div className='lg:block'>
+            <div className='hidden lg:block'>
               <LanguageChanger />
             </div>
           </div>

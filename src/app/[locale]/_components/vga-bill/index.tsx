@@ -6,7 +6,7 @@ import {
   formatCurrency,
   getMembershipPackageName,
   calculateDiscountedPrice,
-	calculateDiscountAmount
+  calculateDiscountAmount
 } from '@/utils'
 import React from 'react'
 
@@ -32,7 +32,7 @@ export default function VGABill() {
                 <div className='flex p-4 gap-4 items-center rounded-[7px] border border-[#F1F1F1] bg-[#F6F6F6]'>
                   <CardNumber vga={vga} showBuyButton={false} />
 
-                  <div className='flex flex-1 justify-between items-center text-[16px]'>
+                  <div className='flex flex-col font-semibold gap-4 justify-evenly items-center text-[16px]'>
                     <span>VGA{vga.id}</span>
                     <span>{formatCurrency(vga.amount)}đ</span>
                   </div>
@@ -71,7 +71,7 @@ export default function VGABill() {
                     <span className='font-semibold'>
                       {discount
                         ? formatCurrency(
-													calculateDiscountAmount(
+                            calculateDiscountAmount(
                               money,
                               discount.discount,
                               discount.type
