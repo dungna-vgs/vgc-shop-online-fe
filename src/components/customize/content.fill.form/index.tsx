@@ -58,19 +58,21 @@ export default function ContentFillForm(props: TItemProps) {
 
   useEffect(() => {
     if (vgacode) {
+      setFeePackage(null)
       apiGetVga({ vga: vgacode }).then((res) => {
         setVga(res.data)
       })
     }
-  }, [vgacode, setVga])
+  }, [vgacode, setVga, setFeePackage])
 
   useEffect(() => {
     if (packageId) {
+      setVga(null)
       apiGetFeePackage({ packageId }).then((res) => {
         setFeePackage(res.data)
       })
     }
-  }, [packageId, setFeePackage])
+  }, [packageId, setFeePackage, setVga])
 
   const golfer = golfers?.find((golfer) => golfer.id == value)
 

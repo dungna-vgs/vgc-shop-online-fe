@@ -48,14 +48,12 @@ export default function RecipientCard({ golfer, feePackage }: Props) {
         <div className=''>
           <p className='text-[24px] mb-4 font-semibold'>Gói hội viên</p>
           <div className='block sm:flex min-w-[246px]  gap-4 justify-between'>
-            <div className='flex justify-center'>
-              <PackageCard
-                memberships={[feePackage]}
-                showBuyButton={false}
-                cardClassName='max-w-64 rounded-[20px] overflow-hidden'
-                textClassName='text-[2rem]'
-              />
-            </div>
+            <PackageCard
+              memberships={[feePackage]}
+              showBuyButton={false}
+              cardClassName='max-w-64 rounded-[20px] overflow-hidden'
+              textClassName='!text-[2rem]'
+            />
             <div className='flex flex-1 justify-between gap-4  xl:justify-between items-center'>
               <span className='text-[16px] font-bold'>
                 {getMembershipPackageName(feePackage)}
