@@ -22,7 +22,7 @@ function Tabs(props: TTabsProps) {
       <div>
         <div className='flex justify-between'>
           {props.items.map((item, index) => (
-            <div key={index} className='flex items-center gap-4'>
+            <div key={index} className='flex items-center gap-2 lg:gap-4'>
               <div
                 className={
                   index == props.active
@@ -51,8 +51,8 @@ function Tabs(props: TTabsProps) {
                 <p
                   className={
                     index == props.active
-                      ? '  text-[19px]'
-                      : 'text-[#ccc] text-[19px]'
+                      ? '  text-sm lg:text-[19px]'
+                      : 'text-[#ccc] text-sm lg:text-[19px]'
                   }
                 >
                   {item.description}

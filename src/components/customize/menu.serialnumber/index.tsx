@@ -33,7 +33,7 @@ export default function MenuSerialNumber(props: TMenuSerialNumberProps) {
                     'bg-[#4AC486]':
                       searchVGA.significance_id == type.id ||
                       searchVGA.significance_id == undefined,
-                    'bg-white hover:bg-[#F1F1F1]':
+                    'bg-[#4AC486] hover:bg-[#3fb97c] text-black':
                       searchVGA.significance_id != -1 &&
                       searchVGA.significance_id != undefined
                   }
@@ -46,7 +46,7 @@ export default function MenuSerialNumber(props: TMenuSerialNumberProps) {
                   alt='Icon'
                   className='hover:fill-slate-50'
                 />
-                <span>Tất cả</span>
+                <span className='text-white'>Tất cả</span>
               </Link>
             </div>
           )
@@ -65,7 +65,7 @@ export default function MenuSerialNumber(props: TMenuSerialNumberProps) {
                 className={clsx(
                   'flex flex-col w-[112px] h-[128px] justify-center gap-1 items-center text-black rounded-[15px]',
                   {
-                    'bg-[#4AC486]': searchVGA.significance_id == type.id,
+                    'bg-[#F1F1F1]': searchVGA.significance_id == type.id,
                     'bg-white  hover:bg-[#F1F1F1]':
                       searchVGA.significance_id != type.id
                   }

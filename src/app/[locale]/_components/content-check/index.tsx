@@ -68,7 +68,7 @@ const ContentCheck = ({ vgacode, packageId, setSteps }: Props) => {
   return !!buyer && (!!vga || !!feePackage) ? (
     <div className='content-check'>
       <div>
-        <p className='font-bold text-center text-[28px] uppercase pb-12'>
+        <p className='font-bold text-center text-[22px] lg:text-[28px] uppercase pb-12'>
           KIỂM TRA THÔNG TIN {vgacode ? 'MUA MÃ VGA' : 'ĐÓNG PHÍ HỘI VIÊN'}
         </p>
         <div className='grid lg:grid-cols-2 grid-cols-1 gap-4'>

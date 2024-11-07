@@ -20,7 +20,7 @@ const Receipt = ({ vgacode, setSteps }: Props) => {
   return (
     <div>
       <div className='text-center'>
-        <p className='text-[28px] font-bold uppercase'>
+        <p className='text-[24px] lg:text-[28px] font-bold uppercase'>
           THANH TOÁN {vgacode ? 'MUA MÃ VGA' : 'PHÍ HỘI VIÊN'}
         </p>
         {!!vgacode && (
@@ -44,7 +44,9 @@ const Receipt = ({ vgacode, setSteps }: Props) => {
         <button
           className='text-black leading-[64px] bg-white rounded-[6px] border-[1px] border-[#000] flex justify-center w-40 md:w-[250px] h-16 text-[16px]'
           onClick={() => {
-            setSteps(1); setDiscount(undefined); setEmployee(undefined);
+            setSteps(1)
+            setDiscount(undefined)
+            setEmployee(undefined)
           }}
         >
           Quay về
