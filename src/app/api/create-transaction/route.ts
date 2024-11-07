@@ -5,24 +5,24 @@ import { createAxiosInstanceServer } from '@/apis'
 import { isValidDomainStore } from '@/utils'
 import Joi from 'joi'
 import { getQueryRequest } from '@/utils'
-import { TFeePackage, TGolfer, TVga } from '@/types/type'
+import { TEmployee, TFeePackage, TGolfer, TVga, TVoucher } from '@/types/type'
+import { ETransactionProvider } from '@/types/transaction-provider'
 
-export enum ETransactionProvider {
-  DIGITAL = 'digital',
-  UPGRADE_ACCOUNT = 'upgrade_account'
+type TExtraBodyRequest = {
+  user_id: TGolfer['id']
+  voucher_id?: TVoucher['id']
+  sale_code?: TEmployee['employee_code']
 }
 
-export type TBuyVgaBodyRequest = {
+export type TBuyVgaBodyRequest = TExtraBodyRequest & {
   provider: ETransactionProvider.DIGITAL
-  user_id: TGolfer['id']
   money: TVga['amount']
   number: TVga['id']
   type_tranfer: 'buy'
 }
 
-export type TPayFeeMemberBodyRequest = {
+export type TPayFeeMemberBodyRequest = TExtraBodyRequest & {
   provider: ETransactionProvider.UPGRADE_ACCOUNT
-  user_id: TGolfer['id']
   money: TFeePackage['amount']
   upgrade_id: TFeePackage['id']
 }
@@ -38,6 +38,8 @@ function validation(bodyRequest: TTransactionBodyRequest) {
       .required(),
     user_id: Joi.number().required(),
     money: Joi.number().required(),
+    sale_code: Joi.string(),
+    voucher_id: Joi.number(),
 
     // Conditional validation for `type_transfer` based on `number`
     number: Joi.number().when('provider', {

@@ -28,7 +28,7 @@ export default function VGABill() {
               {vga ? 'Mua mã VGA' : 'Đóng phí hội viên'}
             </p>
             <div>
-              {!!vga && (
+              {!!vga ? (
                 <div className='flex p-4 gap-4 items-center rounded-[7px] border border-[#F1F1F1] bg-[#F6F6F6]'>
                   <CardNumber vga={vga} showBuyButton={false} />
 
@@ -37,8 +37,7 @@ export default function VGABill() {
                     <span>{formatCurrency(vga.amount)}đ</span>
                   </div>
                 </div>
-              )}
-              {!!feePackage && (
+              ) : !!feePackage ? (
                 <div className='flex p-4 gap-4 items-center rounded-[7px] border border-[#F1F1F1] bg-[#F6F6F6]'>
                   <PackageCard
                     memberships={[feePackage]}
@@ -53,7 +52,7 @@ export default function VGABill() {
                     <span>{formatCurrency(feePackage.amount)}đ</span>
                   </div>
                 </div>
-              )}
+              ) : null}
               <div className='flex flex-col gap-2 my-2'>
                 <span className='text-sm text-[#545454]'>Người nhận</span>
                 <p className='font-bold text-[16px]'>

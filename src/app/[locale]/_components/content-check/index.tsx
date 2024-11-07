@@ -4,7 +4,6 @@ import DummyInvoice from '../dummy-invoice'
 import { useGlobalStore, useDiscountStore, useEmployeeStore } from '@/stores'
 import { apiCreateTransaction } from '@/apis/internals/clients/create.transaction'
 import {
-  ETransactionProvider,
   TBuyVgaBodyRequest,
   TPayFeeMemberBodyRequest
 } from '@/app/api/create-transaction/route'
@@ -15,6 +14,7 @@ import {
   AlertDialogTitle
 } from '@/components/ui/alert-dialog'
 import Loading from '@/components/ui/loading'
+import { ETransactionProvider } from '@/types/transaction-provider'
 
 type Props = {
   vgacode?: string
@@ -25,8 +25,8 @@ type Props = {
 const ContentCheck = ({ vgacode, packageId, setSteps }: Props) => {
   const { buyer, vga, feePackage, setPaymentInfo } = useGlobalStore()
   const [loading, setLoading] = useState<boolean>(false)
-  const { setDiscount } = useDiscountStore()
-  const { setEmployee } = useEmployeeStore()
+  const { discount, setDiscount } = useDiscountStore()
+  const { employee, setEmployee } = useEmployeeStore()
   const onSubmit = async () => {
     if (!buyer) return
 
@@ -54,6 +54,9 @@ const ContentCheck = ({ vgacode, packageId, setSteps }: Props) => {
     }
 
     if (bodyRequest) {
+      if (discount) bodyRequest.voucher_id = discount.id
+      if (employee) bodyRequest.sale_code = employee.employee_code
+
       const res = await apiCreateTransaction(bodyRequest)
 
       if (res.success) {

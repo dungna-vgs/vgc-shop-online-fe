@@ -17,7 +17,7 @@ import MenuSerialNumber from '@/components/customize/menu.serialnumber'
 import Link from 'next/link'
 import { TTypeVGA, TVga } from '@/types/type'
 import { useGlobalStore } from '@/stores'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { apiSearchVGA } from '@/apis/internals/clients/search.vga'
 import { TParamsSearchVGA } from '@/apis/internals/clients/search.vga'
 
@@ -38,18 +38,21 @@ export default function SerialNumber(props: TSerialNumber) {
   const { setVgas, vgas, searchVGA, setSeachVGA, vgaSearchAll, feeSearchAll } =
     useGlobalStore()
 
-  const handleSearchVGA = (params: TParamsSearchVGA) => {
-    apiSearchVGA(params).then((res) => {
-      console.log(res.data)
-      setVgas(res.data)
-    })
-  }
+  const handleSearchVGA = useCallback(
+    (params: TParamsSearchVGA) => {
+      apiSearchVGA(params).then((res) => {
+        console.log(res.data)
+        setVgas(res.data)
+      })
+    },
+    [setVgas]
+  )
 
   useEffect(() => {
     if (Object.keys(searchVGA).length) {
       handleSearchVGA(searchVGA)
     }
-  }, [searchVGA])
+  }, [handleSearchVGA, searchVGA])
 
   let data = props.infoVGA.data
   if (isClient && Object.keys(searchVGA).length) {
@@ -62,13 +65,13 @@ export default function SerialNumber(props: TSerialNumber) {
       if (keyword?.trim()) {
         setSeachVGA({ vga: keyword })
       } else {
-        let copySearchVGA = { ...searchVGA }
+        const copySearchVGA = { ...searchVGA }
         delete copySearchVGA.vga
         setSeachVGA(copySearchVGA)
       }
     }, 300)
     return () => clearTimeout(id)
-  }, [keyword, setSeachVGA])
+  }, [keyword, searchVGA, setSeachVGA])
 
   if (vgaSearchAll.length || feeSearchAll.length) return null
 
