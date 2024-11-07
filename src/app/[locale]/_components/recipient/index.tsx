@@ -1,4 +1,3 @@
-import CardNumber from '@/components/customize/number.card'
 import PackageCard from '@/components/customize/package.card'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { TFeePackage, TGolfer, TVga } from '@/types/type'
@@ -11,7 +10,7 @@ type Props = {
   feePackage: TFeePackage | null
 }
 
-export default function RecipientCard({ golfer, vga, feePackage }: Props) {
+export default function RecipientCard({ golfer, feePackage }: Props) {
   return (
     <div className='flex flex-col gap-8'>
       <div className='pb-4'>
@@ -32,8 +31,8 @@ export default function RecipientCard({ golfer, vga, feePackage }: Props) {
       </div>
 
       {/* MÃ VGA  */}
-      {!!vga && (
-        <div className=''>
+      {/* {!!vga && (
+        <div>
           <p className='text-[24px] mb-4 font-semibold'>Mã VGA</p>
           <div className='block sm:flex min-w-[246px]  gap-4 justify-between'>
             <CardNumber vga={vga} showBuyButton={false} />
@@ -43,19 +42,20 @@ export default function RecipientCard({ golfer, vga, feePackage }: Props) {
             </div>
           </div>
         </div>
-      )}
-
+      )} */}
       {/* ĐÓNG PHÍ HỘI VIÊN */}
       {!!feePackage && (
         <div className=''>
           <p className='text-[24px] mb-4 font-semibold'>Gói hội viên</p>
           <div className='block sm:flex min-w-[246px]  gap-4 justify-between'>
-            <PackageCard
-              memberships={[feePackage]}
-              showBuyButton={false}
-              cardClassName='max-w-64 rounded-[20px] overflow-hidden'
-              textClassName='!text-[2rem]'
-            />
+            <div className='flex justify-center'>
+              <PackageCard
+                memberships={[feePackage]}
+                showBuyButton={false}
+                cardClassName='max-w-64 rounded-[20px] overflow-hidden'
+                textClassName='text-[2rem]'
+              />
+            </div>
             <div className='flex flex-1 justify-between gap-4  xl:justify-between items-center'>
               <span className='text-[16px] font-bold'>
                 {getMembershipPackageName(feePackage)}
