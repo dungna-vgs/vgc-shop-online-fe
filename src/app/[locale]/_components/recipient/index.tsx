@@ -54,7 +54,7 @@ export default function RecipientCard({ golfer, vga, feePackage }: Props) {
               memberships={[feePackage]}
               showBuyButton={false}
               cardClassName='max-w-64 rounded-[20px] overflow-hidden'
-              textClassName='text-[2rem]'
+              textClassName='!text-[2rem]'
             />
             <div className='flex flex-1 justify-between gap-4  xl:justify-between items-center'>
               <span className='text-[16px] font-bold'>

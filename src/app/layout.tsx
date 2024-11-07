@@ -12,6 +12,7 @@ import Header from '@layout/header'
 import Footer from '@layout/footer'
 import BackToTop from '@/components/ui/scroll-to-top'
 import { GlobalToast } from '@/components/ui/toast'
+import { Suspense } from 'react'
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -74,9 +75,11 @@ export default function RootLayout({
     <html lang='vi'>
       <body className={clsx(poppins.variable, yeseva.variable)}>
         <GlobalToast />
-        <Header />
-        {children}
-        <Footer />
+        <Suspense fallback={null}>
+          <Header />
+          {children}
+          <Footer />
+        </Suspense>
         <BackToTop />
       </body>
     </html>

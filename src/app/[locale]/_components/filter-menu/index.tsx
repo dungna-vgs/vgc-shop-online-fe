@@ -1,13 +1,10 @@
 'use client'
 import React from 'react'
-import { Button } from '@/components/ui/button'
 import styles from './style.module.css'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
   Sheet,
-  SheetClose,
   SheetContent,
-  SheetFooter,
   SheetHeader,
   SheetTrigger
 } from '@/components/ui/sheet'

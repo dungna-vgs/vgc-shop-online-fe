@@ -72,12 +72,12 @@ export function formatCurrency(number: number) {
 export const calculateDiscountedPrice = (
   originalPrice: number,
   discountPercentage: number,
-	typediscount: string
+  typediscount: string
 ): number => {
   const discountAmount = calculateDiscountAmount(
     originalPrice,
     discountPercentage,
-		typediscount
+    typediscount
   )
   return originalPrice - discountAmount
 }
