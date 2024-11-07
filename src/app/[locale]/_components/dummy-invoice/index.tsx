@@ -31,7 +31,7 @@ export default function DummyInvoice({ amount }: Props) {
   const handleCheckDiscountCode = async () => {
     try {
       const res = await apiCheckDiscountCode({ voucher_code: discountCode })
-      const { error_code, data } = res.data
+      const { error_code } = res.data
       if (res.data.error_code === 200) {
         showToast('Áp dụng mã thành công', 'success', 2000)
         setDiscount(res.data.data)
