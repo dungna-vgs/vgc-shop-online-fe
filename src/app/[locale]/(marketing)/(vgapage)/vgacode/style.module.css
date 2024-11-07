@@ -28,3 +28,6 @@
   padding: 4px 20px !important;
   height: 33px !important;
 }
+.containerBg {
+  background: linear-gradient(180deg, #ffffff 61%, #44b87e 100%);
+}

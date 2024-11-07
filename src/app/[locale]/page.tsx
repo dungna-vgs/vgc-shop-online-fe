@@ -13,6 +13,7 @@ import { apiPromotion } from '@/apis/business/promotion.program'
 import { getMembersipPackages } from '@/apis/business/membership.package'
 import { getVGAs } from '@/apis/business/vga'
 import ResultSearchAll from '@/components/customize/result.search.all'
+import styles from './page.module.css'
 
 interface HomeProps {
   params: {
@@ -46,10 +47,10 @@ export default async function Home({ params: { locale } }: HomeProps) {
       locale={locale}
       namespaces={i18nNamespaces}
     >
-      <div className='home-page'>
+      <div className={styles.containerBg}>
         <ResultSearchAll />
         <BannerCarousel sliders={images.sliders} />
-        <div className='max-w-[100vw] w-full lg:p-8 sm:p-6 p-4'>
+        <div className='max-w-[1200px] mx-auto md:p-6 p-4'>
           {!!showSpecialDiscount && <OfferCard promotions={promotions} />}
           <SerialNumber infoVGA={vgas} typeVga={data} />
           <BannerImage banner={images.adsHomeCenter} />

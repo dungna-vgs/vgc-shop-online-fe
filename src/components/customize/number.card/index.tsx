@@ -8,13 +8,16 @@ import clsx from 'clsx'
 type TCardNumberProps = {
   vga: TVga
   showBuyButton?: boolean
+  className?: string
 }
+
 export default function CardNumber({
   vga,
-  showBuyButton = true
+  showBuyButton = true,
+  className = ''
 }: TCardNumberProps) {
   return (
-    <div className={styles.listCard}>
+    <div className={clsx(styles.listCard, className)}>
       <div className=''>
         <Image
           src='/images/bg-CardNumber.png'
@@ -29,7 +32,7 @@ export default function CardNumber({
           className='min-w-[148px] min-h-[166px]'
         />
       </div>
-      <div className='absolute top-0 right-0 left-0 bottom-0 p-2 sm:p-4  flex flex-col justify-center  items-center sm:gap-2 lg:gap-2 gap-1  '>
+      <div className='absolute top-0 right-0 left-0 bottom-0 p-2 sm:p-4 flex flex-col justify-center items-center sm:gap-2 lg:gap-2 gap-1'>
         <Image
           src='/images/logo-handicap.png'
           width={40}
@@ -43,7 +46,7 @@ export default function CardNumber({
 
         <div
           className={clsx(
-            'lg:p-1 p-0 w-full flex md:flex-row  flex-col gap-1 items-center text-[#FAFF00] font-semibold',
+            'lg:p-1 p-0 w-full flex md:flex-row flex-col gap-1 items-center text-[#FAFF00] font-semibold',
             showBuyButton ? 'justify-between' : 'justify-center'
           )}
         >
