@@ -1,7 +1,12 @@
 import React, { useState } from 'react'
 import RecipientCard from '../recipient'
 import DummyInvoice from '../dummy-invoice'
-import { useGlobalStore, useDiscountStore, useEmployeeStore } from '@/stores'
+import {
+  useGlobalStore,
+  useDiscountStore,
+  useEmployeeStore,
+  useToastStore
+} from '@/stores'
 import { apiCreateTransaction } from '@/apis/internals/clients/create.transaction'
 import {
   TBuyVgaBodyRequest,
@@ -14,6 +19,7 @@ import {
   AlertDialogTitle
 } from '@/components/ui/alert-dialog'
 import Loading from '@/components/ui/loading'
+import { apiCheckEmployeeCode } from '@/apis/internals/clients/check.employee'
 import { ETransactionProvider } from '@/types/transaction-provider'
 
 type Props = {
@@ -27,10 +33,9 @@ const ContentCheck = ({ vgacode, packageId, setSteps }: Props) => {
   const [loading, setLoading] = useState<boolean>(false)
   const { discount, setDiscount } = useDiscountStore()
   const { employee, setEmployee } = useEmployeeStore()
+  const showToast = useToastStore((state) => state.showToast)
   const onSubmit = async () => {
     if (!buyer) return
-
-    setLoading(true)
 
     let bodyRequest
 
@@ -55,8 +60,15 @@ const ContentCheck = ({ vgacode, packageId, setSteps }: Props) => {
 
     if (bodyRequest) {
       if (discount) bodyRequest.voucher_id = discount.id
-      if (employee) bodyRequest.sale_code = employee.employee_code
-
+      if (employee) {
+        handleCheckEmpoyeeCode()
+        if (employee?.id) {
+          bodyRequest.sale_code = employee?.employee_code
+        } else {
+          return
+        }
+      }
+      setLoading(true)
       const res = await apiCreateTransaction(bodyRequest)
 
       if (res.success) {
@@ -67,7 +79,21 @@ const ContentCheck = ({ vgacode, packageId, setSteps }: Props) => {
 
     setLoading(false)
   }
-
+  const handleCheckEmpoyeeCode = async () => {
+    try {
+      if (!employee?.employee_code) return
+      const res = await apiCheckEmployeeCode({
+        employee_code: employee?.employee_code
+      })
+      if (res.data.error_code === 200) {
+        setEmployee(res.data.data)
+      } else {
+        showToast('Mã nhân viên tư vấn không hợp lệ', 'error', 2000)
+      }
+    } catch (error) {
+      showToast('Đã xảy ra lỗi, vui lòng thử lại sau', 'error', 2000)
+    }
+  }
   return !!buyer && (!!vga || !!feePackage) ? (
     <div className='content-check'>
       <div>

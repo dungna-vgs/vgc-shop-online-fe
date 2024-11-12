@@ -20,7 +20,8 @@ type TOfferCard = {
 
 export default function OfferCard(props: TOfferCard) {
   const { vgaSearchAll, feeSearchAll } = useGlobalStore()
-  if (vgaSearchAll.length || feeSearchAll.length) return null
+  if (vgaSearchAll.length || feeSearchAll.length || !props.promotions.length)
+    return null
   return (
     <div>
       <h3 className='pb-6 pt-2 text-xl font-semibold text-[#000]'>

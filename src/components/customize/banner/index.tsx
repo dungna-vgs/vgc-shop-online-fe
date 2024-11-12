@@ -14,7 +14,7 @@ export default function BannerImage(props: TBannerImageProps) {
   if (props.banner)
     return (
       <div>
-        <Link href={props.banner.link}>
+        <Link href={props.banner.link} target='_blank'>
           <Image
             src={props.banner.image}
             width={1024}

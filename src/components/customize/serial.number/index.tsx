@@ -17,7 +17,7 @@ import MenuSerialNumber from '@/components/customize/menu.serialnumber'
 import Link from 'next/link'
 import { TTypeVGA, TVga } from '@/types/type'
 import { useGlobalStore } from '@/stores'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState, useRef } from 'react'
 import { apiSearchVGA } from '@/apis/internals/clients/search.vga'
 import { TParamsSearchVGA } from '@/apis/internals/clients/search.vga'
 
@@ -35,6 +35,7 @@ type TSerialNumber = {
 export default function SerialNumber(props: TSerialNumber) {
   const [keyword, setKeyword] = useState<string>('')
   const [isClient, setIsClient] = useState(false)
+  const prevSearchVGA = useRef<TParamsSearchVGA>({})
   const { setVgas, vgas, searchVGA, setSeachVGA, vgaSearchAll, feeSearchAll } =
     useGlobalStore()
 
@@ -49,8 +50,10 @@ export default function SerialNumber(props: TSerialNumber) {
   )
 
   useEffect(() => {
-    if (Object.keys(searchVGA).length) {
+    // Check if searchVGA has changed before making the API call
+    if (JSON.stringify(searchVGA) !== JSON.stringify(prevSearchVGA.current)) {
       handleSearchVGA(searchVGA)
+      prevSearchVGA.current = searchVGA
     }
   }, [handleSearchVGA, searchVGA])
 
@@ -62,12 +65,17 @@ export default function SerialNumber(props: TSerialNumber) {
   useEffect(() => {
     setIsClient(true)
     const id = setTimeout(() => {
-      if (keyword?.trim()) {
-        setSeachVGA({ vga: keyword })
-      } else {
-        const copySearchVGA = { ...searchVGA }
-        delete copySearchVGA.vga
-        setSeachVGA(copySearchVGA)
+      if (keyword != prevSearchVGA.current.vga) {
+        if (keyword?.trim()) {
+          setSeachVGA({ ...searchVGA, vga: keyword })
+        } else {
+          if (prevSearchVGA.current.vga && !keyword?.trim()) {
+            const copySearchVGA = { ...searchVGA }
+            prevSearchVGA.current.vga = undefined
+            delete copySearchVGA.vga
+            setSeachVGA(copySearchVGA)
+          }
+        }
       }
     }, 300)
     return () => clearTimeout(id)

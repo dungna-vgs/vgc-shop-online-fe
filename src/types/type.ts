@@ -139,9 +139,9 @@ export type TVoucher = {
   discount: number
 }
 export type TEmployee = {
-  id: number
-  name: string
-  employee_code: string
+  id?: number
+  name?: string
+  employee_code?: string
 }
 
 export type TVoucherResponse = {
