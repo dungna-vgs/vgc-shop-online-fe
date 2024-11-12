@@ -2,6 +2,7 @@ import CardNumber from '@/components/customize/number.card'
 import PackageCard from '@/components/customize/package.card'
 import { Card } from '@/components/ui/card'
 import { useGlobalStore, useDiscountStore, useEmployeeStore } from '@/stores'
+import { useTranslation } from 'react-i18next'
 import {
   formatCurrency,
   getMembershipPackageName,
@@ -11,6 +12,7 @@ import {
 import React from 'react'
 
 export default function VGABill() {
+  const { t } = useTranslation('form')
   const { buyer, vga, feePackage } = useGlobalStore()
   const { discount } = useDiscountStore()
   const { employee } = useEmployeeStore()
@@ -25,7 +27,7 @@ export default function VGABill() {
         <Card className='text-black'>
           <div className='py-6 px-3 lg:px-8'>
             <p className='text-[20px] mb-6'>
-              {vga ? 'Mua mã VGA' : 'Đóng phí hội viên'}
+              {vga ? t('buy-vga') : t('buy-package')}
             </p>
             <div>
               {!!vga ? (
@@ -61,18 +63,18 @@ export default function VGABill() {
                 </div>
               ) : null}
               <div className='flex flex-col gap-2 my-2'>
-                <span className='text-sm text-[#545454]'>Người nhận</span>
+                <span className='text-sm text-[#545454]'>{t('recipient')}</span>
                 <p className='font-bold text-[16px]'>
                   {buyer?.fullname} - <span>VGA{buyer?.id_display}</span>
                 </p>
               </div>
               <div className='mt-6 flex flex-col gap-4 text-[16px]'>
                 <div className='flex justify-between items-center'>
-                  <span>Tổng cộng</span>
+                  <span>{t('total')}</span>
                   <span>{formatCurrency(money)}đ</span>
                 </div>
                 <div className='flex justify-between items-center'>
-                  <span className='text-[#545454]'>Giảm giá</span>
+                  <span className='text-[#545454]'>{t('discount')}</span>
                   <span className='text-[#07AC39]'>
                     {' '}
                     <span className='font-semibold'>
@@ -91,12 +93,12 @@ export default function VGABill() {
                 </div>
                 {employee && (
                   <div className='flex justify-between gap-2 items-center'>
-                    <span className='text-[#545454]'>Mã nhân viên tư vấn</span>
+                    <span className='text-[#545454]'>{t('staff-code')}</span>
                     <span>{`${employee.employee_code}-${employee.name}`}</span>
                   </div>
                 )}
                 <div className='flex justify-between items-center'>
-                  <span>Thành tiền</span>
+                  <span>{t('amount')}</span>
                   <span className='font-semibold'>
                     {discount
                       ? formatCurrency(

@@ -12,15 +12,26 @@ import FilterPrice from '@/components/customize/filter.price'
 import ListVGAs from '@/components/customize/list.vgas'
 import PriceVGACode from '@/components/customize/price.vgacode'
 import styles from './style.module.css'
+import TranslationsProvider from '@/components/customize/languages/TranslationsProvider'
+import initTranslations from '@/app/i18n'
+import TitleVGA from '@/components/customize/title.vga'
 type TVGAPageProps = {
   searchParams: TQueryParamsVGA
+  params: {
+    locale: string
+  }
 }
+
+const i18nNamespaces = ['home', 'common', 'footer', 'form', 'filter-menu']
+
 export default async function VGAPage(props: TVGAPageProps) {
   const configs = await getConfigs()
   if (configs.isMaintain) {
     return redirect('/maintainance')
   }
-  const [ads, vgas, significances] = await Promise.all([
+  const { locale } = props.params;
+  const [{ resources }, ads, vgas, significances] = await Promise.all([
+    initTranslations(locale, i18nNamespaces),
     apiAds(),
     getVGAs({
       ...props.searchParams,
@@ -29,55 +40,57 @@ export default async function VGAPage(props: TVGAPageProps) {
     }),
     getSignificances()
   ])
-
   return (
-    <div className={styles.containerBg}>
-      <div className='mt-[84px]  max-w-[1200px] mx-auto min-h-[100vh]  py-6 px-4'>
-        <div className='grid grid-cols-4 gap-8'>
-          <div className='col-span-1 flex flex-col gap-6'>
-            <div className='hidden lg:block'>
-              <FilterPrice />
-              <FilterType significances={significances} />
-              {ads.adsVGaLeft && (
-                <Image
-                  src={ads.adsVGaLeft.image}
-                  width={256}
-                  height={510}
-                  alt={ads.adsVGaLeft.title}
-                  quality={80}
-                  style={{
-                    width: '100%',
-                    height: 'auto',
-                    objectFit: 'cover'
-                  }}
-                />
-              )}
-            </div>
-          </div>
-          <div className='col-span-4 lg:col-span-3'>
-            <div className='block md:flex justify-between gap-4'>
-              <div className='flex gap-4 justify-between'>
-                <span className='text-[24px] text-black font-semibold'>
-                  Mã VGA
-                </span>
-              </div>
-              <div className='block md:flex justify-between items-center gap-4'>
-                <SearchVGACode />
-                <PriceVGACode significances={significances} />
+    <TranslationsProvider
+      resources={resources}
+      locale={locale}
+      namespaces={i18nNamespaces}
+    >
+      <div className={styles.containerBg}>
+        <div className='mt-[84px]  max-w-[1200px] mx-auto min-h-[100vh]  py-6 px-4'>
+          <div className='grid grid-cols-4 gap-8'>
+            <div className='col-span-1 flex flex-col gap-6'>
+              <div className='hidden lg:block'>
+                <FilterPrice />
+                <FilterType significances={significances} />
+                {ads.adsVGaLeft && (
+                  <Image
+                    src={ads.adsVGaLeft.image}
+                    width={256}
+                    height={510}
+                    alt={ads.adsVGaLeft.title}
+                    quality={80}
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                      objectFit: 'cover'
+                    }}
+                  />
+                )}
               </div>
             </div>
-            <ListVGAs
-              vgas={vgas.data}
-              pagination={{
-                from: vgas.from,
-                total: vgas.total,
-                last_page: vgas.last_page,
-                per_page: vgas.per_page
-              }}
-            />
+            <div className='col-span-4 lg:col-span-3'>
+              <div className='block md:flex justify-between gap-4'>
+                <TitleVGA />
+                <div className='block md:flex justify-between items-center gap-4'>
+                  <SearchVGACode />
+                  <PriceVGACode significances={significances} />
+                </div>
+              </div>
+              <ListVGAs
+                vgas={vgas.data}
+                pagination={{
+                  from: vgas.from,
+                  total: vgas.total,
+                  last_page: vgas.last_page,
+                  per_page: vgas.per_page
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </TranslationsProvider>
+
   )
 }

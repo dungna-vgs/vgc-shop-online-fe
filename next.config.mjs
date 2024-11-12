@@ -24,5 +24,6 @@ export default withPWA({
   reactStrictMode: true,
   images: {
     remotePatterns: createRemotePatterns(process.env.DOMAINS_IMAGE)
-  }
+  },
+  logging: false,
 })

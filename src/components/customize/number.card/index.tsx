@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { TVga } from '@/types/type'
 import { formatCurrency } from '@/utils'
 import clsx from 'clsx'
+import { useTranslation } from 'react-i18next'
 
 type TCardNumberProps = {
   vga: TVga
@@ -16,6 +17,7 @@ export default function CardNumber({
   showBuyButton = true,
   className = ''
 }: TCardNumberProps) {
+  const { t } = useTranslation('common')
   return (
     <div className={clsx(styles.listCard, className)}>
       <div className=''>
@@ -55,7 +57,7 @@ export default function CardNumber({
           </span>
           {showBuyButton && (
             <Link href={`/buy-vga/${vga.id}`} className={styles.btnBuy}>
-              Mua ngay
+              {t('buy')}
             </Link>
           )}
         </div>

@@ -13,18 +13,21 @@ import {
 } from '@/components/ui/carousel'
 import { TPromotion } from '@/types/type'
 import { useGlobalStore } from '@/stores'
+import { useTranslation } from 'react-i18next'
+
 
 type TOfferCard = {
   promotions: TPromotion[]
 }
 
 export default function OfferCard(props: TOfferCard) {
+  const { t } = useTranslation('common')
   const { vgaSearchAll, feeSearchAll } = useGlobalStore()
   if (vgaSearchAll.length || feeSearchAll.length) return null
   return (
     <div>
       <h3 className='pb-6 pt-2 text-xl font-semibold text-[#000]'>
-        ƯU ĐÃI ĐẶC BIỆT
+      {t('promotion')}
       </h3>
       <Carousel
         opts={{

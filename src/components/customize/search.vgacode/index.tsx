@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { Search } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { useGlobalStore } from '@/stores'
+import { useTranslation } from 'react-i18next'
 export default function SearchVGACode() {
+  const { t } = useTranslation('common')
   const { searchVGA, setSeachVGA } = useGlobalStore()
   const [keyword, setKeyword] = useState<string>('')
 
@@ -26,7 +28,7 @@ export default function SearchVGACode() {
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
         type='search'
-        placeholder='Tìm kiếm'
+        placeholder={t('search')}
         className='text-sm w-full rounded-lg bg-[#F5F5F5] border-none pl-8 md:w-[200px] lg:w-[260px]'
       />
     </div>

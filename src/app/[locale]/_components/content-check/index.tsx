@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import Loading from '@/components/ui/loading'
 import { ETransactionProvider } from '@/types/transaction-provider'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
   vgacode?: string
@@ -23,6 +24,7 @@ type Props = {
 }
 
 const ContentCheck = ({ vgacode, packageId, setSteps }: Props) => {
+  const { t } = useTranslation('form')
   const { buyer, vga, feePackage, setPaymentInfo } = useGlobalStore()
   const [loading, setLoading] = useState<boolean>(false)
   const { discount, setDiscount } = useDiscountStore()
@@ -72,7 +74,7 @@ const ContentCheck = ({ vgacode, packageId, setSteps }: Props) => {
     <div className='content-check'>
       <div>
         <p className='font-bold text-center text-[22px] lg:text-[28px] uppercase pb-12'>
-          KIỂM TRA THÔNG TIN {vgacode ? 'MUA MÃ VGA' : 'ĐÓNG PHÍ HỘI VIÊN'}
+          {t('check')} {vgacode ? t('buy-vga') : t('buy-package')}
         </p>
         <div className='grid lg:grid-cols-2 grid-cols-1 gap-4'>
           <RecipientCard
@@ -93,23 +95,24 @@ const ContentCheck = ({ vgacode, packageId, setSteps }: Props) => {
             setEmployee(undefined)
           }}
         >
-          Quay về
+          {t('back')}
         </button>
         <button
           className='text-white leading-[64px] bg-gradient-to-r from-[#17573C] to-[#4AC486] disabled:bg-none disabled:!bg-[#979797] rounded-[6px] flex justify-center w-40 md:w-[250px] h-16 text-[16px]'
           onClick={onSubmit}
         >
-          Tiếp theo
+          {t('next')}
+
         </button>
       </div>
 
       <AlertDialog open={loading}>
         <AlertDialogContent>
           <AlertDialogTitle className='text-center uppercase'>
-            Đang khởi tạo giao dịch
+            {t('initializing')}
           </AlertDialogTitle>
           <AlertDialogDescription className='text-center'>
-            Vui lòng không thoát khỏi màn hình và đợi trong giây lát
+            {t('please')}
           </AlertDialogDescription>
           <div className='flex justify-center flex-col items-center gap-4'>
             <Loading />

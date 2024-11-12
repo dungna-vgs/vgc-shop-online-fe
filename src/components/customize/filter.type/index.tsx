@@ -9,6 +9,8 @@ import {
 import { Checkbox } from '@/components/ui/checkbox'
 import { TTypeVGA } from '@/types/type'
 import { useGlobalStore } from '@/stores'
+import { useTranslation } from 'react-i18next'
+
 
 type TFilterType = {
   significances: TTypeVGA[]
@@ -16,10 +18,14 @@ type TFilterType = {
 
 export default function FilterType(props: TFilterType) {
   const { searchVGA, setSeachVGA } = useGlobalStore()
+  const { t } = useTranslation('filter-menu')
+  const { t: tcommon } = useTranslation('common')
+
+
   return (
     <Accordion type='single' collapsible>
       <AccordionItem value='item-2'>
-        <AccordionTrigger>Ý nghĩa</AccordionTrigger>
+        <AccordionTrigger>{t('mean')}</AccordionTrigger>
         <AccordionContent>
           {props.significances.map((significance, index) => (
             <div key={index} className=' flex py-2 gap-2 items-center'>

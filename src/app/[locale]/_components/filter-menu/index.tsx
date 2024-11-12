@@ -13,6 +13,7 @@ import { SlidersHorizontal } from 'lucide-react'
 import { TTypeVGA } from '@/types/type'
 import { rangesVGA } from '@/constants/range'
 import { useGlobalStore } from '@/stores'
+import { useTranslation } from 'react-i18next'
 
 const SHEET_SIDES = ['left'] as const
 
@@ -22,14 +23,18 @@ type TSheetSideProps = {
   significances: TTypeVGA[]
 }
 export function SheetSide(props: TSheetSideProps) {
+  const { t } = useTranslation('filter-menu')
+  const { t: tcommon } = useTranslation('common')
   const { searchVGA, setSeachVGA } = useGlobalStore()
+
+  const range = rangesVGA(tcommon('all'))
   return (
     <div className=''>
       {SHEET_SIDES.map((side) => (
         <Sheet key={side}>
           <SheetTrigger asChild>
             <div className='cursor-pointer gap-10 text-black  flex justify-start items-center'>
-              <span>Bộ lọc</span>
+              <span>{t('filter')}</span>
               <SlidersHorizontal className='w-4 h-4' />
             </div>
           </SheetTrigger>
@@ -39,7 +44,7 @@ export function SheetSide(props: TSheetSideProps) {
           >
             <SheetHeader>
               <div className=' gap-4 text-black py-2 border-b border-b-[#F1F1F1] text-[24px] font-medium flex justify-start items-center'>
-                <span>Bộ lọc</span>
+                <span>{t('filter')}</span>
               </div>
             </SheetHeader>
             <div
@@ -50,9 +55,9 @@ export function SheetSide(props: TSheetSideProps) {
             >
               <div>
                 <div className='border-b border-b-[#F1F1F1] pb-4 '>
-                  <span className='text-[18px]'>Giá</span>
+                  <span className='text-[18px]'>{t('price')}</span>
                 </div>
-                {rangesVGA.map((range, index) => (
+                {range.map((range, index) => (
                   <div key={index}>
                     <div className='flex items-center justify-start gap-2 pl-2 py-2'>
                       <Checkbox
@@ -80,7 +85,7 @@ export function SheetSide(props: TSheetSideProps) {
               </div>
               <div className='mb-2'>
                 <div className='border-b border-b-[#F1F1F1] py-2 '>
-                  <span className='text-[18px]'>Ý nghĩa</span>
+                  <span className='text-[18px]'>{t('mean')}</span>
                 </div>
                 {props.significances.map((meaning, index) => (
                   <div key={index}>

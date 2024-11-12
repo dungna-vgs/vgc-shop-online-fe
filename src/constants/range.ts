@@ -1,7 +1,8 @@
-export const rangesVGA = [
+import { getI18n } from "react-i18next";
+export const rangesVGA = (all: string) => [
   {
     min: undefined,
-    displayMin: 'Tất cả',
+    displayMin: all,
     displayMax: '',
     space: '',
     max: undefined

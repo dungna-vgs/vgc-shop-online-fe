@@ -16,12 +16,14 @@ import { apiCheckDiscountCode } from '@/apis/internals/clients/check.discount'
 import { apiCheckEmployeeCode } from '@/apis/internals/clients/check.employee'
 import React, { useState } from 'react'
 import { useToastStore, useDiscountStore, useEmployeeStore } from '@/stores'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
   amount: number
 }
 
 export default function DummyInvoice({ amount }: Props) {
+  const { t } = useTranslation('form')
   const [discountCode, setDiscountCode] = useState<string>('')
   const [employeeCode, setEmployeeCode] = useState<string>('')
   const { discount, setDiscount } = useDiscountStore()
@@ -33,16 +35,16 @@ export default function DummyInvoice({ amount }: Props) {
       const res = await apiCheckDiscountCode({ voucher_code: discountCode })
       const { error_code } = res.data
       if (res.data.error_code === 200) {
-        showToast('Áp dụng mã thành công', 'success', 2000)
+        showToast(t('apply-success'), 'success', 2000)
         setDiscount(res.data.data)
       } else {
         const errorMessage =
-          error_code === 401 ? 'Vui lòng thử lại sau' : 'Mã không hợp lệ'
+          error_code === 401 ? t('again-later') : t('invalid-code')
         showToast(errorMessage, 'error', 2000)
         resetDiscount()
       }
     } catch (error) {
-      showToast('Đã xảy ra lỗi, vui lòng thử lại sau', 'error', 2000)
+      showToast(t('error'), 'error', 2000)
       resetDiscount()
     }
   }
@@ -55,14 +57,14 @@ export default function DummyInvoice({ amount }: Props) {
       const res = await apiCheckEmployeeCode({ employee_code: employeeCode })
       if (res.data.error_code === 200) {
         setEmployee(res.data.data)
-        showToast(`Nhân viên tư vấn ${res.data.data.name} `, 'success', 2000)
+        showToast(`t('consultant') ${res.data.data.name} `, 'success', 2000)
         setEmployee(res.data.data)
       } else {
-        showToast('Mã nhân viên tư vấn không hợp lệ', 'error', 2000)
+        showToast(t('error-code'), 'error', 2000)
         resetEmployee()
       }
     } catch (error) {
-      showToast('Đã xảy ra lỗi, vui lòng thử lại sau', 'error', 2000)
+      showToast(t('error'), 'error', 2000)
       resetEmployee()
     }
   }
@@ -75,15 +77,15 @@ export default function DummyInvoice({ amount }: Props) {
       <Card className='text-black'>
         <div className='py-6 px-4 lg:px-8'>
           <CardHeader>
-            <CardTitle>Số tiền thanh toán tạm tính</CardTitle>
+            <CardTitle>{t('estimated')}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className='mb-2'>Mã giảm giá</p>
+            <p className='mb-2'>{t('discount-code')}</p>
             <div className='flex p-4 justify-between items-center rounded-[7px] border border-[#F1F1F1]'>
               <Input
                 className='bg-white placeholder:text-[#979797] outline-none border-none'
                 type='text'
-                placeholder='Nhập mã giảm giá (nếu có)'
+                placeholder={t('fill-code')}
                 value={discountCode}
                 onChange={(e) => setDiscountCode(e.target.value)}
               />
@@ -93,18 +95,18 @@ export default function DummyInvoice({ amount }: Props) {
                 onClick={handleCheckDiscountCode}
                 disabled={!discountCode.trim()}
               >
-                Kiểm tra
+               {t('apply')}
               </Button>
             </div>
             <p className='mt-6 mb-2'>
-              Mã nhân viên tư vấn
-              <span className='text-red-600'> (không bắt buộc)</span>
+              {t('staff-code')}
+              <span className='text-red-600'> {t('not-required')}</span>
             </p>
             <div className='flex p-4 justify-between items-center rounded-[7px] border border-[#F1F1F1]'>
               <Input
                 className='bg-white placeholder:text-[#979797] outline-none border-none'
                 type='text'
-                placeholder='Nhập mã nhân viên tư vấn'
+                placeholder={t('fill-staff-code')}
                 value={employeeCode}
                 onChange={(e) => setEmployeeCode(e.target.value)}
               />
@@ -114,16 +116,16 @@ export default function DummyInvoice({ amount }: Props) {
                 onClick={handleCheckEmpoyeeCode}
                 disabled={!employeeCode.trim()}
               >
-                Kiểm tra
+                {t('check-in')}
               </Button>
             </div>
             <div className='mt-6 flex flex-col gap-2 text-[16px]'>
               <div className='flex justify-between items-center'>
-                <span className=' uppercase'>Tổng cộng</span>
+                <span className=' uppercase'>{t('total')}</span>
                 <span>{formatCurrency(amount)}đ</span>
               </div>
               <div className='flex justify-between items-center'>
-                <span className='text-[#545454]'>Giảm giá</span>
+                <span className='text-[#545454]'>{t('discount')}</span>
                 <span className='text-[#07AC39]'>
                   {formatCurrency(
                     calculateDiscountAmount(
@@ -137,12 +139,12 @@ export default function DummyInvoice({ amount }: Props) {
               </div>
               {employee && (
                 <div className='flex justify-between items-center'>
-                  <span className='text-[#545454]'>Mã nhân viên tư vấn:</span>
+                  <span className='text-[#545454]'>{t('staff-code')}</span>
                   <span>{`${employee.employee_code}-${employee.name}`}</span>
                 </div>
               )}
               <div className='flex justify-between items-center'>
-                <span>Thành tiền</span>
+                <span>{t('amount')}</span>
                 <span className='font-semibold'>
                   {discount
                     ? formatCurrency(

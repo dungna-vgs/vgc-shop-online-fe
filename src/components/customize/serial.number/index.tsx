@@ -20,6 +20,8 @@ import { useGlobalStore } from '@/stores'
 import { useCallback, useEffect, useState } from 'react'
 import { apiSearchVGA } from '@/apis/internals/clients/search.vga'
 import { TParamsSearchVGA } from '@/apis/internals/clients/search.vga'
+import { useTranslation } from 'react-i18next'
+
 
 type TSerialNumber = {
   typeVga: TTypeVGA[]
@@ -33,6 +35,8 @@ type TSerialNumber = {
   }
 }
 export default function SerialNumber(props: TSerialNumber) {
+  const { t } = useTranslation('common')
+
   const [keyword, setKeyword] = useState<string>('')
   const [isClient, setIsClient] = useState(false)
   const { setVgas, vgas, searchVGA, setSeachVGA, vgaSearchAll, feeSearchAll } =
@@ -78,7 +82,7 @@ export default function SerialNumber(props: TSerialNumber) {
   return (
     <div>
       <div className='p-0 py-0 lg:py-0 block lg:flex justify-between items-center w-full'>
-        <h3 className='text-xl font-semibold p-3 text-[#000]'>Mã VGA</h3>
+        <h3 className='text-xl font-semibold p-3 text-[#000]'>{t('vgacode')}</h3>
         <div className='flex flex-col lg:flex-row justify-end items-center gap-4'>
           <div className='relative ml-auto flex-1 w-full md:grow-0'>
             <Search className='absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground ' />
@@ -86,7 +90,7 @@ export default function SerialNumber(props: TSerialNumber) {
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
               type='search'
-              placeholder='Tìm kiếm'
+              placeholder={t('search')}
               className='text-sm w-full rounded-lg bg-[#F5F5F5] border-none pl-8  lg:w-[320px]'
             />
           </div>
@@ -101,10 +105,10 @@ export default function SerialNumber(props: TSerialNumber) {
               }}
             >
               <SelectTrigger className='max-w-[226px]'>
-                <SelectValue placeholder='Chọn mức giá' />
+                <SelectValue placeholder={t('select-price')} />
               </SelectTrigger>
               <SelectContent className='min-w-[250px]'>
-                <SelectItem value='-'>Tất cả</SelectItem>
+                <SelectItem value='-'>{t('all')}</SelectItem>
                 <SelectItem value='-5000000'>&lt; 5.000.000đ</SelectItem>
                 <SelectItem value='5000000-10000000'>
                   5.000.000đ - 10.000.000đ
@@ -123,11 +127,11 @@ export default function SerialNumber(props: TSerialNumber) {
             </Select>
             <Select onValueChange={(direction) => setSeachVGA({ direction })}>
               <SelectTrigger className='max-w-[226px]'>
-                <SelectValue placeholder='Giá từ cao đến thấp' />
+                <SelectValue placeholder={t('high-to-low')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value='desc'>Giá từ cao đến thấp</SelectItem>
-                <SelectItem value='asc'>Giá từ thấp đến cao</SelectItem>
+                <SelectItem value='desc'> {t('high-to-low')}</SelectItem>
+                <SelectItem value='asc'> {t('low-to-high')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -142,7 +146,7 @@ export default function SerialNumber(props: TSerialNumber) {
       <div className='flex justify-center items-center py-3'>
         <Link href='/vgacode'>
           <Button className={styles.btnShowAll}>
-            <span>Xem tất cả</span>
+            <span>{t('see-all')}</span>
             <Image
               src='/images/arrow-right.svg'
               width={16}

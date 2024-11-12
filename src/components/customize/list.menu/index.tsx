@@ -1,7 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { useTranslation } from 'react-i18next'
 
 export default function ListMenuSerial() {
+  const { t } = useTranslation('common')
   return (
     <div>
       <Link
@@ -15,7 +17,7 @@ export default function ListMenuSerial() {
           alt='Icon'
           className='hover:fill-slate-50'
         />
-        <span>Tất cả</span>
+        <span>{t('all')}</span>
       </Link>
     </div>
   )

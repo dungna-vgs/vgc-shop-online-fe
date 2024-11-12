@@ -5,6 +5,7 @@ import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 type TMenuSerialNumberProps = {
   typeVga: TTypeVGA[]
@@ -12,6 +13,7 @@ type TMenuSerialNumberProps = {
 
 export default function MenuSerialNumber(props: TMenuSerialNumberProps) {
   const { setSeachVGA, searchVGA } = useGlobalStore()
+  const { t } = useTranslation('common')
   return (
     <div className='flex items-center py-4 gap-4 lg:gap-8  overflow-hidden overflow-x-scroll no-scrollbar '>
       {props.typeVga?.map?.((type, index) => {
@@ -46,7 +48,7 @@ export default function MenuSerialNumber(props: TMenuSerialNumberProps) {
                   alt='Icon'
                   className='hover:fill-slate-50'
                 />
-                <span className='text-white'>Tất cả</span>
+                <span className='text-white'>{t('all')}</span>
               </Link>
             </div>
           )

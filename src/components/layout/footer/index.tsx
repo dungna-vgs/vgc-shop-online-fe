@@ -4,8 +4,11 @@ import Image from 'next/image'
 import React from 'react'
 import styles from './style.module.css'
 import Link from 'next/link'
+import { useTranslation } from 'react-i18next'
+
 
 const Footer: React.FC = () => {
+  const { t } = useTranslation('common')
   return (
     <div className='bg-[#012f2d]'>
       <div className='max-w-[1200px] mx-auto'>
@@ -29,8 +32,7 @@ const Footer: React.FC = () => {
                 target='_blank'
                 href='https://www.google.com/maps/search/+BT4.7+-+Khu+bi%E1%BB%87t+th%E1%BB%B1+ngo%E1%BA%A1i+giao+%C4%91o%C3%A0n,+P.+Xu%C3%A2n+T%E1%BA%A3o,+Q.+B%E1%BA%AFc+T%E1%BB%AB+Li%C3%AAm,+++++++++++++++H%C3%A0+N%E1%BB%99i/@21.0667597,105.7909583,16z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI0MTAyMS4xIKXMDSoASAFQAw%3D%3D'
               >
-                BT4.7 - Khu biệt thự ngoại giao đoàn, P. Xuân Tảo, Q. Bắc Từ
-                Liêm, Hà Nội
+               {t('map')}
               </Link>
             </div>
             <div className='flex items-center gap-3 justify-start'>
@@ -88,10 +90,7 @@ const Footer: React.FC = () => {
               alt='vhandicap'
             />
             <span>
-              <strong>vHandicap</strong> - Hệ thống tính Handicap Việt Nam từ
-              VGA. Hiệp hội golf Việt Nam (VGA) ra mắt hệ thống ứng dụng
-              Handicap quốc gia cho phép các golfer tính Handicap của mình thông
-              qua kết quả của từng trận đấu.
+              <strong>vHandicap</strong> - {t('vgc-content')}
             </span>
             <div className='lg:flex grid lg:grid-cols-2 grid-cols-1 gap-y-4 gap-4'>
               <Link href='https://play.google.com/store/apps/details?id=com.golfervn.vga.vgagolfer'>
@@ -120,9 +119,9 @@ const Footer: React.FC = () => {
               height={50}
               alt='Contact Icon'
             />
-            <span className='font-semibold text-xl'>Chăm sóc khách hàng</span>
+            <span className='font-semibold text-xl'>{t('customer-service')}</span>
             <span>
-              Liên hệ với bộ phận chăm sóc khách hàng để tổ chức giải đấu golf!
+            {t('contact')}
             </span>
             <div className='flex items-center gap-3 justify-start'>
               <Mail />
