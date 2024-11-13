@@ -8,15 +8,18 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
 import { AlignJustify, Search } from 'lucide-react'
 import { usePathname } from 'next/navigation'
+import { useTranslation } from 'react-i18next'
+
 
 const navLinks = [
-  { name: 'Trang chủ', href: '/' },
-  { name: 'Mã VGA', href: '/vgacode' },
-  { name: 'Phí hội viên', href: '/package-price' }
+  { name: 'home', href: '/' },
+  { name: 'vgacode', href: '/vgacode' },
+  { name: 'cost', href: '/package-price' }
 ]
 const Header: React.FC = () => {
   const pathname = usePathname()
   console.log(pathname)
+  const { t } = useTranslation('common')
   return (
     <div className='bg-background fixed top-0 right-0 left-0 z-[999] shadow-[0_-6px_10px_5px_rgba(0,0,0,0.2)]'>
       <div className='max-w-[1200px] mx-auto px-4'>
@@ -29,7 +32,7 @@ const Header: React.FC = () => {
               alt='Handicap Logo'
             />
             <span className='text-[#33B4B0] font-bold text-[26px] hidden md:block'>
-              vHandicap
+            vHandicap
             </span>
           </Link>
           <div className='flex items-center gap-[24px]'>
@@ -37,13 +40,13 @@ const Header: React.FC = () => {
               <Search className='absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground ' />
               <Input
                 type='search'
-                placeholder='Tìm kiếm'
+                placeholder={t('search')}
                 className='text-sm w-full sm:w-[280] flex-1 rounded-lg bg-[#F5F5F5] border-none pl-8 xl:w-[420] lg:w-[500px]'
               />
             </div>
             {/* //LIST-ITEM  */}
             <div>
-              <nav className='hidden flex-col gap-6 text-lg font-medium lg:flex lg:flex-row lg:items-center lg:gap-5 lg:text-sm'>
+              <nav className='hidden gap-6 text-lg font-medium xl:flex xl:items-center xl:gap-8 xl:text-sm'>
                 {navLinks.map((link) => {
                   const isActive = pathname == link.href
                   return (
@@ -52,11 +55,11 @@ const Header: React.FC = () => {
                       key={link.name}
                       className={
                         isActive
-                          ? 'text-foreground w-[80px] flex justify-center transition-colors hover:text-foreground'
-                          : 'text-muted-foreground  w-[80px] flex justify-center transition-colors hover:text-foreground'
+                          ? 'text-foreground  flex justify-center transition-colors hover:text-foreground'
+                          : 'text-muted-foreground  flex justify-center transition-colors hover:text-foreground'
                       }
                     >
-                      {link.name}
+                      {t(link.name)}
                     </Link>
                   )
                 })}
@@ -67,7 +70,7 @@ const Header: React.FC = () => {
                   <Button
                     variant='outline'
                     size='icon'
-                    className='shrink-0 lg:hidden border-none  '
+                    className='shrink-0 xl:hidden border-none  '
                   >
                     <AlignJustify className='scale-150' />
                   </Button>
@@ -75,19 +78,19 @@ const Header: React.FC = () => {
                 <SheetContent className='bg-[#4AC486] mt-[84px]' side='top'>
                   <nav className='grid text-white gap-6 text-lg font-medium'>
                     <Link href='/' className='hover:text-foreground'>
-                      Trang chủ
+                    {t('home')}
                     </Link>
                     <Link href='/vgacode' className=' hover:text-foreground'>
-                      Mã VGA
+                    {t('vgacode')}
                     </Link>
                     <Link
                       href='/package-price'
                       className=' hover:text-foreground'
                     >
-                      Phí hội viên
+                      {t('cost')}
                     </Link>
                     <div className='flex gap-4 items-center'>
-                      <span>Ngôn ngữ</span>
+                      <span>{t('language')}</span>
                       <LanguageChanger />
                     </div>
                   </nav>
@@ -95,7 +98,7 @@ const Header: React.FC = () => {
               </Sheet>
             </div>
             {/* END LIST ITEM  */}
-            <div className='hidden lg:block'>
+            <div className='hidden xl:block'>
               <LanguageChanger />
             </div>
           </div>

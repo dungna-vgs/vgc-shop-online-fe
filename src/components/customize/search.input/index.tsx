@@ -6,8 +6,11 @@ import { Input } from '@/components/ui/input'
 import { useGlobalStore } from '@/stores'
 import { apiSearchAll } from '@/apis/internals/clients/search.all'
 import { useSearchParams } from 'next/navigation'
+import { useTranslation } from 'react-i18next'
+
 
 export default function SearchInput() {
+  const { t } = useTranslation('common')
   const { setSearchAll } = useGlobalStore()
   const searchParams = useSearchParams()
   const [keyword, setKeyword] = useState<string>(
@@ -39,7 +42,7 @@ export default function SearchInput() {
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
         type='search'
-        placeholder='Tìm kiếm'
+        placeholder={t('search')}
         className='text-sm w-full sm:w-[280] flex-1 rounded-lg bg-[#F5F5F5] border-none pl-8 xl:w-[420] lg:w-[500px] cursor-pointer'
       />
     </div>

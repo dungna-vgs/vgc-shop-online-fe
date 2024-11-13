@@ -4,6 +4,8 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { TFeePackage, TGolfer, TVga } from '@/types/type'
 import { formatCurrency, getMembershipPackageName } from '@/utils'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
+
 
 type Props = {
   golfer: TGolfer
@@ -12,10 +14,11 @@ type Props = {
 }
 
 export default function RecipientCard({ golfer, vga, feePackage }: Props) {
+  const { t } = useTranslation('form')
   return (
     <div className='flex flex-col gap-8'>
       <div className='pb-4'>
-        <p className='text-[24px] mb-4 font-semibold'>Người nhận</p>
+        <p className='text-[24px] mb-4 font-semibold'>{t('recipient')}</p>
         <div className='flex justify-start gap-4 items-center'>
           <Avatar className='bg-gray-400 w-[87px] h-[87px]'>
             <AvatarImage src={golfer.system_avatar_path} alt={golfer.id + ''} />
@@ -34,7 +37,7 @@ export default function RecipientCard({ golfer, vga, feePackage }: Props) {
       {/* MÃ VGA  */}
       {!!vga && (
         <div>
-          <p className='text-[24px] mb-4 font-semibold'>Mã VGA</p>
+          <p className='text-[24px] mb-4 font-semibold'>{t('vgacode')}</p>
           <div className='block sm:flex min-w-[246px]  gap-4 justify-between'>
             <CardNumber vga={vga} showBuyButton={false} />
             <div className='flex flex-1 justify-between gap-4  xl:justify-between items-center'>

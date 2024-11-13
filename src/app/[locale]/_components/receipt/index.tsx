@@ -4,6 +4,8 @@ import VGABill from '../vga-bill'
 import InforBill from '../infor-bill'
 import SuccessAlert from '../success.alert'
 import { useGlobalStore, useDiscountStore, useEmployeeStore } from '@/stores'
+import { useTranslation } from 'react-i18next'
+
 
 type Props = {
   vgacode?: string
@@ -12,6 +14,7 @@ type Props = {
 }
 
 const Receipt = ({ vgacode, setSteps }: Props) => {
+  const { t } = useTranslation('form')
   const { buyer, vga, feePackage, paymentInfo } = useGlobalStore()
   const { setDiscount } = useDiscountStore()
   const { setEmployee } = useEmployeeStore()
@@ -21,12 +24,12 @@ const Receipt = ({ vgacode, setSteps }: Props) => {
     <div>
       <div className='text-center'>
         <p className='text-[24px] lg:text-[28px] font-bold uppercase'>
-          THANH TOÁN {vgacode ? 'MUA MÃ VGA' : 'PHÍ HỘI VIÊN'}
+          {t('payment')} {vgacode ? t('buy-vga') : t('buy-package')}
         </p>
         {!!vgacode && (
           <div className='flex flex-col justify-center items-center'>
             <span className='text-[18px] mb-2'>
-              Giao dịch sẽ tự động huỷ sau:{' '}
+              {t('cancel')}{' '}
             </span>
             <p className='w-12 h-12 text-sm flex justify-center text-red-500 items-center rounded-full border border-red-500'>
               <Countdown />
@@ -49,7 +52,7 @@ const Receipt = ({ vgacode, setSteps }: Props) => {
             setEmployee(undefined)
           }}
         >
-          Quay về
+          {t('back')}
         </button>
         <SuccessAlert transactionId={paymentInfo?.transaction_id} />
 

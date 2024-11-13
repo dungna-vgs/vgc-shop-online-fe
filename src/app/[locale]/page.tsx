@@ -21,7 +21,7 @@ interface HomeProps {
   }
 }
 
-const i18nNamespaces = ['home', 'common', 'footer']
+const i18nNamespaces = ['home', 'common', 'footer', 'form']
 
 export const runtime = 'edge'
 
@@ -40,7 +40,6 @@ export default async function Home({ params: { locale } }: HomeProps) {
       getVGAs(),
       showSpecialDiscount && apiPromotion()
     ])
-
   return (
     <TranslationsProvider
       resources={resources}

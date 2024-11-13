@@ -10,15 +10,22 @@ import {
 import { Checkbox } from '@/components/ui/checkbox'
 import { rangesVGA } from '@/constants/range'
 import { useGlobalStore } from '@/stores'
+import { useTranslation } from 'react-i18next'
+
 
 export default function FilterPrice() {
+  const { t } = useTranslation('filter-menu')
+  const { t: tcommon } = useTranslation('common')
+
   const { setSeachVGA, searchVGA } = useGlobalStore()
+
+  const range = rangesVGA(tcommon('all'))
   return (
     <Accordion className='mb-4' type='single' collapsible>
       <AccordionItem value='item-1'>
-        <AccordionTrigger>Giá</AccordionTrigger>
+        <AccordionTrigger>{t('price')}</AccordionTrigger>
         <AccordionContent>
-          {rangesVGA.map((range, index) => (
+          {range.map((range, index) => (
             <div key={index} className=' flex py-2 gap-2 items-center'>
               <Checkbox
                 onClick={() => {

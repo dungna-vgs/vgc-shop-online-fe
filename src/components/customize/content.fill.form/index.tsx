@@ -27,6 +27,7 @@ import { useGlobalStore } from '@/stores'
 import { apiGetVga } from '@/apis/internals/clients/get.vga'
 import { apiGetFeePackage } from '@/apis/internals/clients/get.package'
 import { getMembershipPackageName } from '@/utils'
+import { useTranslation } from 'react-i18next'
 
 type TItemProps = {
   setSteps: (step: number) => void
@@ -35,6 +36,7 @@ type TItemProps = {
 }
 
 export default function ContentFillForm(props: TItemProps) {
+  const { t } = useTranslation('form')
   const router = useRouter()
   const { vga, feePackage, setVga, setFeePackage, setBuyer } = useGlobalStore()
   const { vgacode, packageId } = props
@@ -80,13 +82,12 @@ export default function ContentFillForm(props: TItemProps) {
     setBuyer(golfer || null)
     props.setSteps(1)
   }
-
   return (
     <div className='content-fill-form'>
       <div>
         {!!props.vgacode && (
           <p className=' font-semibold text-[20px] mb-6'>
-            Chọn tài khoản nhận mã
+            {t('select')}
             <span className='text-[#16533D] text-[22px]'>
               {' '}
               VGA{props.vgacode}
@@ -95,7 +96,7 @@ export default function ContentFillForm(props: TItemProps) {
         )}
         {!!props.packageId && !!feePackage && (
           <p className=' font-semibold text-[20px] mb-6'>
-            Chọn tài khoản đóng phí hội viên gói
+            {t('select-1')}
             <span className='text-[#16533D] text-[22px]'>
               {' '}
               {getMembershipPackageName(feePackage)}
@@ -128,7 +129,7 @@ export default function ContentFillForm(props: TItemProps) {
                   </div>
                 </div>
               ) : (
-                'Nhập tên, mã VGA hoặc số điện thoại để tìm kiếm'
+                t('fill-in')
               )}
               <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
             </Button>
@@ -138,12 +139,12 @@ export default function ContentFillForm(props: TItemProps) {
               onChange={(e) => setKeyword(e.target.value)}
               value={keyword}
               className='min-w-[100%] outline-none focus:outline-none focus:border-none border-none p-3'
-              placeholder='Nhập tên, mã VGA hoặc số điện thoại để tìm kiếm'
+              placeholder={t('fill-in')}
             />
             <Command className='min-w-[100%]'>
               <CommandList className='min-w-[100%]'>
                 <CommandEmpty className='min-w-[100%] p-3 text-center'>
-                  Không tìm thấy golfer nào.
+                  {t('not-search')}
                 </CommandEmpty>
                 <CommandGroup className='min-w-[100%]'>
                   {golfers.map((golfer) => (
@@ -191,14 +192,15 @@ export default function ContentFillForm(props: TItemProps) {
               router.back()
             }}
           >
-            Quay lại
+            {t('back')}
           </Link>
           <button
             className='text-white leading-[64px] bg-gradient-to-r from-[#17573C] to-[#4AC486] disabled:bg-none disabled:!bg-[#979797] rounded-[6px] flex justify-center w-40 md:w-[250px] h-16 text-[16px]'
             disabled={(!vga && !feePackage) || !value}
             onClick={onNextStep}
           >
-            Tiếp theo
+            {t('next')}
+
           </button>
         </div>
       </div>

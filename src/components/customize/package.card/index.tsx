@@ -1,6 +1,5 @@
+'use client';
 import React from 'react'
-// import { Button } from '@/components/ui/button'
-// import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import styles from './style.module.css'
 import Link from 'next/link'
@@ -8,6 +7,7 @@ import { ArrowRight } from 'lucide-react'
 import { TFeePackage } from '@/types/type'
 import { getMembershipPackageName } from '@/utils'
 import clsx from 'clsx'
+import { useTranslation } from 'react-i18next'
 
 type TPackageCardProps = {
   memberships: TFeePackage[]
@@ -24,6 +24,7 @@ export default function PackageCard({
   imgClassName = '',
   textClassName = ''
 }: TPackageCardProps) {
+  const { t } = useTranslation('common')
   return memberships?.map((membership: TFeePackage, index: number) => (
     <div key={index}>
       <div className={clsx(styles.listCard, cardClassName)}>
@@ -50,10 +51,10 @@ export default function PackageCard({
       {showBuyButton && (
         <div className=' bg-white shadow-lg rounded-b-2xl flex justify-center items-center py-3 max-w-full'>
           <Link
-            href={`/buy-package?membershipId=${membership.id}`}
+            href={`/buy-package/${membership.id}`}
             className={styles.btnBuy}
           >
-            <span>Đóng phí ngay</span>
+            <span>{t('pay-now')}</span>
             <ArrowRight />
           </Link>
         </div>
