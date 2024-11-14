@@ -29,6 +29,10 @@ export default function DummyInvoice({ amount }: Props) {
   const showToast = useToastStore((state) => state.showToast)
 
   const handleCheckDiscountCode = async () => {
+    if (discount) {
+      resetDiscount()
+      return
+    }
     try {
       const res = await apiCheckDiscountCode({ voucher_code: discountCode })
       const { error_code } = res.data
@@ -73,7 +77,7 @@ export default function DummyInvoice({ amount }: Props) {
                 onClick={handleCheckDiscountCode}
                 disabled={!discountCode.trim()}
               >
-                {t('apply')}
+                {t(`${discount ? 'delete' : 'apply'}`)}
               </Button>
             </div>
             <p className='mt-6 mb-2'>

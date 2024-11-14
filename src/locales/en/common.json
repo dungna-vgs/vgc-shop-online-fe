@@ -17,5 +17,6 @@
     "customer-service": "Customer Service",
     "contact": "Contact Customer Service to organize a golf tournament!",
     "found": "Found",
-    "no-data": "Not Found"
+    "no-data": "Not Found",
+		"notification":"Notification"
 }

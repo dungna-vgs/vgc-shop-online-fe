@@ -18,5 +18,6 @@
   "contact": "Liên hệ với bộ phận chăm sóc khách hàng để tổ chức giải đấu golf!",
   "found": "Tìm thấy",
   "not-found": "Không có kết quả tìm kiếm cho {{searchQuery}}. Vui lòng thử lại với từ khóa khác.",
-  "no-data": "Không tìm thấy"
+  "no-data": "Không tìm thấy",
+	"notification":"Thông báo"
 }

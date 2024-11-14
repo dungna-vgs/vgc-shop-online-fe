@@ -23,7 +23,7 @@ import {
 import { apiSearchGolfer } from '@/apis/internals/clients/search.golfer'
 import { TGolfer } from '@/types/type'
 import { useRouter } from 'next/navigation'
-import { useGlobalStore } from '@/stores'
+import { useGlobalStore, useDiscountStore, useEmployeeStore } from '@/stores'
 import { apiGetVga } from '@/apis/internals/clients/get.vga'
 import { apiGetFeePackage } from '@/apis/internals/clients/get.package'
 import { getMembershipPackageName } from '@/utils'
@@ -44,6 +44,8 @@ export default function ContentFillForm(props: TItemProps) {
   const [value, setValue] = useState<number>(0)
   const [keyword, setKeyword] = useState<string>('')
   const [golfers, setGolfers] = useState<TGolfer[]>([])
+  const { setDiscount } = useDiscountStore()
+  const { setEmployee } = useEmployeeStore()
   const handleOnSearch = async (keyword: string) => {
     apiSearchGolfer({ keyword }).then((res) => {
       setGolfers(res.data)
@@ -197,7 +199,11 @@ export default function ContentFillForm(props: TItemProps) {
           <button
             className='text-white leading-[64px] bg-gradient-to-r from-[#17573C] to-[#4AC486] disabled:bg-none disabled:!bg-[#979797] rounded-[6px] flex justify-center w-40 md:w-[250px] h-16 text-[16px]'
             disabled={(!vga && !feePackage) || !value}
-            onClick={onNextStep}
+            onClick={() => {
+              onNextStep()
+              setEmployee(undefined)
+              setDiscount(undefined)
+            }}
           >
             {t('next')}
           </button>

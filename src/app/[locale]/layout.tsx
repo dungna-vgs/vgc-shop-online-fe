@@ -102,7 +102,7 @@ export default async function RootLayout({
             <Spinner />
             <GlobalToast />
             <Header />
-            {children}
+            <div className='min-h-[70vh]'>{children}</div>
             <Footer />
             <BackToTop />
           </Suspense>

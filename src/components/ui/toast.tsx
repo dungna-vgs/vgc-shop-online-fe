@@ -3,11 +3,12 @@
 import React, { useEffect } from 'react'
 import * as Toast from '@radix-ui/react-toast'
 import { useToastStore } from '@/stores'
+import { useTranslation } from 'react-i18next'
 import clsx from 'clsx'
 
 export const GlobalToast = () => {
   const { open, message, duration, type, hideToast } = useToastStore()
-
+  const { t } = useTranslation('common')
   useEffect(() => {
     if (open) {
       const timer = setTimeout(() => hideToast(), duration)
@@ -26,7 +27,7 @@ export const GlobalToast = () => {
         onOpenChange={hideToast}
         duration={duration}
       >
-        <Toast.Title className='font-semibold'>Thông báo</Toast.Title>
+        <Toast.Title className='font-semibold'>{t('notification')}</Toast.Title>
         <Toast.Description className='text-sm'>{message}</Toast.Description>
       </Toast.Root>
 
