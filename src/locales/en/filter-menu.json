@@ -1,5 +1,13 @@
 {
-    "filter": "Filter",
-    "price": "Price",
-    "mean": "Meaning"
+  "filter": "Filter",
+  "price": "Price",
+  "mean": "Meaning",
+  "Tam hoa": "Triple",
+  "Tứ quý": "Quadruple",
+  "Đảo gánh": "Mirror pattern",
+  "Năm Sinh": "Birth year",
+  "Ngũ quý": "Quintuples",
+  "Sảnh": "Consecutive Sequence",
+  "Tất cả":"All"
+
 }

@@ -80,18 +80,22 @@ export default function VGABill() {
                 </div>
                 <div className='flex justify-between items-center'>
                   <span className='text-[#545454]'>{t('promotional')}</span>
-                  <span className='text-[#07AC39]'> -{discount
-                        ? formatCurrency(
-                            calculateDiscountAmount(
-                              money,
-                              discount.discount,
-                              discount.type
-                            )
+                  <span className='text-[#07AC39]'>
+                    {' '}
+                    -
+                    {discount
+                      ? formatCurrency(
+                          calculateDiscountAmount(
+                            money,
+                            discount.discount,
+                            discount.type
                           )
-                        : 0}
-                      đ</span>
+                        )
+                      : 0}
+                    đ
+                  </span>
                 </div>
-               
+
                 <div className='flex justify-between items-center'>
                   <span className='text-[#545454]'>{t('discount')}</span>
                   <span className='text-[#07AC39]'>

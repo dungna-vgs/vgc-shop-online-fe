@@ -4,8 +4,11 @@ import axios from 'axios'
 // để gọi ở server nextjs lên server business
 export function createAxiosInstanceServer(origin: string) {
   if (TYPE_ENVIRONMENT.LOCALHOST === process.env.ENVIROMENT) {
-    origin = 'https://bmw-store.dev.vgcorp.vn'
+    origin = 'https://store.dev.vgcorp.vn'
   }
+  console.log("origin ----------------------------------------------------------------")
+  console.log(origin)
+  console.log(process.env.API_URL)
   return axios.create({
     baseURL: process.env.API_URL,
     headers: {

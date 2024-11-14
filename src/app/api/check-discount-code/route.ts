@@ -41,6 +41,7 @@ export async function GET(request: NextRequest) {
       redirect: `${origin}/not-found`
     })
   }
+
   const axiosInstance = createAxiosInstanceServer(origin)
   const res = await axiosInstance.get(API_ENDPOINT.CHECK_DISCOUNT_CODE, {
     params
@@ -49,9 +50,11 @@ export async function GET(request: NextRequest) {
   console.log(JSON.stringify(params))
   console.log('JSON.stringify(res.data): ')
   console.log(JSON.stringify(res.data))
+  console.log(origin)
   return NextResponse.json({
     success: true,
     data: res.data,
-    redirect: null
+    redirect: null,
+    origin 
   })
 }

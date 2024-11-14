@@ -1,7 +1,12 @@
 {
-    "filter": "Bộ lọc",
-    "price": "Giá",
-    "mean": "Ý nghĩa"
-
-
+  "filter": "Bộ lọc",
+  "price": "Giá",
+  "mean": "Ý nghĩa",
+  "Tam hoa": "Tam hoa",
+  "Tứ quý": "Tứ Quý",
+  "Đảo gánh": "Đảo gánh",
+  "Năm sinh": "Năm sinh",
+  "Ngũ quý": "Ngũ quý",
+  "Sảnh": "Sảnh",
+  "Tất cả":"Tất cả"
 }

@@ -43,7 +43,7 @@ export default function FilterType(props: TFilterType) {
                   htmlFor={`meaning${index}`}
                   className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer'
                 >
-                  {significance.name}
+                  {t(significance.name)}
                 </label>
               </div>
             </div>
