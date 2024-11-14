@@ -152,3 +152,10 @@ export type TEmployeeResponse = {
   error_code: number
   data: TEmployee
 }
+
+export type TPromotionValue = {
+  type: string
+  item_id: string
+  promotional_value: number
+  discount_value: number
+}

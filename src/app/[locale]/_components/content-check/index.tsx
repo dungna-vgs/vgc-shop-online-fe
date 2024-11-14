@@ -27,9 +27,10 @@ type Props = {
   vgacode?: string
   packageId?: string
   setSteps: (step: number) => void
+  promotion: number
 }
 
-const ContentCheck = ({ vgacode, packageId, setSteps }: Props) => {
+const ContentCheck = ({ vgacode, packageId, setSteps, promotion }: Props) => {
   const { t } = useTranslation('form')
   const { buyer, vga, feePackage, setPaymentInfo } = useGlobalStore()
   const [loading, setLoading] = useState<boolean>(false)
@@ -121,7 +122,10 @@ const ContentCheck = ({ vgacode, packageId, setSteps }: Props) => {
             feePackage={packageId ? feePackage : null}
           />
           {/* COLS 2  */}
-          <DummyInvoice amount={vga?.amount || feePackage?.amount || 0} />
+          <DummyInvoice
+            promotion={promotion}
+            amount={vga?.amount || feePackage?.amount || 0}
+          />
         </div>
       </div>
       <div className='flex justify-center md:justify-end items-center gap-6 mt-16'>

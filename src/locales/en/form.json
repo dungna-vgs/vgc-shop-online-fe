@@ -64,5 +64,6 @@
   "sorry": "Sorry! This VGA code has already been purchased by another user. Please select a different VGA code and try again!",
   "yes": "Ok, I understand.",
   "vgacode": "VGA Code",
-  "delete": "Delete"
+  "delete": "Delete",
+  "promotion": "promotion"
 }

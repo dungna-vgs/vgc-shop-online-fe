@@ -18,7 +18,8 @@ export enum API_ENDPOINT {
   CREATE_TRANSACTION = '/other/create-payment',
   CHECK_TRANSACTION_STATUS = '/other/check-payment-status',
   CHECK_DISCOUNT_CODE = '/other/check-ecommerce-discount',
-  CHECK_EMPLOYEE_CODE = '/other/check-employee-code'
+  CHECK_EMPLOYEE_CODE = '/other/check-employee-code',
+  GET_PROMOTIONAL_VALUE = '/other/get-promotional-value'
 }
 
 export enum API_INTERNAL_ENDPOINT {
@@ -31,5 +32,6 @@ export enum API_INTERNAL_ENDPOINT {
   CREATE_TRANSACTION = '/api/create-transaction',
   CHECK_TRANSACTION_STATUS = '/api/check-transaction-status',
   CHECK_DISCOUNT_CODE = '/api/check-discount-code',
-  CHECK_EMPLOYEE_CODE = '/api/check-employee-code'
+  CHECK_EMPLOYEE_CODE = '/api/check-employee-code',
+  GET_PROMOTIONAL_VALUE = '/api/get-promotional-value'
 }
