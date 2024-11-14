@@ -1,26 +1,12 @@
-import initTranslations from "@/app/i18n";
-import TranslationsProvider from "@/components/customize/languages/TranslationsProvider";
-import TabBuyVGA from "@/components/customize/tabs.buy.vga";
+import TabBuyVGA from '@/components/customize/tabs.buy.vga'
 
 type TBuyVGAProps = {
   params: {
-    vgacode: string,
-    locale: string,
+    vgacode: string
+    locale: string
   }
 }
-const i18nNamespaces = ['home', 'common', 'footer', 'form']
 
 export default async function BuyVGA({ params }: TBuyVGAProps) {
-  const { resources } = await initTranslations(params.locale, i18nNamespaces)
-
-  return (
-    <TranslationsProvider
-      resources={resources}
-      locale={params.locale}
-      namespaces={i18nNamespaces}
-    >
-      <TabBuyVGA params={params} />
-    </TranslationsProvider>
-
-  );
+  return <TabBuyVGA params={params} />
 }

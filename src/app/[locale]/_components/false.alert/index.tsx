@@ -60,7 +60,8 @@ export default function SuccessAlert() {
                   <li>{t('check-again')}</li>
                   <li>
                     {t('hotline')}
-                    <span className='text-[#17573C]'>0899.955.599</span> {t('suport')}
+                    <span className='text-[#17573C]'>0899.955.599</span>{' '}
+                    {t('suport')}
                   </li>
                 </ul>
                 <div className='flex justify-center'>

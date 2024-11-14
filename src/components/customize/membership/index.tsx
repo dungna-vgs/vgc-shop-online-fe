@@ -8,7 +8,6 @@ import { TFeePackage } from '@/types/type'
 import { useGlobalStore } from '@/stores'
 import { useTranslation } from 'react-i18next'
 
-
 type TMemberShipProps = {
   memberships: TFeePackage[]
 }

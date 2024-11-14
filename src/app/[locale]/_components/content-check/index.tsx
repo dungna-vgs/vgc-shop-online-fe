@@ -1,7 +1,12 @@
 import React, { useState } from 'react'
 import RecipientCard from '../recipient'
 import DummyInvoice from '../dummy-invoice'
-import { useGlobalStore, useDiscountStore, useEmployeeStore } from '@/stores'
+import {
+  useGlobalStore,
+  useDiscountStore,
+  useEmployeeStore,
+  useToastStore
+} from '@/stores'
 import { apiCreateTransaction } from '@/apis/internals/clients/create.transaction'
 import {
   TBuyVgaBodyRequest,
@@ -14,6 +19,7 @@ import {
   AlertDialogTitle
 } from '@/components/ui/alert-dialog'
 import Loading from '@/components/ui/loading'
+import { apiCheckEmployeeCode } from '@/apis/internals/clients/check.employee'
 import { ETransactionProvider } from '@/types/transaction-provider'
 import { useTranslation } from 'react-i18next'
 
@@ -29,10 +35,9 @@ const ContentCheck = ({ vgacode, packageId, setSteps }: Props) => {
   const [loading, setLoading] = useState<boolean>(false)
   const { discount, setDiscount } = useDiscountStore()
   const { employee, setEmployee } = useEmployeeStore()
+  const showToast = useToastStore((state) => state.showToast)
   const onSubmit = async () => {
     if (!buyer) return
-
-    setLoading(true)
 
     let bodyRequest
 
@@ -57,8 +62,15 @@ const ContentCheck = ({ vgacode, packageId, setSteps }: Props) => {
 
     if (bodyRequest) {
       if (discount) bodyRequest.voucher_id = discount.id
-      if (employee) bodyRequest.sale_code = employee.employee_code
-
+      if (employee?.employee_code) {
+        const checkedEmployee = await handleCheckEmployeeCode()
+        if (checkedEmployee) {
+          bodyRequest.sale_code = employee?.employee_code
+        } else {
+          return
+        }
+      }
+      setLoading(true)
       const res = await apiCreateTransaction(bodyRequest)
 
       if (res.success) {
@@ -69,7 +81,33 @@ const ContentCheck = ({ vgacode, packageId, setSteps }: Props) => {
 
     setLoading(false)
   }
+  const handleCheckEmployeeCode = async () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        if (!employee?.employee_code) {
+          reject('No employee code')
+          return
+        }
 
+        const res = await apiCheckEmployeeCode({
+          employee_code: employee?.employee_code
+        })
+
+        if (res.data.error_code === 200) {
+          setEmployee(res.data.data)
+          setTimeout(() => {
+            resolve(res.data.data)
+          }, 0)
+        } else {
+          showToast(t('error-code'), 'error', 2000)
+          reject('Invalid employee code')
+        }
+      } catch (error) {
+        showToast(t('error'), 'error', 2000)
+        reject(error)
+      }
+    })
+  }
   return !!buyer && (!!vga || !!feePackage) ? (
     <div className='content-check'>
       <div>
@@ -102,7 +140,6 @@ const ContentCheck = ({ vgacode, packageId, setSteps }: Props) => {
           onClick={onSubmit}
         >
           {t('next')}
-
         </button>
       </div>
 

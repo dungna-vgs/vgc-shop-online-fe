@@ -11,7 +11,7 @@ import {
   PaginationNext,
   PaginationPrevious
 } from '@/components/ui/pagination'
-import { useGlobalStore } from '@/stores'
+import { useGlobalStore, useLoading } from '@/stores'
 import {
   apiSearchVGA,
   TParamsSearchVGA
@@ -28,33 +28,37 @@ type TListVGAsProps = {
 
 export default function ListVGAs(props: TListVGAsProps) {
   const [pagination, setPagination] = useState(props.pagination)
+  const { setLoading } = useLoading()
   const [isClient, setIsClient] = React.useState(false)
   useEffect(() => setIsClient(true), [])
   const { vgas, searchVGA, setVgas, setSeachVGA } = useGlobalStore()
 
-  const handleSearchVGA = (params: TParamsSearchVGA) => {
-    apiSearchVGA(params).then((res) => {
-      console.log(res.data)
-      setPagination({
-        from: res.from,
-        total: res.total,
-        last_page: res.last_page,
-        per_page: res.per_page
-      })
-      setVgas(res.data)
-    })
-  }
-
   let data = props.vgas
-  if (isClient && Object.keys(searchVGA).length) {
+  if (isClient && Object.values(searchVGA).filter((value) => !!value).length) {
     data = vgas
   }
 
   useEffect(() => {
+    const handleSearchVGA = (params: TParamsSearchVGA) => {
+      setLoading(true)
+      apiSearchVGA(params)
+        .then((res) => {
+          setPagination({
+            from: res.from,
+            total: res.total,
+            last_page: res.last_page,
+            per_page: res.per_page
+          })
+          setVgas(res.data)
+        })
+        .finally(() => {
+          setLoading(false)
+        })
+    }
     if (Object.keys(searchVGA).length) {
       handleSearchVGA(searchVGA)
     }
-  }, [searchVGA])
+  }, [searchVGA, setPagination, setVgas, setLoading])
 
   let page = searchVGA.page
   if (page && parseInt(page.toString())) {
@@ -65,7 +69,7 @@ export default function ListVGAs(props: TListVGAsProps) {
   return (
     <div>
       <div className='grid lg:grid-cols-3 grid-cols-2 gap-2 py-4'>
-        {data.map((vga: TVga, index: number) => (
+        {data?.map((vga: TVga, index: number) => (
           <CardNumber vga={vga} key={index} />
         ))}
       </div>

@@ -27,15 +27,13 @@ export default async function initTranslations(
 
   if (!resources) {
     i18nInstance.use(
-      resourcesToBackend(
-        (language: string, namespace: string) => {
-          console.log({
-            language,
-            namespace,
-          });
-          return import(`@/locales/${language}/${namespace}.json`)
-        }
-      )
+      resourcesToBackend((language: string, namespace: string) => {
+        console.log({
+          language,
+          namespace
+        })
+        return import(`@/locales/${language}/${namespace}.json`)
+      })
     )
   }
 

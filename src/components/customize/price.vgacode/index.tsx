@@ -13,7 +13,6 @@ import { TTypeVGA } from '@/types/type'
 import { useGlobalStore } from '@/stores'
 import { useTranslation } from 'react-i18next'
 
-
 type TPriceVGACodeProps = {
   significances: TTypeVGA[]
 }
@@ -28,11 +27,11 @@ export default function PriceVGACode(props: TPriceVGACodeProps) {
       </div>
       <Select onValueChange={(direction) => setSeachVGA({ direction })}>
         <SelectTrigger className='w-full mr-3'>
-          <SelectValue placeholder= {t('high-to-low')} />
+          <SelectValue placeholder={t('high-to-low')} />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value='asc' className='mr-3'>
-          {t('high-to-low')}
+            {t('high-to-low')}
           </SelectItem>
           <SelectItem value='desc'>{t('low-to-high')}</SelectItem>
         </SelectContent>

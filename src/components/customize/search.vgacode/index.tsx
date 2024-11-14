@@ -6,21 +6,15 @@ import { useGlobalStore } from '@/stores'
 import { useTranslation } from 'react-i18next'
 export default function SearchVGACode() {
   const { t } = useTranslation('common')
-  const { searchVGA, setSeachVGA } = useGlobalStore()
+  const { setSeachVGA } = useGlobalStore()
   const [keyword, setKeyword] = useState<string>('')
 
   useEffect(() => {
     const id = setTimeout(() => {
-      if (keyword?.trim()) {
-        setSeachVGA({ vga: keyword })
-      } else {
-        const copySearchVGA = { ...searchVGA }
-        delete copySearchVGA.vga
-        setSeachVGA(copySearchVGA)
-      }
+      setSeachVGA({ vga: keyword })
     }, 500)
     return () => clearTimeout(id)
-  }, [keyword])
+  }, [keyword, setSeachVGA])
   return (
     <div className='relative ml-auto flex-1 md:grow-0 my-4 md:my-0'>
       <Search className='absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground ' />

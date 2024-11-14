@@ -1,12 +1,24 @@
 import '@/worker/index.js'
+
 import {
   APP_DEFAULT_TITLE,
   APP_DESCRIPTION,
   APP_NAME,
   APP_TITLE_TEMPLATE
 } from '@/constants/manifest'
+import clsx from 'clsx'
+import { poppins, yeseva } from 'fonts'
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
+import Header from '@layout/header'
+import Footer from '@layout/footer'
+import BackToTop from '@/components/ui/scroll-to-top'
+import { GlobalToast } from '@/components/ui/toast'
+import { Suspense } from 'react'
+import Loading from '@/components/customize/loading'
+import TranslationsProvider from '@customize/languages/TranslationsProvider'
+import initTranslations from '@/app/i18n'
+import Spinner from '@/components/customize/spinner'
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -53,23 +65,49 @@ export const metadata: Metadata = {
   },
   keywords: ['Next.js', 'React', 'Tailwind CSS', 'Vercel'],
   metadataBase: new URL(process.env.APP_URL!),
-  themeColor: '#FFFFFF',
-  icons: '/favicon.ico'
+  themeColor: '#FFFFFF'
 }
 
 export const viewport: Viewport = {
   themeColor: '#FFFFFF'
 }
 
+const i18nNamespaces = [
+  'common',
+  'filter-menu',
+  'form',
+  'package-price',
+  'not-found'
+]
+
 export default async function RootLayout({
-  children
+  children,
+  params: { locale }
 }: Readonly<{
   children: React.ReactNode
   params: { locale: string }
 }>) {
+  const [{ resources }] = await Promise.all([
+    initTranslations(locale, i18nNamespaces)
+  ])
   return (
     <html lang='vi'>
-      <body>{children}</body>
+      <body className={clsx(poppins.variable, yeseva.variable)}>
+        <TranslationsProvider
+          resources={resources}
+          locale={locale}
+          namespaces={i18nNamespaces}
+        >
+          <Suspense fallback={<Loading />}>
+            <Spinner />
+            <GlobalToast />
+            <Header />
+            {children}
+            <Footer />
+            <BackToTop />
+          </Suspense>
+        </TranslationsProvider>
+      </body>
     </html>
   )
 }

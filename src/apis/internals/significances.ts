@@ -10,7 +10,9 @@ export default async function getSignificances() {
   const [url] = getStoreDomain()
   if (url) {
     const instanceAxios = createAxiosInstanceServer(url)
-    const res = await instanceAxios.get<TSignificanceResponse>(API_ENDPOINT.GET_SIGNIFICANCES)
+    const res = await instanceAxios.get<TSignificanceResponse>(
+      API_ENDPOINT.GET_SIGNIFICANCES
+    )
     const { data } = res
     return data.data
   }

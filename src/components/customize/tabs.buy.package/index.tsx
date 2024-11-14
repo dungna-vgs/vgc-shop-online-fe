@@ -49,7 +49,7 @@ function Tabs(props: TTabsProps) {
                       : ' text-[#ccc] text-[14px]'
                   }
                 >
-                    {t(item.title)}
+                  {t(item.title)}
                 </p>
                 <p
                   className={
@@ -58,7 +58,7 @@ function Tabs(props: TTabsProps) {
                       : 'text-[#ccc] text-sm lg:text-[19px]'
                   }
                 >
-                   {t(item.description)}
+                  {t(item.description)}
                 </p>
               </div>
             </div>
@@ -77,7 +77,6 @@ type TBuyPackageProps = {
 }
 
 export default function TabBuyPackage({ params }: TBuyPackageProps) {
-
   const [currentStep, setCurrentStep] = useState(0)
   const { t } = useTranslation()
   const steps = [
@@ -86,7 +85,10 @@ export default function TabBuyPackage({ params }: TBuyPackageProps) {
       src: '/images/Location.svg',
       description: t('des-1'),
       content: (
-        <ContentFillForm packageId={params.packageId} setSteps={setCurrentStep} />
+        <ContentFillForm
+          packageId={params.packageId}
+          setSteps={setCurrentStep}
+        />
       )
     },
     {
@@ -101,7 +103,9 @@ export default function TabBuyPackage({ params }: TBuyPackageProps) {
       title: 'step-3',
       src: '/images/Payment.svg',
       description: 'des-3',
-      content: <Receipt packageId={params.packageId} setSteps={setCurrentStep} />
+      content: (
+        <Receipt packageId={params.packageId} setSteps={setCurrentStep} />
+      )
     }
   ]
   return (

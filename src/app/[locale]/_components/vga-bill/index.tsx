@@ -62,12 +62,17 @@ export default function VGABill() {
                   </div>
                 </div>
               ) : null}
-              <div className='flex flex-col gap-2 my-2'>
-                <span className='text-sm text-[#545454]'>{t('recipient')}</span>
-                <p className='font-bold text-[16px]'>
-                  {buyer?.fullname} - <span>VGA{buyer?.id_display}</span>
-                </p>
-              </div>
+
+              {employee?.id && (
+                <div className='flex flex-col gap-2 my-2'>
+                  <span className='text-sm text-[#545454]'>
+                    {t('recipient')}
+                  </span>
+                  <p className='font-bold text-[16px]'>
+                    {buyer?.fullname} - <span>VGA{buyer?.id_display}</span>
+                  </p>
+                </div>
+              )}
               <div className='mt-6 flex flex-col gap-4 text-[16px]'>
                 <div className='flex justify-between items-center'>
                   <span>{t('total')}</span>

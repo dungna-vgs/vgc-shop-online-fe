@@ -2,14 +2,13 @@
 import LanguageChanger from '@customize/languages/LanguageChanger'
 import Image from 'next/image'
 import React from 'react'
-import { Input } from '@/components/ui/input'
 import Link from 'next/link'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
-import { AlignJustify, Search } from 'lucide-react'
+import { AlignJustify } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
-
+import SearchInput from '@/components/customize/search.input'
 
 const navLinks = [
   { name: 'home', href: '/' },
@@ -18,7 +17,6 @@ const navLinks = [
 ]
 const Header: React.FC = () => {
   const pathname = usePathname()
-  console.log(pathname)
   const { t } = useTranslation('common')
   return (
     <div className='bg-background fixed top-0 right-0 left-0 z-[999] shadow-[0_-6px_10px_5px_rgba(0,0,0,0.2)]'>
@@ -32,18 +30,11 @@ const Header: React.FC = () => {
               alt='Handicap Logo'
             />
             <span className='text-[#33B4B0] font-bold text-[26px] hidden md:block'>
-            vHandicap
+              vHandicap
             </span>
           </Link>
           <div className='flex items-center gap-[24px]'>
-            <div className='relative ml-auto flex-1'>
-              <Search className='absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground ' />
-              <Input
-                type='search'
-                placeholder={t('search')}
-                className='text-sm w-full sm:w-[280] flex-1 rounded-lg bg-[#F5F5F5] border-none pl-8 xl:w-[420] lg:w-[500px]'
-              />
-            </div>
+            <SearchInput />
             {/* //LIST-ITEM  */}
             <div>
               <nav className='hidden gap-6 text-lg font-medium xl:flex xl:items-center xl:gap-8 xl:text-sm'>
@@ -78,10 +69,10 @@ const Header: React.FC = () => {
                 <SheetContent className='bg-[#4AC486] mt-[84px]' side='top'>
                   <nav className='grid text-white gap-6 text-lg font-medium'>
                     <Link href='/' className='hover:text-foreground'>
-                    {t('home')}
+                      {t('home')}
                     </Link>
                     <Link href='/vgacode' className=' hover:text-foreground'>
-                    {t('vgacode')}
+                      {t('vgacode')}
                     </Link>
                     <Link
                       href='/package-price'

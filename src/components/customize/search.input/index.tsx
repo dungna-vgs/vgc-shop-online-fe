@@ -7,8 +7,7 @@ import { useGlobalStore } from '@/stores'
 import { apiSearchAll } from '@/apis/internals/clients/search.all'
 import { useSearchParams } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
-
-
+import { useToastStore } from '@/stores'
 export default function SearchInput() {
   const { t } = useTranslation('common')
   const { setSearchAll } = useGlobalStore()
@@ -16,13 +15,7 @@ export default function SearchInput() {
   const [keyword, setKeyword] = useState<string>(
     searchParams.get('keyword') || ''
   )
-  const handleOnSearch = async (keyword: string) => {
-    const res = await apiSearchAll({ keyword })
-    setSearchAll({
-      vgaSearchAll: res.data.vgas,
-      feeSearchAll: res.data.membershipPackage
-    })
-  }
+  const { showToast } = useToastStore()
 
   useEffect(() => {
     if (!keyword) {
@@ -30,10 +23,21 @@ export default function SearchInput() {
       return
     }
     const id = setTimeout(() => {
+      const handleOnSearch = async (keyword: string) => {
+        const res = await apiSearchAll({ keyword })
+        if (res.data.vgas.length > 0 && res.data.membershipPackage.length > 0) {
+          setSearchAll({
+            vgaSearchAll: res.data.vgas,
+            feeSearchAll: res.data.membershipPackage
+          })
+        } else {
+          showToast(t('not-found', { searchQuery: keyword }), 'error', 2000)
+        }
+      }
       handleOnSearch(keyword)
     }, 300)
     return () => clearTimeout(id)
-  }, [keyword])
+  }, [keyword, setSearchAll, showToast, t])
 
   return (
     <div className='relative ml-auto flex-1'>

@@ -14,7 +14,6 @@ import Link from 'next/link'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-
 type Props = {
   transactionId: TPaymentInfo['transaction_id']
 }
@@ -90,7 +89,7 @@ export default function SuccessAlert({ transactionId }: Props) {
                   >
                     0899.955.599
                   </a>{' '}
-                 {t('support')}
+                  {t('support')}
                 </li>
               </ul>
               <div className='flex justify-center'>

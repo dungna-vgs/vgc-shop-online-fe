@@ -35,14 +35,14 @@ const BannerCarousel: React.FC<TBannerCarouselProps> = (props) => {
       <CarouselContent className='mx-0'>
         {props.sliders.map((image: TAds, index) => (
           <CarouselItem key={index} className='relative mt-[84px] w-full'>
-            <Link href={image.link} className='w-full h-auto'>
+            <Link href={image.link} className='w-full h-auto' target='_blank'>
               <Image
                 src={image.image}
                 alt={image.title}
                 className='w-full h-auto'
                 quality={80}
                 width={1200}
-                height={800}
+                height={400}
               />
             </Link>
           </CarouselItem>

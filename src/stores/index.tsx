@@ -113,7 +113,22 @@ export const useDiscountStore = create<{
 export const useEmployeeStore = create<{
   employee: TEmployee | undefined
   setEmployee: (employee: TEmployee | undefined) => void
+  setEmployeeCode: (id: string) => void
 }>((set) => ({
   employee: undefined,
-  setEmployee: (employee) => set({ employee })
+  setEmployee: (employee) => set({ employee }),
+  setEmployeeCode: (employee_code) =>
+    set((state) => ({
+      employee: state.employee
+        ? { ...state.employee, employee_code }
+        : ({ employee_code } as TEmployee)
+    }))
+}))
+
+export const useLoading = create<{
+  loading: boolean
+  setLoading: (loading: boolean) => void
+}>((set) => ({
+  loading: false,
+  setLoading: (loading) => set({ loading })
 }))

@@ -6,7 +6,6 @@ import styles from './style.module.css'
 import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
 
-
 const Footer: React.FC = () => {
   const { t } = useTranslation('common')
   return (
@@ -32,7 +31,7 @@ const Footer: React.FC = () => {
                 target='_blank'
                 href='https://www.google.com/maps/search/+BT4.7+-+Khu+bi%E1%BB%87t+th%E1%BB%B1+ngo%E1%BA%A1i+giao+%C4%91o%C3%A0n,+P.+Xu%C3%A2n+T%E1%BA%A3o,+Q.+B%E1%BA%AFc+T%E1%BB%AB+Li%C3%AAm,+++++++++++++++H%C3%A0+N%E1%BB%99i/@21.0667597,105.7909583,16z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI0MTAyMS4xIKXMDSoASAFQAw%3D%3D'
               >
-               {t('map')}
+                {t('map')}
               </Link>
             </div>
             <div className='flex items-center gap-3 justify-start'>
@@ -119,10 +118,10 @@ const Footer: React.FC = () => {
               height={50}
               alt='Contact Icon'
             />
-            <span className='font-semibold text-xl'>{t('customer-service')}</span>
-            <span>
-            {t('contact')}
+            <span className='font-semibold text-xl'>
+              {t('customer-service')}
             </span>
+            <span>{t('contact')}</span>
             <div className='flex items-center gap-3 justify-start'>
               <Mail />
               <Link

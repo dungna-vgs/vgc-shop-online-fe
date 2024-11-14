@@ -23,7 +23,9 @@ const withPWA = withPWAInit({
 export default withPWA({
   reactStrictMode: true,
   images: {
-    remotePatterns: createRemotePatterns(process.env.DOMAINS_IMAGE)
+    remotePatterns: createRemotePatterns(
+      'https://vgs-image-dev.s3.ap-southeast-1.amazonaws.com/,https://img.vietqr.io/'
+    )
   },
-  logging: false,
+  logging: false
 })

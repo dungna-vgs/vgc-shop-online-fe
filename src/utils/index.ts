@@ -79,7 +79,7 @@ export const calculateDiscountedPrice = (
     discountPercentage,
     typediscount
   )
-  return originalPrice - discountAmount
+  return originalPrice > discountAmount ? originalPrice - discountAmount : 0
 }
 export const calculateDiscountAmount = (
   originalPrice: number,

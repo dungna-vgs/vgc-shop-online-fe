@@ -16,13 +16,11 @@ import Image from 'next/image'
 import MenuSerialNumber from '@/components/customize/menu.serialnumber'
 import Link from 'next/link'
 import { TTypeVGA, TVga } from '@/types/type'
-import { useGlobalStore } from '@/stores'
-import { useCallback, useEffect, useState } from 'react'
+import { useGlobalStore, useLoading } from '@/stores'
+import { useCallback, useEffect, useState, useRef } from 'react'
 import { apiSearchVGA } from '@/apis/internals/clients/search.vga'
 import { TParamsSearchVGA } from '@/apis/internals/clients/search.vga'
 import { useTranslation } from 'react-i18next'
-
-
 type TSerialNumber = {
   typeVga: TTypeVGA[]
   infoVGA: {
@@ -36,25 +34,33 @@ type TSerialNumber = {
 }
 export default function SerialNumber(props: TSerialNumber) {
   const { t } = useTranslation('common')
-
+  const { setLoading } = useLoading()
   const [keyword, setKeyword] = useState<string>('')
   const [isClient, setIsClient] = useState(false)
+  const prevSearchVGA = useRef<TParamsSearchVGA>({})
   const { setVgas, vgas, searchVGA, setSeachVGA, vgaSearchAll, feeSearchAll } =
     useGlobalStore()
 
   const handleSearchVGA = useCallback(
     (params: TParamsSearchVGA) => {
-      apiSearchVGA(params).then((res) => {
-        console.log(res.data)
-        setVgas(res.data)
-      })
+      setLoading(true)
+      apiSearchVGA(params)
+        .then((res) => {
+          console.log(res.data)
+          setVgas(res.data)
+        })
+        .finally(() => {
+          setLoading(false)
+        })
     },
-    [setVgas]
+    [setVgas, setLoading]
   )
 
   useEffect(() => {
-    if (Object.keys(searchVGA).length) {
+    // Check if searchVGA has changed before making the API call
+    if (JSON.stringify(searchVGA) !== JSON.stringify(prevSearchVGA.current)) {
       handleSearchVGA(searchVGA)
+      prevSearchVGA.current = searchVGA
     }
   }, [handleSearchVGA, searchVGA])
 
@@ -66,12 +72,17 @@ export default function SerialNumber(props: TSerialNumber) {
   useEffect(() => {
     setIsClient(true)
     const id = setTimeout(() => {
-      if (keyword?.trim()) {
-        setSeachVGA({ vga: keyword })
-      } else {
-        const copySearchVGA = { ...searchVGA }
-        delete copySearchVGA.vga
-        setSeachVGA(copySearchVGA)
+      if (keyword != prevSearchVGA.current.vga) {
+        if (keyword?.trim()) {
+          setSeachVGA({ ...searchVGA, vga: keyword })
+        } else {
+          if (prevSearchVGA.current.vga && !keyword?.trim()) {
+            const copySearchVGA = { ...searchVGA }
+            prevSearchVGA.current.vga = undefined
+            delete copySearchVGA.vga
+            setSeachVGA(copySearchVGA)
+          }
+        }
       }
     }, 300)
     return () => clearTimeout(id)
@@ -82,7 +93,9 @@ export default function SerialNumber(props: TSerialNumber) {
   return (
     <div>
       <div className='p-0 py-0 lg:py-0 block lg:flex justify-between items-center w-full'>
-        <h3 className='text-xl font-semibold p-3 text-[#000]'>{t('vgacode')}</h3>
+        <h3 className='text-xl font-semibold p-3 text-[#000]'>
+          {t('vgacode')}
+        </h3>
         <div className='flex flex-col lg:flex-row justify-end items-center gap-4'>
           <div className='relative ml-auto flex-1 w-full md:grow-0'>
             <Search className='absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground ' />
@@ -138,6 +151,19 @@ export default function SerialNumber(props: TSerialNumber) {
         </div>
       </div>
       <MenuSerialNumber typeVga={props.typeVga} />
+      {data.length === 0 && (
+        <div className='flex justify-center items-center py-3 w-full flex-col-reverse'>
+          <span className='text-xl font-semibold p-3 text-[#000]'>
+            {t('no-data')}
+          </span>
+          <Image
+            src='/images/search-not-found.png'
+            width={200}
+            height={200}
+            alt=''
+          />
+        </div>
+      )}
       <div className='grid  grid-cols-2  sm:grid-cols-3 lg:grid-cols-4 xl:gap-4 md:gap-3 gap-2 overflow-hidden'>
         {data.map((vga, index) => (
           <CardNumber vga={vga} key={index} />

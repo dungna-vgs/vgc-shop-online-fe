@@ -6,7 +6,6 @@ import SuccessAlert from '../success.alert'
 import { useGlobalStore, useDiscountStore, useEmployeeStore } from '@/stores'
 import { useTranslation } from 'react-i18next'
 
-
 type Props = {
   vgacode?: string
   packageId?: string
@@ -28,9 +27,7 @@ const Receipt = ({ vgacode, setSteps }: Props) => {
         </p>
         {!!vgacode && (
           <div className='flex flex-col justify-center items-center'>
-            <span className='text-[18px] mb-2'>
-              {t('cancel')}{' '}
-            </span>
+            <span className='text-[18px] mb-2'>{t('cancel')} </span>
             <p className='w-12 h-12 text-sm flex justify-center text-red-500 items-center rounded-full border border-red-500'>
               <Countdown />
             </p>

@@ -49,7 +49,7 @@ function Tabs(props: TTabsProps) {
                       : ' text-[#ccc] text-[14px]'
                   }
                 >
-                    {t(item.title)}
+                  {t(item.title)}
                 </p>
                 <p
                   className={
@@ -58,7 +58,7 @@ function Tabs(props: TTabsProps) {
                       : 'text-[#ccc] text-sm lg:text-[19px]'
                   }
                 >
-                   {t(item.description)}
+                  {t(item.description)}
                 </p>
               </div>
             </div>
@@ -77,7 +77,6 @@ type TBuyVGAProps = {
 }
 
 export default function TabBuyVGA({ params }: TBuyVGAProps) {
-
   const [currentStep, setCurrentStep] = useState(0)
   const { t } = useTranslation()
   const steps = [

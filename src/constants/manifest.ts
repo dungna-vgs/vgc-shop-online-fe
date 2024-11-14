@@ -1,4 +1,4 @@
-export const APP_NAME = 'PWA Ecoomerce'
-export const APP_DEFAULT_TITLE = 'My Awesome PWA Ecoomerce'
-export const APP_TITLE_TEMPLATE = '%s - PWA Ecoomerce'
-export const APP_DESCRIPTION = 'Best PWA Ecoomerce in the world!'
+export const APP_NAME = 'VGCorp Store'
+export const APP_DEFAULT_TITLE = 'VGCorp Store'
+export const APP_TITLE_TEMPLATE = '%s - VGCorp Store'
+export const APP_DESCRIPTION = 'Best VGCorp Store in the world!'

@@ -200,7 +200,6 @@ export default function ContentFillForm(props: TItemProps) {
             onClick={onNextStep}
           >
             {t('next')}
-
           </button>
         </div>
       </div>

@@ -33,6 +33,6 @@
     "app/i18n.js",
     "src/i18nConfig.ts",
     "src/app/components/TranslationsProvider.js"
-, "src/app/[locale]/not-search"  ],
+, "src/app/[locale]/not-search", "src/worker/index.js"  ],
   "exclude": ["node_modules"]
 }

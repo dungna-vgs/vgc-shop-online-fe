@@ -21,7 +21,7 @@ function validation(params: TParams) {
   const schema = Joi.object<TParams>({
     page: Joi.number(),
     limit: Joi.number().default(24),
-    vga: Joi.string(),
+    vga: Joi.string().allow(''),
     money_to: Joi.number(),
     money_from: Joi.number(),
     significance_id: Joi.number(),

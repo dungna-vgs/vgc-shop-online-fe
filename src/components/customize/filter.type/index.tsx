@@ -11,7 +11,6 @@ import { TTypeVGA } from '@/types/type'
 import { useGlobalStore } from '@/stores'
 import { useTranslation } from 'react-i18next'
 
-
 type TFilterType = {
   significances: TTypeVGA[]
 }
@@ -19,8 +18,6 @@ type TFilterType = {
 export default function FilterType(props: TFilterType) {
   const { searchVGA, setSeachVGA } = useGlobalStore()
   const { t } = useTranslation('filter-menu')
-  const { t: tcommon } = useTranslation('common')
-
 
   return (
     <Accordion type='single' collapsible>

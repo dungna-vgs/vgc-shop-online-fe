@@ -19,7 +19,7 @@ const Loading: FC = () => {
       <div>
         {showImg ? (
           <Image
-            src='/images/loading.svg'
+            src='/images/Loading.svg'
             width={56}
             height={56}
             alt='Loading'

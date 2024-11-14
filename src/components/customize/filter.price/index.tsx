@@ -12,7 +12,6 @@ import { rangesVGA } from '@/constants/range'
 import { useGlobalStore } from '@/stores'
 import { useTranslation } from 'react-i18next'
 
-
 export default function FilterPrice() {
   const { t } = useTranslation('filter-menu')
   const { t: tcommon } = useTranslation('common')
