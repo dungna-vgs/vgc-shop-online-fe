@@ -160,7 +160,8 @@ export default function SerialNumber(props: TSerialNumber) {
             src='/images/search-not-found.png'
             width={200}
             height={200}
-            alt=''
+            alt='Search Not Found'
+            quality={60}
           />
         </div>
       )}
@@ -178,7 +179,7 @@ export default function SerialNumber(props: TSerialNumber) {
               width={16}
               height={16}
               alt='ArrowRight Icon'
-              quality={75}
+              quality={60}
             />
           </Button>
         </Link>

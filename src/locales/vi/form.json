@@ -7,7 +7,7 @@
     "des-3": "Thanh toán",
     "select": "Chọn tài khoản nhận mã",
     "select-1": "Chọn tài khoản đóng phí hội viên gói",
-    "fill-in": "Nhập tên, mã VGA hoặc số điện thoại để tìm kiếm",
+    "fill-in": "Nhập tên hoặc mã VGA để tìm kiếm",
     "not-search": " Không tìm thấy golfer nào.",
     "next": "Tiếp theo",
     "back": "Quay lại",
@@ -63,7 +63,9 @@
     "buyed": "Mã VGA đã được mua",
     "sorry": "Rất tiếc! Mã VGA này đã được mua bởi 1 người dùng khác. Vui lòng chọn lại 1 mã VGA khác và thử lại!",
     "yes": "Ok, tôi đã hiểu",
-    "vgacode": "Mã VGA"
+    "vgacode": "Mã VGA",
+    "promotional": "Chương trình khuyến mãi"
+
 
 
 

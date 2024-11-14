@@ -10,7 +10,7 @@ export default function NotSearch() {
           width={585}
           height={249}
           alt='Not Search'
-          quality={75}
+          quality={60}
         />
         <p className='mt-3 text-[36px] font-medium'>
           Không tìm thấy kết quả tìm kiếm

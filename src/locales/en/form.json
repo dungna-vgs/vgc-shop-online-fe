@@ -7,7 +7,7 @@
     "des-3": "Payment",
     "select": "Select the account to receive the code",
     "select-1": "Select the account to pay the membership package fee",
-    "fill-in": "Enter name, VGA code, or phone number to search",
+    "fill-in": "Enter name or VGA code to search",
     "not-search": "No golfer found.",
     "next": "Next",
     "back": "Go back",
@@ -63,7 +63,8 @@
     "buyed": "The VGA code has been purchased",
     "sorry": "Sorry! This VGA code has already been purchased by another user. Please select a different VGA code and try again!",
     "yes": "Ok, I understand.",
-    "vgacode": "VGA Code"
+    "vgacode": "VGA Code",
+    "promotional": "Promotional Program"
 
 
 }

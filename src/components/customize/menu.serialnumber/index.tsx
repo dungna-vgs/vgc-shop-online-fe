@@ -46,6 +46,7 @@ export default function MenuSerialNumber(props: TMenuSerialNumberProps) {
                   width={44}
                   height={44}
                   alt='Icon'
+                  quality={60}
                   className='text-black'
                 />
                 <span>{t('all')}</span>
@@ -79,6 +80,7 @@ export default function MenuSerialNumber(props: TMenuSerialNumberProps) {
                   width={44}
                   height={44}
                   alt='Icon'
+                  quality={60}
                   className='hover:fill-slate-50'
                 />
                 <span>{type.name}</span>

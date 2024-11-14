@@ -34,7 +34,7 @@ export default function PackageCard({
             width={352}
             height={233}
             alt='Background PackageCard'
-            quality={75}
+            quality={60}
             style={{
               width: '100%',
               height: 'auto'

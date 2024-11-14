@@ -39,7 +39,7 @@ export default async function MembershipFee() {
               width={1121}
               height={148}
               alt='Banner'
-              quality={75}
+              quality={60}
               style={{
                 width: '100%',
                 height: 'auto'

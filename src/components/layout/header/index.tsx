@@ -28,6 +28,7 @@ const Header: React.FC = () => {
               width={36}
               height={31}
               alt='Handicap Logo'
+              quality={60}
             />
             <span className='text-[#33B4B0] font-bold text-[26px] hidden md:block'>
               vHandicap

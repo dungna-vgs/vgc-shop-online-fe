@@ -1,10 +1,14 @@
+import { Button } from '@/components/ui/button'
 import { useGlobalStore } from '@/stores'
 import { generateVietQR } from '@/utils'
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Check } from 'lucide-react';
+
 
 export default function InforBill() {
+
   const { t } = useTranslation('form')
   const { paymentInfo } = useGlobalStore()
 
@@ -13,6 +17,7 @@ export default function InforBill() {
   const { bank } = paymentInfo
 
   const qrUrl = generateVietQR(bank)
+  const [copy, setCopy] = useState(false)
 
   return (
     <div className='p-3 lg:p-6'>
@@ -26,6 +31,7 @@ export default function InforBill() {
             height={192}
             className='w-48 h-48'
             alt='QR code'
+            quality={60}
           />
         </div>
         <p className='text-center'>{t('or-payment')}</p>
@@ -47,7 +53,7 @@ export default function InforBill() {
             width={24}
             height={24}
             alt='Copy'
-            quality={75}
+            quality={60}
           />
         </div>
         <div className='p-4 flex justify-between items-center border border-[#F1F1F1] rounded-[7px]'>
@@ -60,7 +66,7 @@ export default function InforBill() {
             width={24}
             height={24}
             alt='Copy'
-            quality={75}
+            quality={60}
           />
         </div>
         <div className='grid lg:grid-cols-2 w-full h-full grid-cols-1 gap-4 '>
@@ -74,21 +80,37 @@ export default function InforBill() {
               width={24}
               height={24}
               alt='Copy'
-              quality={75}
+              quality={60}
             />
           </div>
           <div className='p-4  border border-[#F1F1F1] rounded-[7px] flex justify-between items-center gap-4'>
-            <p className='text-[#979797]'>
+            <p className='text-[#979797]' >
               {t('content')}{' '}
               <span className='text-black uppercase'>{bank.bank_code}</span>
             </p>
+        {
+          copy ?  (
+             <Button variant='ghost' size='none'>
+            <Check/>
+            </Button>
+          ) : (
+            <Button variant='ghost' size='none' onClick={() => {
+              navigator.clipboard.writeText();
+              setCopy(true)
+              setTimeout(() => {
+              setCopy(false)
+              },2000)
+            }}>
             <Image
-              src='/images/copy.svg'
-              width={24}
-              height={24}
-              alt='Copy'
-              quality={75}
-            />
+                 src='/images/copy.svg'
+                 width={24}
+                 height={24}
+                 alt='Copy'
+                 quality={60}
+               />
+            </Button>
+          ) 
+        }
           </div>
         </div>
       </div>

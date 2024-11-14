@@ -20,7 +20,7 @@ export default function BannerImage(props: TBannerImageProps) {
             width={1024}
             height={174}
             alt={props.banner.title}
-            quality={75}
+            quality={60}
             style={{
               width: '100%',
               height: 'auto',

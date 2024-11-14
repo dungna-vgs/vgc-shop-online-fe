@@ -14,6 +14,7 @@ export default async function Maintainance() {
           className='w-auto h-auto'
           src='/images/maintain.png'
           alt='Bảo trì'
+          quality={60}
         />
         <h4 className='capitalize mt-5 text-center font-semibold text-2xl text-black'>
           Hệ thống đang bảo trì

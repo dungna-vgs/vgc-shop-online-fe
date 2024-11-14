@@ -26,7 +26,7 @@ export default function CardNumber({
           width={256}
           height={168}
           alt={`vga: ${vga.id} - type ${vga.loai_ma}`}
-          quality={75}
+          quality={60}
           style={{
             width: '100%',
             height: 'auto'
@@ -40,7 +40,7 @@ export default function CardNumber({
           width={40}
           height={37}
           alt='vHandicap'
-          quality={75}
+          quality={60}
         />
         <div className={styles.borderCode}>
           <span className='text-[24px] xl:text-[36px]'>{vga.id}</span>

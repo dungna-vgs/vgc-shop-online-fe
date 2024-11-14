@@ -53,6 +53,7 @@ function LanguageChanger() {
               src={`/images/${lang.image}`}
               width={24}
               height={24}
+              quality={60}
               alt={lang.alt}
             />
           </SelectItem>
