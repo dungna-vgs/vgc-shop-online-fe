@@ -18,7 +18,7 @@ export default function ListMenuSerial() {
           quality={60}
           className='hover:fill-slate-50'
         />
-        <span>{t('all')}</span>
+        <p>{t('all')}</p>
       </Link>
     </div>
   )

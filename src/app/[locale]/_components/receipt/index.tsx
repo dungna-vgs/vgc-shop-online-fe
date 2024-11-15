@@ -5,11 +5,12 @@ import InforBill from '../infor-bill'
 import SuccessAlert from '../success.alert'
 import { useGlobalStore, useDiscountStore, useEmployeeStore } from '@/stores'
 import { useTranslation } from 'react-i18next'
+import { Button } from '@/components/ui/button'
 
 type Props = {
   vgacode?: string
   packageId?: string
-  setSteps: (step: number) => void,
+  setSteps: (step: number) => void
   promotion: number
 }
 
@@ -42,7 +43,7 @@ const Receipt = ({ vgacode, setSteps, promotion }: Props) => {
         <InforBill />
       </div>
       <div className='receipt flex  justify-center md:justify-end items-center gap-6 mt-6'>
-        <button
+        <Button
           className='text-black leading-[64px] bg-white rounded-[6px] border-[1px] border-[#000] flex justify-center w-40 md:w-[250px] h-16 text-[16px]'
           onClick={() => {
             setSteps(1)
@@ -51,7 +52,7 @@ const Receipt = ({ vgacode, setSteps, promotion }: Props) => {
           }}
         >
           {t('back')}
-        </button>
+        </Button>
         <SuccessAlert transactionId={paymentInfo?.transaction_id} />
 
         {/* MÃ ĐÃ ĐƯỢC MUA  */}

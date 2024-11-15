@@ -47,6 +47,11 @@ export default function PackageCard({
             {getMembershipPackageName(membership)}
           </span>
         </div>
+        <div className='absolute text-[18px] md:text-[20px] lg:text-[22px]  right-0 left-0 bottom-0 p-3 sm:p-4  flex justify-center  items-center'>
+          <span className={clsx(styles.packageCard)}>
+            Gói hội viên cao cấp 1 năm
+          </span>
+        </div>
       </div>
       {showBuyButton && (
         <div className=' bg-white shadow-lg rounded-b-2xl flex justify-center items-center py-3 max-w-full'>
