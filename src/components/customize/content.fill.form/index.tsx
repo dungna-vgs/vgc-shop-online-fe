@@ -196,7 +196,7 @@ export default function ContentFillForm(props: TItemProps) {
           >
             {t('back')}
           </Link>
-          <button
+          <Button
             className='text-white leading-[64px] bg-gradient-to-r from-[#17573C] to-[#4AC486] disabled:bg-none disabled:!bg-[#979797] rounded-[6px] flex justify-center w-40 md:w-[250px] h-16 text-[16px]'
             disabled={(!vga && !feePackage) || !value}
             onClick={() => {
@@ -206,7 +206,7 @@ export default function ContentFillForm(props: TItemProps) {
             }}
           >
             {t('next')}
-          </button>
+          </Button>
         </div>
       </div>
     </div>
