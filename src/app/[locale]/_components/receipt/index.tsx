@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next'
 type Props = {
   vgacode?: string
   packageId?: string
-  setSteps: (step: number) => void,
+  setSteps: (step: number) => void
   promotion: number
 }
 

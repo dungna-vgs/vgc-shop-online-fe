@@ -2,11 +2,17 @@ import { TYPE_ENVIRONMENT } from '@/configs'
 import axios from 'axios'
 
 // để gọi ở server nextjs lên server business
-export function createAxiosInstanceServer(origin: string) {
+export function createAxiosInstanceServer(
+  origin: string,
+  cfIp?: string | null,
+  forwardedIps?: string | null
+) {
   if (TYPE_ENVIRONMENT.LOCALHOST === process.env.ENVIROMENT) {
     origin = 'https://store.dev.vgcorp.vn'
   }
-  console.log("origin ----------------------------------------------------------------")
+  console.log(
+    'origin ----------------------------------------------------------------'
+  )
   console.log(origin)
   console.log(process.env.API_URL)
   return axios.create({
@@ -14,7 +20,9 @@ export function createAxiosInstanceServer(origin: string) {
     headers: {
       'Content-Type': 'application/json',
       'x-client-domain': origin,
-      'x-api-key': process.env.API_KEY
+      'x-api-key': process.env.API_KEY,
+      'vgs-client-ips': forwardedIps,
+      'cf-client-ip': cfIp
     }
   })
 }

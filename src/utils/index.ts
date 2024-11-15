@@ -55,7 +55,6 @@ export function isValidDomainStore<T = null>(req: TRequest<T>): boolean {
   return true
 }
 
-
 export function formatCurrency(number: number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
 }

@@ -182,7 +182,10 @@ const ContentCheck = ({ vgacode, packageId, setSteps, promotion }: Props) => {
               >
                 {t('cancel-form')}
               </AlertDialogCancel>
-              <AlertDialogAction onClick={onSubmit} className='bg-gradient-to-r from-[#17573C] to-[#4AC486] lg:w-[168px] h-16  w-28'>
+              <AlertDialogAction
+                onClick={onSubmit}
+                className='bg-gradient-to-r from-[#17573C] to-[#4AC486] lg:w-[168px] h-16  w-28'
+              >
                 {t('confirm')}
               </AlertDialogAction>
             </div>

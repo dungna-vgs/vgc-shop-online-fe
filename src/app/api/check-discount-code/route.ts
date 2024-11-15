@@ -6,7 +6,7 @@ import { createAxiosInstanceServer } from '@/apis'
 import { isValidDomainStore } from '@/utils'
 import Joi from 'joi'
 import { getQueryRequest } from '@/utils/server'
-
+import { getIps } from '@/utils/server'
 type TParams = {
   voucher_code: string
 }
@@ -41,8 +41,8 @@ export async function GET(request: NextRequest) {
       redirect: `${origin}/not-found`
     })
   }
-
-  const axiosInstance = createAxiosInstanceServer(origin)
+  const { forwardedIps, cfIp } = getIps()
+  const axiosInstance = createAxiosInstanceServer(origin, cfIp, forwardedIps)
   const res = await axiosInstance.get(API_ENDPOINT.CHECK_DISCOUNT_CODE, {
     params
   })
@@ -55,6 +55,6 @@ export async function GET(request: NextRequest) {
     success: true,
     data: res.data,
     redirect: null,
-    origin 
+    origin
   })
 }

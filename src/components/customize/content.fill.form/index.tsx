@@ -125,7 +125,7 @@ export default function ContentFillForm(props: TItemProps) {
                     <div className='name'>{golfer.fullname}</div>
                     <div className='flex w-full justify-start'>
                       <span className='vga bg-yellow-600 text-sm rounded-md py-[2px] pt-1 px-2 text-white leading-[16px] inline-block'>
-                        {golfer.id}
+                        {golfer.id_display}
                       </span>
                     </div>
                   </div>
@@ -174,7 +174,7 @@ export default function ContentFillForm(props: TItemProps) {
                         <div className='ml-2'>
                           <div className='name'>{golfer.fullname}</div>
                           <span className='vga bg-yellow-600 rounded-md py-[2px] pt-1 px-2 text-white leading-[16px] inline-block'>
-                            {golfer.id}
+                            {golfer.id_display}
                           </span>
                         </div>
                       </div>
