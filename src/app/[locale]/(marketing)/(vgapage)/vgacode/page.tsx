@@ -40,7 +40,7 @@ export default async function VGAPage(props: TVGAPageProps) {
       <div className='mt-[84px]  max-w-[1200px] mx-auto min-h-[100vh]  py-6 px-4'>
         <div className='grid grid-cols-4 gap-8'>
           <div className='col-span-1 flex flex-col gap-6'>
-            <div className='hidden lg:block'>
+            <div className='hidden xl:block'>
               <FilterPrice />
               <FilterType significances={significances} />
               {ads.adsVGaLeft && (
@@ -59,8 +59,9 @@ export default async function VGAPage(props: TVGAPageProps) {
               )}
             </div>
           </div>
-          <div className='col-span-4 lg:col-span-3'>
-            <div className='block md:flex justify-between gap-4'>
+
+          <div className='col-span-4 xl:col-span-3'>
+            <div className='block md:flex justify-between items-center gap-4'>
               <TitleVGA />
               <div className='block md:flex justify-between items-center gap-4'>
                 <SearchVGACode />

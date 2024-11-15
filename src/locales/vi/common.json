@@ -10,8 +10,8 @@
   "see-all": "Xem tất cả",
   "pay-now": "Đóng phí ngay",
   "select-price": " Chọn mức giá",
-  "high-to-low": "Gía từ cao đến thấp",
-  "low-to-high": "Gía từ thấp đến cao",
+  "high-to-low": "Giá từ cao đến thấp",
+  "low-to-high": "Giá từ thấp đến cao",
   "map": "BT4.7 - Khu biệt thự ngoại giao đoàn, P. Xuân Tảo, Q. Bắc Từ Liêm, Hà Nội",
   "vgc-content": "Hệ thống tính Handicap Việt Nam từ VGA. Hiệp hội golf Việt Nam (VGA) ra mắt hệ thống ứng dụng Handicap quốc gia cho phép các golfer tính Handicap của mình thông qua kết quả của từng trận đấu",
   "customer-service": "Chăm sóc khách hàng",
@@ -19,7 +19,6 @@
   "found": "Tìm thấy",
   "not-found": "Không có kết quả tìm kiếm cho {{searchQuery}}. Vui lòng thử lại với từ khóa khác.",
   "no-data": "Không tìm thấy",
-	"notification":"Thông báo",
-  "year-package":"Gói hội viên cao cấp {{year}} năm"
-
+  "notification": "Thông báo",
+  "year-package": "Gói hội viên cao cấp {{year}} năm"
 }
