@@ -9,10 +9,11 @@ import { useTranslation } from 'react-i18next'
 type Props = {
   vgacode?: string
   packageId?: string
-  setSteps: (step: number) => void
+  setSteps: (step: number) => void,
+  promotion: number
 }
 
-const Receipt = ({ vgacode, setSteps }: Props) => {
+const Receipt = ({ vgacode, setSteps, promotion }: Props) => {
   const { t } = useTranslation('form')
   const { buyer, vga, feePackage, paymentInfo } = useGlobalStore()
   const { setDiscount } = useDiscountStore()
@@ -36,7 +37,7 @@ const Receipt = ({ vgacode, setSteps }: Props) => {
       </div>
       <div className='grid lg:grid-cols-2 grid-cols-1 gap-6'>
         {/* COL 1 */}
-        <VGABill />
+        <VGABill promotion={promotion} />
         {/* {COL 2} */}
         <InforBill />
       </div>

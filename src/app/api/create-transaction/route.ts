@@ -4,7 +4,7 @@ import { API_ENDPOINT } from '@/configs'
 import { createAxiosInstanceServer } from '@/apis'
 import { isValidDomainStore } from '@/utils'
 import Joi from 'joi'
-import { getQueryRequest } from '@/utils'
+import { getQueryRequest } from '@/utils/server'
 import { TEmployee, TFeePackage, TGolfer, TVga, TVoucher } from '@/types/type'
 import { ETransactionProvider } from '@/types/transaction-provider'
 

@@ -18,7 +18,7 @@ export const runtime = 'edge'
 export default async function Home() {
   const { isMaintain, showSpecialDiscount } = await getConfigs()
   if (isMaintain) {
-    redirect('/maintainance')
+    return redirect('/maintainance')
   }
   const [data, images, memberships, vgas, promotions] = await Promise.all([
     getSignificances(),

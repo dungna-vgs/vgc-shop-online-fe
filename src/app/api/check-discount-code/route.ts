@@ -5,7 +5,7 @@ import { API_ENDPOINT } from '@/configs'
 import { createAxiosInstanceServer } from '@/apis'
 import { isValidDomainStore } from '@/utils'
 import Joi from 'joi'
-import { getQueryRequest } from '@/utils'
+import { getQueryRequest } from '@/utils/server'
 
 type TParams = {
   voucher_code: string

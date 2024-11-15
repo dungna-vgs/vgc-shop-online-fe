@@ -75,9 +75,10 @@ type TBuyPackageProps = {
   params: {
     packageId: string
   }
+  promotion: number
 }
 
-export default function TabBuyPackage({ params }: TBuyPackageProps) {
+export default function TabBuyPackage({ params, promotion }: TBuyPackageProps) {
   const [currentStep, setCurrentStep] = useState(0)
   const { t } = useTranslation()
   const steps = [
@@ -97,7 +98,11 @@ export default function TabBuyPackage({ params }: TBuyPackageProps) {
       src: '/images/Shipping.svg',
       description: t('des-2'),
       content: (
-        <ContentCheck packageId={params.packageId} setSteps={setCurrentStep} />
+        <ContentCheck
+          promotion={promotion}
+          packageId={params.packageId}
+          setSteps={setCurrentStep}
+        />
       )
     },
     {
@@ -105,7 +110,11 @@ export default function TabBuyPackage({ params }: TBuyPackageProps) {
       src: '/images/Payment.svg',
       description: 'des-3',
       content: (
-        <Receipt packageId={params.packageId} setSteps={setCurrentStep} />
+        <Receipt
+          promotion={promotion}
+          packageId={params.packageId}
+          setSteps={setCurrentStep}
+        />
       )
     }
   ]

@@ -7,52 +7,51 @@ import { isValidDomainStore } from '@/utils'
 import Joi from 'joi'
 import { getQueryRequest } from '@/utils/server'
 
-type TParams = {
-  keyword: string
-  page?: number
-  limit?: number
+type TQueryParams = {
+  type: string
+  item_id: number
 }
 
-function validation(params: TParams) {
-  const schema = Joi.object({
-    keyword: Joi.string().required(),
-    page: Joi.number(),
-    limit: Joi.number().default(20)
+function validation(params: TQueryParams) {
+  const schema = Joi.object<TQueryParams>({
+    type: Joi.string().valid('vga', 'membership').required(),
+    item_id: Joi.number().required()
   })
   return schema.validate(params)
 }
 
 export async function GET(request: NextRequest) {
-  const req = getQueryRequest<TParams>(request)
+  const req = getQueryRequest<TQueryParams>(request)
   const { origin, query } = req
   const { error, warning, value: params } = validation(query)
   if (error || warning) {
     return NextResponse.json({
+      message: 'Dữ liệu không hợp lệ!',
       success: false,
       error,
       warning,
+      params,
       redirect: `${origin}/not-found`
     })
   }
 
   if (!isValidDomainStore(req)) {
     return NextResponse.json({
+      message: 'Không tìm thấy đại lý này!',
       success: false,
-      message: origin,
+      origin,
       data: null,
       redirect: `${origin}/not-found`
     })
   }
+
   const axiosInstance = createAxiosInstanceServer(origin)
-  const res = await axiosInstance.get(API_ENDPOINT.SEARCH_ALL, {
+  const res = await axiosInstance.get(API_ENDPOINT.GET_PROMOTIONAL_VALUE, {
     params
   })
   return NextResponse.json({
     success: true,
-    data: {
-      list_vga: res.data.data.list_vga.data,
-      membership_package: res.data.data.membership_package.data
-    },
+    data: res.data.data,
     redirect: null
   })
 }

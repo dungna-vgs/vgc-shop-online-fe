@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server'
 import { API_ENDPOINT } from '@/configs'
 import { createAxiosInstanceServer } from '@/apis'
 import { isValidDomainStore, TRequest } from '@/utils'
-import { getQueryRequest } from '@/utils'
+import { getQueryRequest } from '@/utils/server'
 
 export async function GET(request: NextRequest) {
   const req: TRequest = getQueryRequest<null>(request)

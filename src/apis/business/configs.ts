@@ -14,6 +14,7 @@ export const getConfigs = async () => {
   }
   return {
     isMaintain: false,
-    showSpecialDiscount: false
+    showSpecialDiscount: false,
+    origin
   }
 }

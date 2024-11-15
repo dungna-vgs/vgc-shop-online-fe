@@ -26,6 +26,6 @@ export default async function Maintainance() {
       </div>
     )
   } else {
-    redirect('/')
+    return redirect('/')
   }
 }

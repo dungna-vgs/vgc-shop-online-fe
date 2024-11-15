@@ -72,5 +72,6 @@
   "copy": "Copied successfully.",
   "notify": "Notification",
   "sorry-alert": "Sorry! This VGA code has already been purchased by another user. Please select a different VGA code and try again!",
-  "delete": "Delete"
+  "delete": "Delete",
+  "promotion": "Promotion"
 }

@@ -16,12 +16,18 @@ import { apiCheckDiscountCode } from '@/apis/internals/clients/check.discount'
 import React, { useEffect, useState } from 'react'
 import { useToastStore, useDiscountStore, useEmployeeStore } from '@/stores'
 import { useTranslation } from 'react-i18next'
+import axios from 'axios'
+import { useParams } from 'next/navigation'
 
 type Props = {
   amount: number
+  promotion: number
 }
 
-export default function DummyInvoice({ amount }: Props) {
+export default function DummyInvoice({ amount, promotion }: Props) {
+  const params = useParams()
+  console.log('params: ')
+  console.log(params)
   const { t } = useTranslation('form')
   const [discountCode, setDiscountCode] = useState<string>('')
   const { discount, setDiscount } = useDiscountStore()
@@ -35,17 +41,20 @@ export default function DummyInvoice({ amount }: Props) {
   }, [discount])
   const handleCheckDiscountCode = async () => {
     if (discount) {
-      return setDiscount(undefined)
+      resetDiscount()
+      return
     }
     try {
       const res = await apiCheckDiscountCode({ voucher_code: discountCode })
       const { error_code } = res.data
-      if (res.data.error_code === 200) {
+      if (res.data.error_code === axios.HttpStatusCode.Ok) {
         showToast(t('apply-success'), 'success', 2000)
         setDiscount(res.data.data)
       } else {
         const errorMessage =
-          error_code === 401 ? t('again-later') : t('invalid-code')
+          error_code === axios.HttpStatusCode.Unauthorized
+            ? t('again-later')
+            : t('invalid-code')
         showToast(errorMessage, 'error', 2000)
         resetDiscount()
       }
@@ -106,33 +115,30 @@ export default function DummyInvoice({ amount }: Props) {
                 <span className='my-1 uppercase'>{t('total')}</span>
                 <span>{formatCurrency(amount)}đ</span>
               </div>
-              <div className='flex justify-between items-center'>
-                <span className='my-1 text-[#545454]'>{t('promotional')}</span>
-                <span>
-                  {' '}
-                  {formatCurrency(
-                    calculateDiscountAmount(
-                      amount,
-                      discount?.discount || 0,
-                      discount?.type || ''
-                    )
-                  )}
-                  đ
-                </span>
-              </div>
-              <div className='flex justify-between items-center'>
-                <span className='my-1 text-[#545454]'>{t('discount')}</span>
-                <span className='my-1 text-[#07AC39]'>
-                  {formatCurrency(
-                    calculateDiscountAmount(
-                      amount,
-                      discount?.discount || 0,
-                      discount?.type || ''
-                    )
-                  )}
-                  đ
-                </span>
-              </div>
+
+              {discount ? (
+                <div className='flex justify-between items-center'>
+                  <span className='text-[#545454]'>{t('discount')}</span>
+                  <span className='text-[#07AC39] font-semibold'>
+                    {formatCurrency(
+                      calculateDiscountAmount(
+                        amount,
+                        discount?.discount || 0,
+                        discount?.type || ''
+                      )
+                    )}
+                    đ
+                  </span>
+                </div>
+              ) : (
+                <div className='flex justify-between items-center'>
+                  <span className=''>{t('promotion')}</span>
+                  <span className='text-[#07AC39] font-semibold'>
+                    -{formatCurrency(promotion)}đ
+                  </span>
+                </div>
+              )}
+
               <div className='flex justify-between items-center'>
                 <span>{t('amount')}</span>
                 <span className='text-[#F7941D] font-semibold'>
@@ -140,11 +146,11 @@ export default function DummyInvoice({ amount }: Props) {
                     ? formatCurrency(
                         calculateDiscountedPrice(
                           amount,
-                          discount.discount,
+                          discount.discount || promotion,
                           discount.type
                         )
                       )
-                    : formatCurrency(amount)}
+                    : formatCurrency(amount - promotion)}
                   đ
                 </span>
               </div>

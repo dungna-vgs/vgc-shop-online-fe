@@ -75,9 +75,10 @@ type TBuyVGAProps = {
   params: {
     vgacode: string
   }
+  promotion: number
 }
 
-export default function TabBuyVGA({ params }: TBuyVGAProps) {
+export default function TabBuyVGA({ params, promotion }: TBuyVGAProps) {
   const [currentStep, setCurrentStep] = useState(0)
   const { t } = useTranslation()
   const steps = [
@@ -94,14 +95,24 @@ export default function TabBuyVGA({ params }: TBuyVGAProps) {
       src: '/images/Shipping.svg',
       description: t('des-2'),
       content: (
-        <ContentCheck vgacode={params.vgacode} setSteps={setCurrentStep} />
+        <ContentCheck
+          promotion={promotion}
+          vgacode={params.vgacode}
+          setSteps={setCurrentStep}
+        />
       )
     },
     {
       title: 'step-3',
       src: '/images/Payment.svg',
       description: 'des-3',
-      content: <Receipt vgacode={params.vgacode} setSteps={setCurrentStep} />
+      content: (
+        <Receipt
+          promotion={promotion}
+          vgacode={params.vgacode}
+          setSteps={setCurrentStep}
+        />
+      )
     }
   ]
   return (

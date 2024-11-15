@@ -50,20 +50,11 @@ export interface TRequest<T = null> extends NextRequest {
 export function isValidDomainStore<T = null>(req: TRequest<T>): boolean {
   if (TYPE_ENVIRONMENT.LOCALHOST !== process.env.ENVIROMENT) {
     const { origin } = req
-    return !!(origin && origin.includes('-store.'))
+    return !!origin
   }
   return true
 }
 
-export function getQueryRequest<T>(req: NextRequest) {
-  const { origin, searchParams } = new URL(req.url)
-  const query = Object.fromEntries(searchParams) as T
-  return {
-    ...req,
-    origin,
-    query
-  } as TRequest<T>
-}
 
 export function formatCurrency(number: number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
