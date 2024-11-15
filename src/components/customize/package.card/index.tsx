@@ -47,9 +47,9 @@ export default function PackageCard({
             {getMembershipPackageName(membership)}
           </span>
         </div>
-        <div className='absolute text-[18px] md:text-[20px] lg:text-[22px]  right-0 left-0 bottom-0 p-3 sm:p-4  flex justify-center  items-center'>
+        <div className='absolute text-16  right-0 left-0 bottom-0 p-3 sm:p-4  flex justify-center  items-center'>
           <span className={clsx(styles.packageCard)}>
-            Gói hội viên cao cấp 1 năm
+            {t('year-package', { year: membership.year_add })}
           </span>
         </div>
       </div>
