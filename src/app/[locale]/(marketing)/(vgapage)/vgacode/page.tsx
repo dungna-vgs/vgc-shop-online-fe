@@ -49,7 +49,7 @@ export default async function VGAPage(props: TVGAPageProps) {
                   width={256}
                   height={510}
                   alt={ads.adsVGaLeft.title}
-                  quality={80}
+                  quality={60}
                   style={{
                     width: '100%',
                     height: 'auto',

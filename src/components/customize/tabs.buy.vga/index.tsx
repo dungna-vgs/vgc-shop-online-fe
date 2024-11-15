@@ -39,6 +39,7 @@ function Tabs(props: TTabsProps) {
                   alt='VGA Icon'
                   src={item.src}
                   className='min-h-3'
+                  quality={60}
                 />
               </div>
               <div>

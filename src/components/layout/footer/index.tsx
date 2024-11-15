@@ -19,6 +19,7 @@ const Footer: React.FC = () => {
                 width={197}
                 height={47}
                 alt='VG Corp Logo'
+                quality={60}
               />
             </div>
             <span className='font-semibold text-base lg:text-start text-center'>
@@ -63,6 +64,7 @@ const Footer: React.FC = () => {
                     height={32}
                     alt='Facebook'
                     className={styles.colorIcon}
+                    quality={60}
                   />
                 </Link>
                 <Link
@@ -76,6 +78,7 @@ const Footer: React.FC = () => {
                     height={20}
                     alt='Youtube'
                     className={styles.colorIcon}
+                    quality={60}
                   />
                 </Link>
               </div>
@@ -87,6 +90,7 @@ const Footer: React.FC = () => {
               width={218}
               height={50}
               alt='vhandicap'
+              quality={60}
             />
             <span>
               <strong>vHandicap</strong> - {t('vgc-content')}
@@ -98,6 +102,7 @@ const Footer: React.FC = () => {
                   width={160}
                   height={46}
                   alt='Google Play'
+                  quality={60}
                 />
               </Link>
 
@@ -107,6 +112,7 @@ const Footer: React.FC = () => {
                   width={160}
                   height={46}
                   alt='App Store'
+                  quality={60}
                 />
               </Link>
             </div>
@@ -117,6 +123,7 @@ const Footer: React.FC = () => {
               width={50}
               height={50}
               alt='Contact Icon'
+              quality={60}
             />
             <span className='font-semibold text-xl'>
               {t('customer-service')}

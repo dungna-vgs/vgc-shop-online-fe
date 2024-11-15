@@ -14,14 +14,18 @@ import {
 } from '@/app/api/create-transaction/route'
 import {
   AlertDialog,
+  AlertDialogAction,
   AlertDialogContent,
   AlertDialogDescription,
-  AlertDialogTitle
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger
 } from '@/components/ui/alert-dialog'
 import Loading from '@/components/ui/loading'
 import { apiCheckEmployeeCode } from '@/apis/internals/clients/check.employee'
 import { ETransactionProvider } from '@/types/transaction-provider'
 import { useTranslation } from 'react-i18next'
+import { AlertDialogCancel } from '@radix-ui/react-alert-dialog'
 
 type Props = {
   vgacode?: string
@@ -37,6 +41,8 @@ const ContentCheck = ({ vgacode, packageId, setSteps, promotion }: Props) => {
   const { discount, setDiscount } = useDiscountStore()
   const { employee, setEmployee } = useEmployeeStore()
   const showToast = useToastStore((state) => state.showToast)
+  const [confirm, setConfirm] = useState<boolean>(false)
+
   const onSubmit = async () => {
     if (!buyer) return
 
@@ -109,6 +115,15 @@ const ContentCheck = ({ vgacode, packageId, setSteps, promotion }: Props) => {
       }
     })
   }
+
+  const handleConfirmDiscount = () => {
+    if (discount) {
+      return setConfirm(true)
+    } else {
+      onSubmit()
+    }
+  }
+
   return !!buyer && (!!vga || !!feePackage) ? (
     <div className='content-check'>
       <div>
@@ -139,12 +154,40 @@ const ContentCheck = ({ vgacode, packageId, setSteps, promotion }: Props) => {
         >
           {t('back')}
         </button>
-        <button
-          className='text-white leading-[64px] bg-gradient-to-r from-[#17573C] to-[#4AC486] disabled:bg-none disabled:!bg-[#979797] rounded-[6px] flex justify-center w-40 md:w-[250px] h-16 text-[16px]'
-          onClick={onSubmit}
-        >
-          {t('next')}
-        </button>
+
+        <AlertDialog open={confirm}>
+          <AlertDialogTrigger>
+            <button
+              className='text-white leading-[64px] bg-gradient-to-r from-[#17573C] to-[#4AC486] disabled:bg-none disabled:!bg-[#979797] rounded-[6px] flex justify-center w-40 md:w-[250px] h-16 text-[16px]'
+              onClick={handleConfirmDiscount}
+            >
+              {t('next')}
+            </button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <p className='w-full text-center font-bold text-black mb-3 uppercase'>
+                {t('confirm-alert')}
+              </p>
+              <AlertDialogDescription className='text-black text-center'>
+                {t('note-alert')}
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <div className='flex gap-4 justify-center items-center'>
+              <AlertDialogCancel
+                onClick={() => {
+                  setConfirm(false)
+                }}
+                className='bg-[#D3090C] text-white font-semibold lg:w-[168px] h-16 w-28 rounded-[6px]'
+              >
+                {t('cancel-form')}
+              </AlertDialogCancel>
+              <AlertDialogAction onClick={onSubmit} className='bg-gradient-to-r from-[#17573C] to-[#4AC486] lg:w-[168px] h-16  w-28'>
+                {t('confirm')}
+              </AlertDialogAction>
+            </div>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
 
       <AlertDialog open={loading}>

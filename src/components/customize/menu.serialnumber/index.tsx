@@ -14,6 +14,7 @@ type TMenuSerialNumberProps = {
 export default function MenuSerialNumber(props: TMenuSerialNumberProps) {
   const { setSeachVGA, searchVGA } = useGlobalStore()
   const { t } = useTranslation('common')
+  const { t: tmenu } = useTranslation('filter-menu')
   return (
     <div className='flex items-center py-4 gap-4 lg:gap-8  overflow-hidden overflow-x-scroll no-scrollbar '>
       {props.typeVga?.map?.((type, index) => {
@@ -46,6 +47,7 @@ export default function MenuSerialNumber(props: TMenuSerialNumberProps) {
                   width={44}
                   height={44}
                   alt='Icon'
+                  quality={60}
                   className='text-black'
                 />
                 <span>{t('all')}</span>
@@ -79,9 +81,10 @@ export default function MenuSerialNumber(props: TMenuSerialNumberProps) {
                   width={44}
                   height={44}
                   alt='Icon'
+                  quality={60}
                   className='hover:fill-slate-50'
                 />
-                <span>{type.name}</span>
+                <span className='text-center'>{tmenu(type.name)}</span>
               </Link>
             </div>
           )

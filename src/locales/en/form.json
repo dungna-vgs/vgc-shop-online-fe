@@ -7,7 +7,7 @@
   "des-3": "Payment",
   "select": "Select the account to receive the code",
   "select-1": "Select the account to pay the membership package fee",
-  "fill-in": "Enter name, VGA code, or phone number to search",
+  "fill-in": "Enter name or VGA code to search",
   "not-search": "No golfer found.",
   "next": "Next",
   "back": "Go back",
@@ -18,7 +18,7 @@
   "please": "Please do not exit the screen and wait a moment",
   "payment": "Payment",
   "cancel": "The transaction will be automatically canceled after:",
-  "completed": "Payment completed",
+  "completed": "Paid",
   "process": "Transaction is in process",
   "success": "Check successful",
   "successful": "Transaction status successful",
@@ -64,6 +64,14 @@
   "sorry": "Sorry! This VGA code has already been purchased by another user. Please select a different VGA code and try again!",
   "yes": "Ok, I understand.",
   "vgacode": "VGA Code",
+  "promotional": "Promotional Program",
+  "confirm-alert": "Confirm the use of discount code",
+  "note-alert": "Note, this discount code can only be used once. Are you sure you want to apply it to this transaction? (VGC will not reapply the discount code if this transaction is unsuccessful).",
+  "confirm": "Confirm",
+  "cancel-form": "Cancel",
+  "copy": "Copied successfully.",
+  "notify": "Notification",
+  "sorry-alert": "Sorry! This VGA code has already been purchased by another user. Please select a different VGA code and try again!",
   "delete": "Delete",
-  "promotion": "promotion"
+  "promotion": "Promotion"
 }

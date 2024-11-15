@@ -10,7 +10,7 @@ export default async function NotFound() {
         width={585}
         height={249}
         alt='Not Found'
-        quality={75}
+        quality={60}
       />
       <p className='text-[36px]'>Không tìm thấy trang!</p>
       <p>Tài nguyên yêu cầu không được tìm thấy trên máy chủ này!</p>

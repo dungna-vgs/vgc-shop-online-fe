@@ -23,6 +23,7 @@ const Loading: FC = () => {
             width={56}
             height={56}
             alt='Loading'
+            quality={60}
           />
         ) : (
           <h3>{text}</h3>

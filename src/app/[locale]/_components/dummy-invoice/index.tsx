@@ -13,7 +13,7 @@ import {
   calculateDiscountedPrice
 } from '@/utils'
 import { apiCheckDiscountCode } from '@/apis/internals/clients/check.discount'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useToastStore, useDiscountStore, useEmployeeStore } from '@/stores'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
@@ -33,6 +33,12 @@ export default function DummyInvoice({ amount, promotion }: Props) {
   const { discount, setDiscount } = useDiscountStore()
   const { employee, setEmployeeCode } = useEmployeeStore()
   const showToast = useToastStore((state) => state.showToast)
+
+  useEffect(() => {
+    if (discount === undefined) {
+      setDiscountCode('')
+    }
+  }, [discount])
   const handleCheckDiscountCode = async () => {
     if (discount) {
       resetDiscount()
@@ -69,7 +75,10 @@ export default function DummyInvoice({ amount, promotion }: Props) {
             <CardTitle>{t('estimated')}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className='mb-2'>{t('discount-code')}</p>
+            <p className='my-2'>
+              {t('discount-code')}
+              <span className='text-red-600'> {t('not-required')}</span>
+            </p>
             <div className='flex p-4 justify-between items-center rounded-[7px] border border-[#F1F1F1]'>
               <Input
                 className='bg-white placeholder:text-[#979797] outline-none border-none'
@@ -78,13 +87,14 @@ export default function DummyInvoice({ amount, promotion }: Props) {
                 value={discountCode}
                 onChange={(e) => setDiscountCode(e.target.value)}
               />
+
               <Button
-                className='border border-[#17573C] bg-white text-black hover:text-white'
+                className='border bg-gradient-to-r from-[#17573C] to-[#4AC486]  text-white hover:text-white'
                 type='submit'
                 onClick={handleCheckDiscountCode}
                 disabled={!discountCode.trim()}
               >
-                {t(`${discount ? 'delete' : 'apply'}`)}
+                {t(discount ? 'delete' : 'apply')}
               </Button>
             </div>
             <p className='mt-6 mb-2'>
@@ -100,38 +110,43 @@ export default function DummyInvoice({ amount, promotion }: Props) {
                 onChange={(e) => setEmployeeCode(e.target.value)}
               />
             </div>
-            <div className='mt-6 flex flex-col gap-2 text-[16px]'>
+            <div className='mt-6 flex flex-col gap-4 text-[16px]'>
               <div className='flex justify-between items-center'>
-                <span className=' uppercase'>{t('total')}</span>
+                <span className='my-1 uppercase'>{t('total')}</span>
                 <span>{formatCurrency(amount)}đ</span>
               </div>
-              <div className='flex justify-between items-center'>
-                <span className=''>{t('promotion')}</span>
-                <span className='text-[#07AC39] font-semibold'>
-                  -{formatCurrency(promotion)}đ
-                </span>
-              </div>
-              <div className='flex justify-between items-center'>
-                <span className='text-[#545454]'>{t('discount')}</span>
-                <span className='text-[#07AC39] font-semibold'>
-                  {formatCurrency(
-                    calculateDiscountAmount(
-                      amount,
-                      discount?.discount || 0,
-                      discount?.type || ''
-                    )
-                  )}
-                  đ
-                </span>
-              </div>
+
+              {discount ? (
+                <div className='flex justify-between items-center'>
+                  <span className='text-[#545454]'>{t('discount')}</span>
+                  <span className='text-[#07AC39] font-semibold'>
+                    {formatCurrency(
+                      calculateDiscountAmount(
+                        amount,
+                        discount?.discount || 0,
+                        discount?.type || ''
+                      )
+                    )}
+                    đ
+                  </span>
+                </div>
+              ) : (
+                <div className='flex justify-between items-center'>
+                  <span className=''>{t('promotion')}</span>
+                  <span className='text-[#07AC39] font-semibold'>
+                    -{formatCurrency(promotion)}đ
+                  </span>
+                </div>
+              )}
+
               <div className='flex justify-between items-center'>
                 <span>{t('amount')}</span>
-                <span className='font-semibold text-[#F7941D]'>
+                <span className='text-[#F7941D] font-semibold'>
                   {discount
                     ? formatCurrency(
                         calculateDiscountedPrice(
-                          amount - promotion,
-                          discount.discount,
+                          amount,
+                          discount.discount || promotion,
                           discount.type
                         )
                       )

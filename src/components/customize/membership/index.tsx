@@ -28,7 +28,7 @@ export default function MemberShip(props: TMemberShipProps) {
                 width={16}
                 height={16}
                 alt='ArrowRight Icon'
-                quality={75}
+                quality={60}
               />
             </Button>
           </Link>

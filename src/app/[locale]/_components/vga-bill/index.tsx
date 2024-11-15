@@ -24,7 +24,7 @@ export default function VGABill({ promotion }: TVGABill) {
   if (!buyer || (!vga && !feePackage)) return null
 
   const money = vga?.amount || feePackage?.amount || 0
-
+  console.log({ employee })
   return (
     <div>
       <div className='px-0 lg:px-6 py-4'>
@@ -84,43 +84,49 @@ export default function VGABill({ promotion }: TVGABill) {
                     {formatCurrency(money)}đ
                   </span>
                 </div>
-                <div className='flex justify-between items-center'>
-                  <span className='text-[#545454]'>{t('promotion')}</span>
-                  <span className='text-[#07AC39] font-semibold'>
-                    -{formatCurrency(promotion)}đ
-                  </span>
-                </div>
-                <div className='flex justify-between items-center'>
-                  <span className='text-[#545454]'>{t('discount')}</span>
-                  <span className='text-[#07AC39]'>
-                    {' '}
-                    <span className='font-semibold'>
-                      {discount
-                        ? formatCurrency(
-                            calculateDiscountAmount(
-                              money - promotion,
-                              discount.discount,
-                              discount.type
+                {discount ? (
+                  <div className='flex justify-between items-center'>
+                    <span className='text-[#545454]'>{t('discount')}</span>
+                    <span className='text-[#07AC39]'>
+                      {' '}
+                      <span className=''>
+                        {discount
+                          ? formatCurrency(
+                              calculateDiscountAmount(
+                                money,
+                                discount.discount,
+                                discount.type
+                              )
                             )
-                          )
-                        : 0}
-                      đ
+                          : 0}
+                        đ
+                      </span>
                     </span>
-                  </span>
-                </div>
-                {employee && (
+                  </div>
+                ) : (
+                  <div className='flex justify-between items-center'>
+                    <span className='text-[#545454]'>{t('promotion')}</span>
+                    <span className='text-[#07AC39] font-semibold'>
+                      -{formatCurrency(promotion)}đ
+                    </span>
+                  </div>
+                )}
+
+                {employee?.employee_code && employee?.name && (
                   <div className='flex justify-between gap-2 items-center'>
                     <span className='text-[#545454]'>{t('staff-code')}</span>
-                    <span>{`${employee.employee_code}-${employee.name}`}</span>
+                    <span>
+                      {employee.employee_code}-{employee.name}
+                    </span>
                   </div>
                 )}
                 <div className='flex justify-between items-center'>
                   <span>{t('amount')}</span>
-                  <span className='font-semibold text-[#F7941D]'>
+                  <span className='text-[#F7941D] font-semibold'>
                     {discount
                       ? formatCurrency(
                           calculateDiscountedPrice(
-                            money - promotion,
+                            money,
                             discount.discount,
                             discount.type
                           )

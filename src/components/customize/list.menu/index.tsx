@@ -15,6 +15,7 @@ export default function ListMenuSerial() {
           width={44}
           height={44}
           alt='Icon'
+          quality={60}
           className='hover:fill-slate-50'
         />
         <span>{t('all')}</span>

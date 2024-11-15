@@ -20,7 +20,7 @@ export default function OfferItem(props: TOfferItem) {
           width={454}
           height={454}
           alt={props.promotion.name}
-          quality={80}
+          quality={60}
           style={{
             width: '100%',
             height: 'auto',

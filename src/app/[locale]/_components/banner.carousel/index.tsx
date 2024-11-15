@@ -40,7 +40,7 @@ const BannerCarousel: React.FC<TBannerCarouselProps> = (props) => {
                 src={image.image}
                 alt={image.title}
                 className='w-full h-auto'
-                quality={80}
+                quality={60}
                 width={1200}
                 height={400}
               />
