@@ -39,7 +39,7 @@ export default function RecipientCard({ golfer, vga, feePackage }: Props) {
           <p className='text-[24px] mb-4 font-semibold'>{t('vgacode')}</p>
           <div className='block sm:flex min-w-[246px]  gap-4 justify-between'>
             <CardNumber vga={vga} showBuyButton={false} />
-            <div className='flex flex-1 justify-between gap-4  xl:justify-between items-center'>
+            <div className='flex flex-1 justify-between gap-4 mt-4 md:mt-0  xl:justify-between items-center'>
               <span className='text-[16px] font-bold'>VGA{vga.id}</span>
               <span className='text-[20px]'>{formatCurrency(vga.amount)}đ</span>
             </div>
@@ -59,7 +59,7 @@ export default function RecipientCard({ golfer, vga, feePackage }: Props) {
                 textClassName='!text-[2rem]'
               />
             </div>
-            <div className='flex flex-1 justify-between gap-4  xl:justify-between items-center'>
+            <div className='flex flex-1 justify-between gap-4 mt-4 md:mt-0 xl:justify-between items-center'>
               <span className='text-[16px] font-bold'>
                 {getMembershipPackageName(feePackage)}
               </span>

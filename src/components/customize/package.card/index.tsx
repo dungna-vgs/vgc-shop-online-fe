@@ -37,19 +37,22 @@ export default function PackageCard({
             quality={60}
             style={{
               width: '100%',
-              height: 'auto'
+              height: 'auto',
+              borderTopLeftRadius:'16px',
+              borderTopRightRadius:'16px'
+              
             }}
             className={clsx('min-w-[148px] min-h-[166px]', imgClassName)}
           />
         </div>
-        <div className='absolute top-0 right-0 left-0 bottom-0 p-3 sm:p-4  flex justify-items-start  items-center'>
+        <div className='absolute bg-transparent top-0 right-0 left-0 bottom-0 p-3 sm:p-4  flex justify-items-start  items-center'>
           <span className={clsx(styles.titleCard, textClassName)}>
             {getMembershipPackageName(membership)}
           </span>
         </div>
       </div>
       {showBuyButton && (
-        <div className=' bg-white shadow-lg rounded-b-2xl flex justify-center items-center py-3 max-w-full'>
+        <div className='bg-white shadow-lg rounded-b-2xl flex justify-center items-center py-3 max-w-full'>
           <Link
             href={`/buy-package/${membership.id}`}
             className={styles.btnBuy}

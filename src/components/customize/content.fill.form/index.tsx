@@ -185,7 +185,7 @@ export default function ContentFillForm(props: TItemProps) {
             </Command>
           </PopoverContent>
         </Popover>
-        <div className='flex justify-end items-center gap-6 mt-16'>
+        <div className='flex justify-center md:justify-end items-center gap-6 mt-16'>
           <Link
             className='text-black leading-[64px] bg-white rounded-[6px] border-[1px] border-[#000] flex justify-center w-40 md:w-[250px] h-16 text-[16px]'
             href='/package-price'
