@@ -23,7 +23,12 @@ import {
 import { apiSearchGolfer } from '@/apis/internals/clients/search.golfer'
 import { TGolfer } from '@/types/type'
 import { useRouter } from 'next/navigation'
-import { useGlobalStore, useDiscountStore, useEmployeeStore } from '@/stores'
+import {
+  useGlobalStore,
+  useDiscountStore,
+  useEmployeeStore,
+  useToastStore
+} from '@/stores'
 import { apiGetVga } from '@/apis/internals/clients/get.vga'
 import { apiGetFeePackage } from '@/apis/internals/clients/get.package'
 import { getMembershipPackageName } from '@/utils'
@@ -39,6 +44,7 @@ export default function ContentFillForm(props: TItemProps) {
   const { t } = useTranslation('form')
   const router = useRouter()
   const { vga, feePackage, setVga, setFeePackage, setBuyer } = useGlobalStore()
+  const { showToast } = useToastStore()
   const { vgacode, packageId } = props
   const [open, setOpen] = useState(true)
   const [value, setValue] = useState<number>(0)
@@ -63,20 +69,36 @@ export default function ContentFillForm(props: TItemProps) {
   useEffect(() => {
     if (vgacode) {
       setFeePackage(null)
-      apiGetVga({ vga: vgacode }).then((res) => {
-        setVga(res.data)
-      })
+      apiGetVga({ vga: vgacode })
+        .then((res) => {
+          if (res.success) {
+            setVga(res.data)
+          } else {
+            showToast(t('hold-or-purchased'), 'error', 2000)
+          }
+        })
+        .catch(() => {
+          showToast(t('error'), 'error', 2000)
+        })
     }
-  }, [vgacode, setVga, setFeePackage])
+  }, [vgacode, setVga, setFeePackage, showToast, t])
 
   useEffect(() => {
     if (packageId) {
       setVga(null)
-      apiGetFeePackage({ packageId }).then((res) => {
-        setFeePackage(res.data)
-      })
+      apiGetFeePackage({ packageId })
+        .then((res) => {
+          if (res.success) {
+            setFeePackage(res.data)
+          } else {
+            showToast(t('error'), 'error', 2000)
+          }
+        })
+        .catch(() => {
+          showToast(t('error'), 'error', 2000)
+        })
     }
-  }, [packageId, setFeePackage, setVga])
+  }, [packageId, setFeePackage, setVga, showToast, t])
 
   const golfer = golfers?.find((golfer) => golfer.id == value)
 
@@ -197,7 +219,9 @@ export default function ContentFillForm(props: TItemProps) {
             {t('back')}
           </Link>
           <Button
-            className='text-white leading-[64px] bg-gradient-to-r from-[#17573C] to-[#4AC486] disabled:bg-none disabled:!bg-[#979797] rounded-[6px] flex justify-center w-40 md:w-[250px] h-16 text-[16px]'
+            className={
+              'text-white leading-[64px] bg-gradient-to-r from-[#17573C] to-[#4AC486] disabled:bg-none disabled:!bg-[#979797] disabled:cursor-not-allowed rounded-[6px] flex justify-center w-40 md:w-[250px] h-16 text-[16px]'
+            }
             disabled={(!vga && !feePackage) || !value}
             onClick={() => {
               onNextStep()

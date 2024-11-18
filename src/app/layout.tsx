@@ -7,6 +7,7 @@ import {
 } from '@/constants/manifest'
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
+import GoogleAnalytics from '@/components/GoogleAnalytics'
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -69,6 +70,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang='vi'>
+      <GoogleAnalytics />
       <body>{children}</body>
     </html>
   )

@@ -44,9 +44,18 @@ export async function GET(request: NextRequest) {
 
   const axiosInstance = createAxiosInstanceServer(origin)
   const res = await axiosInstance.get(API_ENDPOINT.GET_VGA + '/' + params.vga)
+  if (res.data.error_code) {
+    return NextResponse.json({
+      success: false,
+      data: null,
+      res: res.data,
+      redirect: null
+    })
+  }
   return NextResponse.json({
     success: true,
     data: res.data.data,
+    res: res.data,
     redirect: null
   })
 }

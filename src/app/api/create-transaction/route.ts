@@ -8,6 +8,7 @@ import { getQueryRequest } from '@/utils/server'
 import { TEmployee, TFeePackage, TGolfer, TVga, TVoucher } from '@/types/type'
 import { ETransactionProvider } from '@/types/transaction-provider'
 import { getIps } from '@/utils/server'
+import { STATUS_VGA } from '@/types/enum'
 type TExtraBodyRequest = {
   user_id: TGolfer['id']
   voucher_id?: TVoucher['id']
@@ -86,9 +87,26 @@ export async function POST(request: NextRequest) {
   const { forwardedIps, cfIp } = getIps()
   const axiosInstance = createAxiosInstanceServer(origin, cfIp, forwardedIps)
   const res = await axiosInstance.post(API_ENDPOINT.CREATE_TRANSACTION, body)
+  if (res.data.message == STATUS_VGA.HOLD) {
+    return NextResponse.json({
+      success: false,
+      data: res.data.data,
+      error: STATUS_VGA.HOLD,
+      redirect: null
+    })
+  }
+  if (res.data.message == STATUS_VGA.PURCHASED) {
+    return NextResponse.json({
+      success: false,
+      data: res.data.data,
+      error: STATUS_VGA.PURCHASED,
+      redirect: null
+    })
+  }
   return NextResponse.json({
     success: true,
     data: res.data.data,
+    error: null,
     redirect: null
   })
 }

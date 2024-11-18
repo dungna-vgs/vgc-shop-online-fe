@@ -26,8 +26,10 @@ import { apiCheckEmployeeCode } from '@/apis/internals/clients/check.employee'
 import { ETransactionProvider } from '@/types/transaction-provider'
 import { useTranslation } from 'react-i18next'
 import { AlertDialogCancel } from '@radix-ui/react-alert-dialog'
+import { STATUS_VGA } from '@/types/enum'
 import { Button } from '@/components/ui/button'
-
+import ExistAlert from '@/components/customize/exist.alert'
+import HoldVGA from '@/components/customize/hold.vga'
 type Props = {
   vgacode?: string
   packageId?: string
@@ -43,6 +45,7 @@ const ContentCheck = ({ vgacode, packageId, setSteps, promotion }: Props) => {
   const { employee, setEmployee } = useEmployeeStore()
   const showToast = useToastStore((state) => state.showToast)
   const [confirm, setConfirm] = useState<boolean>(false)
+  const [error, setError] = useState<STATUS_VGA | null>(null)
 
   const onSubmit = async () => {
     if (!buyer) return
@@ -81,9 +84,14 @@ const ContentCheck = ({ vgacode, packageId, setSteps, promotion }: Props) => {
       setLoading(true)
       const res = await apiCreateTransaction(bodyRequest)
 
+      console.log('apiCreateTransaction: ', res)
       if (res.success) {
         setPaymentInfo(res.data)
         setSteps(2)
+      } else {
+        if (res.error) {
+          setError(res.error)
+        }
       }
     }
 
@@ -137,13 +145,17 @@ const ContentCheck = ({ vgacode, packageId, setSteps, promotion }: Props) => {
             vga={vgacode ? vga : null}
             feePackage={packageId ? feePackage : null}
           />
-          {/* COLS 2  */}
           <DummyInvoice
             promotion={promotion}
             amount={vga?.amount || feePackage?.amount || 0}
           />
         </div>
       </div>
+      <HoldVGA open={error == STATUS_VGA.HOLD} onClose={() => setError(null)} />
+      <ExistAlert
+        open={error == STATUS_VGA.PURCHASED}
+        onClose={() => setError(null)}
+      />
       <div className='flex justify-center md:justify-end items-center gap-6 mt-16'>
         <Button
           className='text-black leading-[64px] bg-white rounded-[6px] border-[1px] border-[#000] flex justify-center w-40 md:w-[250px] h-16 text-[16px]'

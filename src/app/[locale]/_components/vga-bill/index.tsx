@@ -1,5 +1,5 @@
 import CardNumber from '@/components/customize/number.card'
-import PackageCard from '@/components/customize/package.card'
+
 import { Card } from '@/components/ui/card'
 import { useGlobalStore, useDiscountStore, useEmployeeStore } from '@/stores'
 import { useTranslation } from 'react-i18next'
@@ -10,6 +10,9 @@ import {
   calculateDiscountAmount
 } from '@/utils'
 import React from 'react'
+import Image from 'next/image'
+import styles from './style.module.css'
+import clsx from 'clsx'
 
 type TVGABill = {
   promotion: number
@@ -52,13 +55,25 @@ export default function VGABill({ promotion }: TVGABill) {
                 </div>
               ) : !!feePackage ? (
                 <div className='flex p-4 gap-4 items-center rounded-[7px] border border-[#F1F1F1] bg-[#F6F6F6]'>
-                  <PackageCard
-                    memberships={[feePackage]}
-                    showBuyButton={false}
-                    cardClassName='w-[56px] h-[38px] rounded-[4px] overflow-hidden'
-                    imgClassName='min-w-[unset] min-h-[unset]'
-                    textClassName='!text-[4px]'
-                  />
+                  <div className='relative'>
+                    <Image
+                      src='/images/bg-fee.jpg'
+                      width={80}
+                      height={50}
+                      alt='Background PackageCard'
+                      quality={60}
+                    />
+                    <div className='absolute top-0 right-0 left-0 bottom-0 w-full h-full flex justify-center items-center'>
+                      <span
+                        className={clsx(
+                          'text-white font-bold uppercase text-xs mb-3 block',
+                          styles.title
+                        )}
+                      >
+                        {feePackage.sub_name}
+                      </span>
+                    </div>
+                  </div>
 
                   <div className='flex flex-1 justify-between items-center text-[16px]'>
                     <span>{getMembershipPackageName(feePackage)}</span>

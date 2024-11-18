@@ -37,7 +37,7 @@ export default async function VGAPage(props: TVGAPageProps) {
 
   return (
     <div className={styles.containerBg}>
-      <div className='mt-[84px]  max-w-[1200px] mx-auto min-h-[100vh]  py-6 px-4'>
+      <div className='mt-[84px] max-w-[1200px] mx-auto min-h-[100vh]  py-6 px-4'>
         <div className='grid grid-cols-4 gap-8'>
           <div className='col-span-1 flex flex-col gap-6'>
             <div className='hidden xl:block'>

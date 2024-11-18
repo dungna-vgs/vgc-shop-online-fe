@@ -17,6 +17,7 @@ const navLinks = [
 ]
 const Header: React.FC = () => {
   const pathname = usePathname()
+  const [oenNavbar, setOenNavbar] = React.useState(false)
   const { t } = useTranslation('common')
   return (
     <div className='bg-background fixed top-0 right-0 left-0 z-[999] shadow-[0_-6px_10px_5px_rgba(0,0,0,0.2)]'>
@@ -57,9 +58,10 @@ const Header: React.FC = () => {
                 })}
               </nav>
 
-              <Sheet>
+              <Sheet onOpenChange={setOenNavbar} open={oenNavbar}>
                 <SheetTrigger asChild>
                   <Button
+                    onClick={() => setOenNavbar(true)}
                     variant='outline'
                     size='icon'
                     className='shrink-0 xl:hidden border-none  '
@@ -69,13 +71,22 @@ const Header: React.FC = () => {
                 </SheetTrigger>
                 <SheetContent className='bg-[#4AC486] mt-[84px]' side='top'>
                   <nav className='grid text-white gap-6 text-lg font-medium'>
-                    <Link href='/' className='hover:text-foreground'>
+                    <Link
+                      onClick={() => setOenNavbar(false)}
+                      href='/'
+                      className='hover:text-foreground'
+                    >
                       {t('home')}
                     </Link>
-                    <Link href='/vgacode' className=' hover:text-foreground'>
+                    <Link
+                      onClick={() => setOenNavbar(false)}
+                      href='/vgacode'
+                      className=' hover:text-foreground'
+                    >
                       {t('vgacode')}
                     </Link>
                     <Link
+                      onClick={() => setOenNavbar(false)}
                       href='/package-price'
                       className=' hover:text-foreground'
                     >
