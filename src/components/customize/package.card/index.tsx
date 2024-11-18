@@ -50,6 +50,11 @@ export default function PackageCard({
             {getMembershipPackageName(membership)}
           </span>
         </div>
+        <div className='absolute text-16  right-0 left-0 bottom-0 p-3 sm:p-4  flex justify-center  items-center'>
+          <span className={clsx(styles.packageCard)}>
+            {t('year-package', { year: membership.year_add })}
+          </span>
+        </div>
       </div>
       {showBuyButton && (
         <div className='bg-white shadow-lg rounded-b-2xl flex justify-center items-center py-3 max-w-full'>

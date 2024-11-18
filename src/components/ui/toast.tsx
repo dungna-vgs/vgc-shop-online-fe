@@ -31,7 +31,7 @@ export const GlobalToast = () => {
       </Toast.Root>
 
       {/* Position the toast at the top center */}
-      <Toast.Viewport className='fixed top-0 left-1/2 transform -translate-x-1/2 flex flex-col gap-2 p-4 w-[320px] max-w-full z-50 outline-none' />
+      <Toast.Viewport className='fixed top-0 left-1/2 transform -translate-x-1/2 flex flex-col gap-2 p-4 w-[320px] max-w-full z-[9999] outline-none' />
     </Toast.Provider>
   )
 }

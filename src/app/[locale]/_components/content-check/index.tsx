@@ -26,6 +26,7 @@ import { apiCheckEmployeeCode } from '@/apis/internals/clients/check.employee'
 import { ETransactionProvider } from '@/types/transaction-provider'
 import { useTranslation } from 'react-i18next'
 import { AlertDialogCancel } from '@radix-ui/react-alert-dialog'
+import { Button } from '@/components/ui/button'
 
 type Props = {
   vgacode?: string
@@ -144,7 +145,7 @@ const ContentCheck = ({ vgacode, packageId, setSteps, promotion }: Props) => {
         </div>
       </div>
       <div className='flex justify-center md:justify-end items-center gap-6 mt-16'>
-        <button
+        <Button
           className='text-black leading-[64px] bg-white rounded-[6px] border-[1px] border-[#000] flex justify-center w-40 md:w-[250px] h-16 text-[16px]'
           onClick={() => {
             setSteps(0)
@@ -153,16 +154,16 @@ const ContentCheck = ({ vgacode, packageId, setSteps, promotion }: Props) => {
           }}
         >
           {t('back')}
-        </button>
+        </Button>
 
         <AlertDialog open={confirm}>
           <AlertDialogTrigger>
-            <button
+            <Button
               className='text-white leading-[64px] bg-gradient-to-r from-[#17573C] to-[#4AC486] disabled:bg-none disabled:!bg-[#979797] rounded-[6px] flex justify-center w-40 md:w-[250px] h-16 text-[16px]'
               onClick={handleConfirmDiscount}
             >
               {t('next')}
-            </button>
+            </Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
@@ -182,7 +183,10 @@ const ContentCheck = ({ vgacode, packageId, setSteps, promotion }: Props) => {
               >
                 {t('cancel-form')}
               </AlertDialogCancel>
-              <AlertDialogAction onClick={onSubmit} className='bg-gradient-to-r from-[#17573C] to-[#4AC486] lg:w-[168px] h-16  w-28'>
+              <AlertDialogAction
+                onClick={onSubmit}
+                className='bg-gradient-to-r from-[#17573C] to-[#4AC486] lg:w-[168px] h-16  w-28'
+              >
                 {t('confirm')}
               </AlertDialogAction>
             </div>

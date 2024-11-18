@@ -7,7 +7,7 @@ import Joi from 'joi'
 import { getQueryRequest } from '@/utils/server'
 import { TEmployee, TFeePackage, TGolfer, TVga, TVoucher } from '@/types/type'
 import { ETransactionProvider } from '@/types/transaction-provider'
-
+import { getIps } from '@/utils/server'
 type TExtraBodyRequest = {
   user_id: TGolfer['id']
   voucher_id?: TVoucher['id']
@@ -83,8 +83,8 @@ export async function POST(request: NextRequest) {
       redirect: `${origin}/not-found`
     })
   }
-
-  const axiosInstance = createAxiosInstanceServer(origin)
+  const { forwardedIps, cfIp } = getIps()
+  const axiosInstance = createAxiosInstanceServer(origin, cfIp, forwardedIps)
   const res = await axiosInstance.post(API_ENDPOINT.CREATE_TRANSACTION, body)
   return NextResponse.json({
     success: true,

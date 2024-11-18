@@ -73,5 +73,7 @@
   "notify": "Notification",
   "sorry-alert": "Sorry! This VGA code has already been purchased by another user. Please select a different VGA code and try again!",
   "delete": "Delete",
-  "promotion": "Promotion"
+  "promotion": "Promotion",
+  "hold": "VGA code is being held",
+  "hold-alert": "Sorry! This VGA code is currently on hold by another user. Please select a different VGA code and try again!"
 }
