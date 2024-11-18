@@ -30,7 +30,7 @@ export default function PackageCard({
       <div className={clsx(styles.listCard, cardClassName)}>
         <div>
           <Image
-            src='/images/bg-fee.jpg'
+            src='/images/bg-fee.png'
             width={352}
             height={233}
             alt='Background PackageCard'
@@ -38,8 +38,8 @@ export default function PackageCard({
             style={{
               width: '100%',
               height: 'auto',
-              borderTopLeftRadius:'16px',
-              borderTopRightRadius:'16px'
+              borderTopLeftRadius: '16px',
+              borderTopRightRadius: '16px'
             }}
             className={clsx('min-w-[148px] min-h-[166px]', imgClassName)}
           />

@@ -57,7 +57,7 @@ export default function VGABill({ promotion }: TVGABill) {
                 <div className='flex p-4 gap-4 items-center rounded-[7px] border border-[#F1F1F1] bg-[#F6F6F6]'>
                   <div className='relative'>
                     <Image
-                      src='/images/bg-fee.jpg'
+                      src='/images/bg-fee.png'
                       width={80}
                       height={50}
                       alt='Background PackageCard'
