@@ -110,18 +110,18 @@ export default function ContentFillForm(props: TItemProps) {
     <div className='content-fill-form'>
       <div>
         {!!props.vgacode && (
-          <p className=' font-semibold text-[20px] mb-6'>
+          <p className=' font-semibold text-[18px] md:text-[20px] mb-6'>
             {t('select')}
-            <span className='text-[#16533D] text-[22px]'>
+            <span className='text-[#16533D] text-[18px] md:text-[22px]'>
               {' '}
               VGA{props.vgacode}
             </span>
           </p>
         )}
         {!!props.packageId && !!feePackage && (
-          <p className=' font-semibold text-[20px] mb-6'>
+          <p className=' font-semibold text-[18px] md:text-[20px] mb-6'>
             {t('select-1')}
-            <span className='text-[#16533D] text-[22px]'>
+            <span className='text-[#16533D] text-[18px] md:text-[22px]'>
               {' '}
               {getMembershipPackageName(feePackage)}
             </span>
@@ -133,7 +133,7 @@ export default function ContentFillForm(props: TItemProps) {
               variant='outline'
               role='combobox'
               aria-expanded={open}
-              className='w-full overflow-hidden rounded-[7px] px-6 h-[72px] bg-[#F6F6F6] mb-2 text-[18px] outline-none focus:outline-none focus:border-none flex justify-between items-center'
+              className='w-full overflow-hidden rounded-[7px]  px-3 lg:px-6 h-[72px] bg-[#F6F6F6] mb-2 text-[16px] lg:text-[18px] outline-none focus:outline-none focus:border-none flex justify-between items-center'
             >
               {golfer ? (
                 <div className='flex'>
