@@ -1,13 +1,16 @@
+'use client'
 import React, { useEffect, useState, FC } from 'react'
-
+import { WAITING_TIMEOUT } from '@/constants'
+import { redirect } from 'next/navigation'
 const Countdown: FC = () => {
-  const [time, setTime] = useState<number>(600)
+  const [time, setTime] = useState<number>(WAITING_TIMEOUT)
 
   useEffect(() => {
     const timer: NodeJS.Timeout = setInterval(() => {
       setTime((time: number) => {
         if (time === 0) {
           clearInterval(timer)
+          redirect('/')
           return 1
         } else return time - 1
       })

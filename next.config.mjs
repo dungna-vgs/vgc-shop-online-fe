@@ -1,5 +1,4 @@
 import withPWAInit from '@ducanh2912/next-pwa'
-
 function createRemotePatterns(URLString) {
   if (URLString && typeof URLString === 'string') {
     return URLString.split(',').map((url) => {
@@ -25,5 +24,7 @@ export default withPWA({
   images: {
     remotePatterns: createRemotePatterns(process.env.DOMAINS_IMAGE)
   },
+
+  cleanDistDir: true,
   logging: false
 })

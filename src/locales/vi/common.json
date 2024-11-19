@@ -20,5 +20,6 @@
   "not-found": "Không có kết quả tìm kiếm cho {{searchQuery}}. Vui lòng thử lại với từ khóa khác.",
   "no-data": "Không tìm thấy",
   "notification": "Thông báo",
-  "year-package": "Gói hội viên cao cấp {{year}} năm"
+  "year-package": "Gói hội viên cao cấp {{year}} năm",
+  "result-search": "Tìm thấy {{total}} kết quả cho từ khoá {{keyword}}"
 }

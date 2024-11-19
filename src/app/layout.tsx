@@ -8,6 +8,7 @@ import {
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import GoogleAnalytics from '@/components/GoogleAnalytics'
+import i18nConfig from '@/i18nConfig'
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -69,7 +70,7 @@ export default async function RootLayout({
   params: { locale: string }
 }>) {
   return (
-    <html lang='vi'>
+    <html lang={i18nConfig.defaultLocale}>
       <GoogleAnalytics />
       <body>{children}</body>
     </html>

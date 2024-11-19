@@ -133,7 +133,7 @@ export default function ContentFillForm(props: TItemProps) {
               variant='outline'
               role='combobox'
               aria-expanded={open}
-              className='w-full overflow-hidden rounded-[7px]  px-3 lg:px-6 h-[72px] bg-[#F6F6F6] mb-2 text-[16px] lg:text-[18px] outline-none focus:outline-none focus:border-none flex justify-between items-center'
+              className='w-full overflow-hidden rounded-[7px] px-3 lg:px-6 h-[72px] bg-[#F6F6F6] mb-2 text-[16px] lg:text-[18px] outline-none focus:outline-none focus:border-none flex justify-between items-center'
             >
               {golfer ? (
                 <div className='flex'>

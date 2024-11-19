@@ -19,5 +19,7 @@
   "found": "Found",
   "no-data": "Not Found",
   "notification": "Notification",
-  "year-package": "Premium membership package {{year}} year"
+  "year-package": "Premium membership package {{year}} year",
+  "not-found": "No search results for {{searchQuery}}. Please try again with a different keyword.",
+  "result-search": "Found {{total}} results for the keyword {{keyword}}."
 }

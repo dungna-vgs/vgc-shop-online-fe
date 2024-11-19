@@ -14,9 +14,12 @@ export type THomeStore = {
   searchVGA: TParamsSearchVGA
   fees: TFeePackage[]
   vgaSearchAll: TVga[]
+  totalSearch: number | null
+  keyword: string | null
   feeSearchAll: TFeePackage[]
   buyer: TGolfer | null
   vga: TVga | null
+  totalPage: number | null
   feePackage: TFeePackage | null
   paymentInfo: TPaymentInfo | null
   setVgas: (vgas: TVga[]) => void
@@ -24,15 +27,20 @@ export type THomeStore = {
   setSeachVGA: (searchVGA: TParamsSearchVGA) => void
   setSearchAll: ({
     vgaSearchAll,
-    feeSearchAll
+    feeSearchAll,
+    totalSearch,
+    totalPage
   }: {
     vgaSearchAll: TVga[]
     feeSearchAll: TFeePackage[]
+    totalSearch: number | null
+    totalPage: number | null
   }) => void
   setBuyer: (buyer: TGolfer | null) => void
   setVga: (vga: TVga | null) => void
   setFeePackage: (feePackage: TFeePackage | null) => void
   setPaymentInfo: (paymentInfo: TPaymentInfo | null) => void
+  setKeyword: (keyword: string | null) => void
 }
 
 export const useGlobalStore = create<THomeStore>((set, get) => ({
@@ -40,10 +48,13 @@ export const useGlobalStore = create<THomeStore>((set, get) => ({
   fees: [],
   vgaSearchAll: [],
   feeSearchAll: [],
+  totalSearch: null,
+  keyword: null,
   searchVGA: {},
   buyer: null,
   vga: null,
   feePackage: null,
+  totalPage: null,
   paymentInfo: null,
   setVgas: (vgas) => set({ vgas }),
   setFees: (fees) => set({ fees }),
@@ -69,12 +80,14 @@ export const useGlobalStore = create<THomeStore>((set, get) => ({
       }
     })
   },
-  setSearchAll: ({ vgaSearchAll, feeSearchAll }) => {
+  setKeyword: (keyword: string | null) => set({ keyword }),
+  setSearchAll: ({ vgaSearchAll, feeSearchAll, totalSearch, totalPage }) =>
     set({
       vgaSearchAll,
-      feeSearchAll
-    })
-  },
+      feeSearchAll,
+      totalSearch,
+      totalPage
+    }),
   setBuyer: (buyer) => set({ buyer }),
   setVga: (vga) => set({ vga }),
   setFeePackage: (feePackage) => set({ feePackage }),
@@ -96,8 +109,14 @@ export const useToastStore = create<ToastState>((set) => ({
   message: '',
   duration: 3000,
   type: 'success',
-  showToast: (message, type = 'success', duration = 3000) =>
-    set({ open: true, message, type, duration }),
+  showToast: (message, type = 'success', duration = 3000) => {
+    console.trace('showToast', {
+      message,
+      type,
+      duration
+    })
+    set({ open: true, message, type, duration })
+  },
   hideToast: () =>
     set({ open: false, message: '', type: 'success', duration: 3000 })
 }))

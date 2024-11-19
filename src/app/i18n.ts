@@ -28,15 +28,14 @@ export default async function initTranslations(
   if (!resources) {
     i18nInstance.use(
       resourcesToBackend((language: string, namespace: string) => {
-        console.log({
-          language,
-          namespace
-        })
         return import(`@/locales/${language}/${namespace}.json`)
       })
     )
   }
 
+  if (!i18nConfig.locales.includes(locale)) {
+    locale = i18nConfig.defaultLocale
+  }
   const initOptions: InitOptions = {
     lng: locale,
     resources,

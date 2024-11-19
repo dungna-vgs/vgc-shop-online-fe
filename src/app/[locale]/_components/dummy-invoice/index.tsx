@@ -17,7 +17,6 @@ import React, { useEffect, useState } from 'react'
 import { useToastStore, useDiscountStore, useEmployeeStore } from '@/stores'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
-import { useParams } from 'next/navigation'
 
 type Props = {
   amount: number
@@ -25,9 +24,6 @@ type Props = {
 }
 
 export default function DummyInvoice({ amount, promotion }: Props) {
-  const params = useParams()
-  console.log('params: ')
-  console.log(params)
   const { t } = useTranslation('form')
   const [discountCode, setDiscountCode] = useState<string>('')
   const { discount, setDiscount } = useDiscountStore()
