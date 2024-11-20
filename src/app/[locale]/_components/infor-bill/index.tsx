@@ -43,6 +43,15 @@ export default function InforBill() {
             {t('account-holder')}{' '}
             <span className='font-semibold uppercase'>{bank.bank_account}</span>
           </p>
+          <Image
+            onClick={() => copyData(bank.bank_id)}
+            className='cursor-pointer'
+            src='/images/copy.svg'
+            width={24}
+            height={24}
+            alt='Copy'
+            quality={60}
+          />
         </div>
 
         <div className='p-4 flex justify-between items-center border border-[#F1F1F1] rounded-[7px]'>
