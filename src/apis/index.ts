@@ -10,11 +10,7 @@ export function createAxiosInstanceServer(
   if (TYPE_ENVIRONMENT.LOCALHOST === process.env.ENVIROMENT) {
     origin = 'https://store.dev.vgcorp.vn'
   }
-  console.log(
-    'origin ----------------------------------------------------------------'
-  )
-  console.log(origin)
-  console.log(process.env.API_URL)
+
   return axios.create({
     baseURL: process.env.API_URL,
     headers: {

@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 import Loading from '@/components/ui/loading'
+import { STATUS_CHECK_TRANSACTION } from '@/constants'
 import { TPaymentInfo } from '@/types/type'
 import { AlertDialogDescription } from '@radix-ui/react-alert-dialog'
 import Link from 'next/link'
@@ -21,7 +22,8 @@ type Props = {
 export default function SuccessAlert({ transactionId }: Props) {
   const { t } = useTranslation('form')
   const [isOpen, setIsOpen] = useState(false)
-  const [transactionStatus, setTransactionStatus] = useState(0)
+  const [transactionStatus, setTransactionStatus] =
+    useState<STATUS_CHECK_TRANSACTION>(STATUS_CHECK_TRANSACTION.PENDING)
 
   const fetchTransactionStatus = useCallback(async () => {
     const res = await apiCheckTransactionStatus({
@@ -31,7 +33,7 @@ export default function SuccessAlert({ transactionId }: Props) {
   }, [transactionId])
 
   const handleRetry = useCallback(() => {
-    setTransactionStatus(0)
+    setTransactionStatus(STATUS_CHECK_TRANSACTION.PENDING)
   }, [])
 
   useEffect(() => {

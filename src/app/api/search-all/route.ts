@@ -47,11 +47,22 @@ export async function GET(request: NextRequest) {
   const res = await axiosInstance.get(API_ENDPOINT.SEARCH_ALL, {
     params
   })
+  let total = res.data.data.list_vga.total
+  if (total < res.data.data.membership_package.total) {
+    total = res.data.data.membership_package.total
+  }
+
+  let page = res.data.data.list_vga.last_page
+  if (page < res.data.data.membership_package.last_page) {
+    page = res.data.data.membership_package.last_page
+  }
   return NextResponse.json({
     success: true,
     data: {
       list_vga: res.data.data.list_vga.data,
-      membership_package: res.data.data.membership_package.data
+      membership_package: res.data.data.membership_package.data,
+      total,
+      page
     },
     redirect: null
   })

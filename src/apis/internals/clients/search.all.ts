@@ -5,6 +5,8 @@ import { TVga } from '@/types/type'
 
 type TParams = {
   keyword: string
+  page?: number
+  limit?: number
 }
 
 type TSearchAllResponse = {
@@ -13,6 +15,8 @@ type TSearchAllResponse = {
   data: {
     list_vga: TVga[]
     membership_package: []
+    total: number
+    page: number
   }
 }
 
@@ -22,6 +26,8 @@ type TReturnSeachAall = {
   data: {
     vgas: TVga[]
     membershipPackage: []
+    total: number
+    page: number
   }
 }
 export const apiSearchAll = async (
@@ -31,7 +37,12 @@ export const apiSearchAll = async (
   const res = await axiosInstance.get<TSearchAllResponse>(
     API_INTERNAL_ENDPOINT.SEARCH_ALL,
     {
-      params
+      params,
+      headers: {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        Pragma: 'no-cache',
+        Expires: '0'
+      }
     }
   )
   return {
@@ -39,7 +50,9 @@ export const apiSearchAll = async (
     redirect: res.data.redirect,
     data: {
       vgas: res.data.data.list_vga,
-      membershipPackage: res.data.data.membership_package
+      membershipPackage: res.data.data.membership_package,
+      total: res.data.data.total,
+      page: res.data.data.page
     }
   }
 }

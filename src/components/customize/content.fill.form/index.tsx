@@ -23,7 +23,12 @@ import {
 import { apiSearchGolfer } from '@/apis/internals/clients/search.golfer'
 import { TGolfer } from '@/types/type'
 import { useRouter } from 'next/navigation'
-import { useGlobalStore, useDiscountStore, useEmployeeStore } from '@/stores'
+import {
+  useGlobalStore,
+  useDiscountStore,
+  useEmployeeStore,
+  useToastStore
+} from '@/stores'
 import { apiGetVga } from '@/apis/internals/clients/get.vga'
 import { apiGetFeePackage } from '@/apis/internals/clients/get.package'
 import { getMembershipPackageName } from '@/utils'
@@ -39,6 +44,7 @@ export default function ContentFillForm(props: TItemProps) {
   const { t } = useTranslation('form')
   const router = useRouter()
   const { vga, feePackage, setVga, setFeePackage, setBuyer } = useGlobalStore()
+  const { showToast } = useToastStore()
   const { vgacode, packageId } = props
   const [open, setOpen] = useState(true)
   const [value, setValue] = useState<number>(0)
@@ -63,20 +69,36 @@ export default function ContentFillForm(props: TItemProps) {
   useEffect(() => {
     if (vgacode) {
       setFeePackage(null)
-      apiGetVga({ vga: vgacode }).then((res) => {
-        setVga(res.data)
-      })
+      apiGetVga({ vga: vgacode })
+        .then((res) => {
+          if (res.success) {
+            setVga(res.data)
+          } else {
+            showToast(t('hold-or-purchased'), 'error', 2000)
+          }
+        })
+        .catch(() => {
+          showToast(t('error'), 'error', 2000)
+        })
     }
-  }, [vgacode, setVga, setFeePackage])
+  }, [vgacode, setVga, setFeePackage, showToast, t])
 
   useEffect(() => {
     if (packageId) {
       setVga(null)
-      apiGetFeePackage({ packageId }).then((res) => {
-        setFeePackage(res.data)
-      })
+      apiGetFeePackage({ packageId })
+        .then((res) => {
+          if (res.success) {
+            setFeePackage(res.data)
+          } else {
+            showToast(t('error'), 'error', 2000)
+          }
+        })
+        .catch(() => {
+          showToast(t('error'), 'error', 2000)
+        })
     }
-  }, [packageId, setFeePackage, setVga])
+  }, [packageId, setFeePackage, setVga, showToast, t])
 
   const golfer = golfers?.find((golfer) => golfer.id == value)
 
@@ -88,18 +110,18 @@ export default function ContentFillForm(props: TItemProps) {
     <div className='content-fill-form'>
       <div>
         {!!props.vgacode && (
-          <p className=' font-semibold text-[20px] mb-6'>
+          <p className=' font-semibold text-[18px] md:text-[20px] mb-6'>
             {t('select')}
-            <span className='text-[#16533D] text-[22px]'>
+            <span className='text-[#16533D] text-[18px] md:text-[22px]'>
               {' '}
               VGA{props.vgacode}
             </span>
           </p>
         )}
         {!!props.packageId && !!feePackage && (
-          <p className=' font-semibold text-[20px] mb-6'>
+          <p className=' font-semibold text-[18px] md:text-[20px] mb-6'>
             {t('select-1')}
-            <span className='text-[#16533D] text-[22px]'>
+            <span className='text-[#16533D] text-[18px] md:text-[22px]'>
               {' '}
               {getMembershipPackageName(feePackage)}
             </span>
@@ -111,7 +133,7 @@ export default function ContentFillForm(props: TItemProps) {
               variant='outline'
               role='combobox'
               aria-expanded={open}
-              className='w-full overflow-hidden rounded-[7px] px-6 h-[72px] bg-[#F6F6F6] mb-2 text-[18px] outline-none focus:outline-none focus:border-none flex justify-between items-center'
+              className='w-full overflow-hidden rounded-[7px] px-3 lg:px-6 h-[72px] bg-[#F6F6F6] mb-2 text-[16px] lg:text-[18px] outline-none focus:outline-none focus:border-none flex justify-between items-center'
             >
               {golfer ? (
                 <div className='flex'>
@@ -185,7 +207,7 @@ export default function ContentFillForm(props: TItemProps) {
             </Command>
           </PopoverContent>
         </Popover>
-        <div className='flex justify-end items-center gap-6 mt-16'>
+        <div className='flex justify-center md:justify-end items-center gap-6 mt-16'>
           <Link
             className='text-black leading-[64px] bg-white rounded-[6px] border-[1px] border-[#000] flex justify-center w-40 md:w-[250px] h-16 text-[16px]'
             href='/package-price'
@@ -197,7 +219,9 @@ export default function ContentFillForm(props: TItemProps) {
             {t('back')}
           </Link>
           <Button
-            className='text-white leading-[64px] bg-gradient-to-r from-[#17573C] to-[#4AC486] disabled:bg-none disabled:!bg-[#979797] rounded-[6px] flex justify-center w-40 md:w-[250px] h-16 text-[16px]'
+            className={
+              'text-white leading-[64px] bg-gradient-to-r from-[#17573C] to-[#4AC486] disabled:bg-none disabled:!bg-[#979797] disabled:cursor-not-allowed rounded-[6px] flex justify-center w-40 md:w-[250px] h-16 text-[16px]'
+            }
             disabled={(!vga && !feePackage) || !value}
             onClick={() => {
               onNextStep()

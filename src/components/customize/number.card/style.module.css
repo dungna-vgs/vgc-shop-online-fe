@@ -19,6 +19,7 @@
   color: #ffe040 !important;
 }
 .btnBuy {
+  width: 100px;
   color: #fff !important;
   background: linear-gradient(
     108.81deg,
@@ -27,7 +28,8 @@
     #ffe03e 98.37%
   ) !important;
   font-weight: 400;
-  padding: 4px 16px !important;
+  line-height: 33px;
+  text-align: center;
   height: 33px !important;
   border-radius: 8px;
 }

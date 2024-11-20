@@ -55,8 +55,8 @@ function Tabs(props: TTabsProps) {
                 <p
                   className={
                     index == props.active
-                      ? '  text-sm lg:text-[19px]'
-                      : 'text-[#ccc] text-sm lg:text-[19px]'
+                      ? '  text-[12px] md:text-sm lg:text-[19px]'
+                      : 'text-[#ccc] text-[12px] md:text-sm lg:text-[19px]'
                   }
                 >
                   {t(item.description)}

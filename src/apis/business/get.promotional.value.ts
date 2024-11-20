@@ -17,19 +17,19 @@ type TReturnGetPromotionalValue = {
 export const apiGetPromotionalValue = async (
   params: TQueryParamsPromotional
 ): Promise<TReturnGetPromotionalValue> => {
-  const [origin] = getStoreDomain()
-  console.log('origin: ', origin)
-  const axiosInstance = createAxiosInstanceServer(origin!)
-  if (origin) {
-    const res = await axiosInstance.get<TReturnGetPromotionalValue>(
-      API_ENDPOINT.GET_PROMOTIONAL_VALUE,
-      { params }
-    )
-    console.log('return here')
-    console.log(res.data)
-    return res.data
+  try {
+    const [origin] = getStoreDomain()
+    const axiosInstance = createAxiosInstanceServer(origin!)
+    if (origin) {
+      const res = await axiosInstance.get<TReturnGetPromotionalValue>(
+        API_ENDPOINT.GET_PROMOTIONAL_VALUE,
+        { params }
+      )
+      return res.data
+    }
+  } catch (error) {
+    console.log(error)
   }
-  console.log('return 222222')
   return {
     success: false,
     data: {} as TPromotionValue,

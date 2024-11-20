@@ -7,13 +7,16 @@ type TPromotionResponse = {
   data: TPromotion[]
 }
 export const apiPromotion = async () => {
-  const [origin] = getStoreDomain()
-  if (origin) {
-    const axiosInstance = createAxiosInstanceServer(origin)
-    const res = await axiosInstance.get<TPromotionResponse>(
-      API_ENDPOINT.PROMOTION_PROGRAM
-    )
-    return res.data.data
+  try {
+    const [origin] = getStoreDomain()
+    if (origin) {
+      const axiosInstance = createAxiosInstanceServer(origin)
+      const res = await axiosInstance.get<TPromotionResponse>(
+        API_ENDPOINT.PROMOTION_PROGRAM
+      )
+      return res.data.data
+    }
+  } catch (error) {
+    return []
   }
-  return []
 }

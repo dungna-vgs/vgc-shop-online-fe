@@ -74,6 +74,7 @@
   "sorry-alert": "Rất tiếc! Mã VGA này đã được mua bởi 1 người dùng khác. Vui lòng chọn lại 1 mã VGA khác và thử lại!",
   "delete": "Xóa",
   "promotion": "Chương trình khuyến mãi",
+  "hold-or-purchased": "Mã VGA không tồn tại hoặc đã bị hold!",
   "hold": "Mã VGA đang bị Hold",
   "hold-alert": "Rất tiếc! Mã VGA này đang bị hold bởi 1 người dùng khác. Vui lòng chọn lại 1 mã VGA khác và thử lại!"
 }

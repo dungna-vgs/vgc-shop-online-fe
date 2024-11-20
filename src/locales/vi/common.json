@@ -21,5 +21,6 @@
   "no-data": "Không tìm thấy",
   "notification": "Thông báo",
   "year-package": "Gói hội viên cao cấp {{year}} năm",
-  "price": "Giá: {{price}}đ"
+  "price": "Giá: {{price}}đ",
+  "result-search": "Tìm thấy {{total}} kết quả cho từ khoá {{keyword}}"
 }

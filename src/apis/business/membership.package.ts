@@ -8,13 +8,17 @@ type TMembershipPackageResponse = {
 }
 
 export const getMembersipPackages = async () => {
-  const [origin] = getStoreDomain()
-  if (origin) {
-    const axiosInstance = createAxiosInstanceServer(origin)
-    const res = await axiosInstance.get<TMembershipPackageResponse>(
-      API_ENDPOINT.LIST_MEMBERSHIP_PACKAGES
-    )
-    return res.data.data
+  try {
+    const [origin] = getStoreDomain()
+    if (origin) {
+      const axiosInstance = createAxiosInstanceServer(origin)
+      const res = await axiosInstance.get<TMembershipPackageResponse>(
+        API_ENDPOINT.LIST_MEMBERSHIP_PACKAGES
+      )
+      return res.data.data
+    }
+  } catch (e) {
+    console.log(e)
   }
   return []
 }

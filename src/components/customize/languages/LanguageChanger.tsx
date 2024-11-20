@@ -14,7 +14,10 @@ import { LANGUAGES } from '@/constants'
 
 function LanguageChanger() {
   const params = useParams()
-  const currentLocale = (params.locale as string) || i18nConfig.defaultLocale
+  let currentLocale = (params.locale as string) || i18nConfig.defaultLocale
+  if (!i18nConfig.locales.includes(currentLocale)) {
+    currentLocale = i18nConfig.defaultLocale
+  }
 
   const router = useRouter()
   const currentPathname = usePathname()
@@ -36,7 +39,6 @@ function LanguageChanger() {
     } else {
       router.push(currentPathname.replace(`/${currentLocale}`, `/${newLocale}`))
     }
-
     router.refresh()
   }
 

@@ -1,5 +1,3 @@
-import '@/worker/index.js'
-
 import {
   APP_DEFAULT_TITLE,
   APP_DESCRIPTION,
@@ -19,6 +17,8 @@ import Loading from '@/components/customize/loading'
 import TranslationsProvider from '@customize/languages/TranslationsProvider'
 import initTranslations from '@/app/i18n'
 import Spinner from '@/components/customize/spinner'
+import i18nConfig from '@/i18nConfig'
+import '@/worker/index.js'
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -87,15 +87,22 @@ export default async function RootLayout({
   children: React.ReactNode
   params: { locale: string }
 }>) {
-  const [{ resources }] = await Promise.all([
-    initTranslations(locale, i18nNamespaces)
-  ])
+  let initLocale = locale
+  if (!i18nConfig.locales.includes(initLocale)) {
+    initLocale = i18nConfig.defaultLocale
+  }
+
+  const { resources } = await initTranslations(
+    initLocale || i18nConfig.defaultLocale,
+    i18nNamespaces
+  )
+
   return (
-    <html lang='vi'>
+    <html lang={i18nConfig.defaultLocale}>
       <body className={clsx(poppins.variable, yeseva.variable)}>
         <TranslationsProvider
           resources={resources}
-          locale={locale}
+          locale={initLocale}
           namespaces={i18nNamespaces}
         >
           <Suspense fallback={<Loading />}>

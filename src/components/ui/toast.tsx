@@ -8,12 +8,23 @@ import clsx from 'clsx'
 export const GlobalToast = () => {
   const { t } = useTranslation('common')
   const { open, message, duration, type, hideToast } = useToastStore()
+  console.log('open: ', {
+    open,
+    message,
+    duration,
+    type
+  })
   useEffect(() => {
     if (open) {
       const timer = setTimeout(() => hideToast(), duration)
       return () => clearTimeout(timer)
     }
   }, [open, duration, hideToast])
+
+  const handleCloseToast = () => {
+    console.log('handleCloseToast')
+    hideToast()
+  }
 
   return (
     <Toast.Provider swipeDirection='right'>
@@ -23,7 +34,7 @@ export const GlobalToast = () => {
           'bg-red-600': type === 'error'
         })}
         open={open}
-        onOpenChange={hideToast}
+        onOpenChange={handleCloseToast}
         duration={duration}
       >
         <Toast.Title className='font-semibold'>{t('notification')}</Toast.Title>
