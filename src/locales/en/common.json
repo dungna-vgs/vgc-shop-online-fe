@@ -19,5 +19,6 @@
   "found": "Found",
   "no-data": "Not Found",
   "notification": "Notification",
-  "year-package": "Premium membership package {{year}} year"
+  "year-package": "Premium membership package {{year}} year",
+  "price": "Price: {{price}}đ"
 }

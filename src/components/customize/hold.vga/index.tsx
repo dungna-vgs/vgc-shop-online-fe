@@ -23,7 +23,7 @@ import {
           <AlertDialogContent>
             <AlertDialogHeader>
               <p className='w-full text-center font-bold text-black mb-3 uppercase'>
-                {t('buyed')}
+                {t('hold')}
               </p>
               <AlertDialogDescription className='text-black text-center'>
                 {t('hold-alert')}

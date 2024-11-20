@@ -31,9 +31,9 @@ export default function PriceVGACode(props: TPriceVGACodeProps) {
         </SelectTrigger>
         <SelectContent>
           <SelectItem value='asc' className='mr-3'>
-            {t('high-to-low')}
+            {t('low-to-high')}
           </SelectItem>
-          <SelectItem value='desc'>{t('low-to-high')}</SelectItem>
+          <SelectItem value='desc'>{t('high-to-low')}</SelectItem>
         </SelectContent>
       </Select>
     </div>
