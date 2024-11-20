@@ -1,10 +1,11 @@
 'use client'
 import { createAxiosInstanceClient } from '@/apis'
 import { API_INTERNAL_ENDPOINT } from '@/configs'
-import { TFeePackage } from '@/types/type'
+import { TFeePackage, TGolfer } from '@/types/type'
 
 export type TParamsGetFeePackage = {
   packageId: string
+  userId?: TGolfer['id']
 }
 
 type TReturnGetFeePackage = {

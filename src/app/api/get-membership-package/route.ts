@@ -6,14 +6,17 @@ import { createAxiosInstanceServer } from '@/apis'
 import { isValidDomainStore } from '@/utils'
 import Joi from 'joi'
 import { getQueryRequest } from '@/utils/server'
+import { TGolfer } from '@/types/type'
 
 type TParams = {
   packageId: string
+  userId?: TGolfer['id']
 }
 
 function validation(params: TParams) {
   const schema = Joi.object<TParams>({
-    packageId: Joi.string().required()
+    packageId: Joi.string().required(),
+    userId: Joi.number()
   })
   return schema.validate(params)
 }
@@ -43,8 +46,10 @@ export async function GET(request: NextRequest) {
   }
 
   const axiosInstance = createAxiosInstanceServer(origin)
+  const { packageId, userId } = params
   const res = await axiosInstance.get(
-    API_ENDPOINT.GET_MEMBERSHIP_PACKAGE + '/' + params.packageId
+    API_ENDPOINT.GET_MEMBERSHIP_PACKAGE + '/' + packageId,
+    { params: userId ? { user_id: userId } : undefined }
   )
   return NextResponse.json({
     success: true,

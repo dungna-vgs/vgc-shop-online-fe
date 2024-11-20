@@ -27,7 +27,8 @@ import {
   useGlobalStore,
   useDiscountStore,
   useEmployeeStore,
-  useToastStore
+  useToastStore,
+  useLoading
 } from '@/stores'
 import { apiGetVga } from '@/apis/internals/clients/get.vga'
 import { apiGetFeePackage } from '@/apis/internals/clients/get.package'
@@ -46,12 +47,13 @@ export default function ContentFillForm(props: TItemProps) {
   const { vga, feePackage, setVga, setFeePackage, setBuyer } = useGlobalStore()
   const { showToast } = useToastStore()
   const { vgacode, packageId } = props
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
   const [value, setValue] = useState<number>(0)
   const [keyword, setKeyword] = useState<string>('')
   const [golfers, setGolfers] = useState<TGolfer[]>([])
   const { setDiscount } = useDiscountStore()
   const { setEmployee } = useEmployeeStore()
+  const { setLoading } = useLoading()
   const handleOnSearch = async (keyword: string) => {
     apiSearchGolfer({ keyword }).then((res) => {
       setGolfers(res.data)
@@ -86,7 +88,8 @@ export default function ContentFillForm(props: TItemProps) {
   useEffect(() => {
     if (packageId) {
       setVga(null)
-      apiGetFeePackage({ packageId })
+      setLoading(true)
+      apiGetFeePackage({ packageId, userId: value || undefined })
         .then((res) => {
           if (res.success) {
             setFeePackage(res.data)
@@ -97,8 +100,12 @@ export default function ContentFillForm(props: TItemProps) {
         .catch(() => {
           showToast(t('error'), 'error', 2000)
         })
+        .finally(() => {
+          !value && setOpen(true)
+          setLoading(false)
+        })
     }
-  }, [packageId, setFeePackage, setVga, showToast, t])
+  }, [packageId, value, setFeePackage, setVga, showToast, t, setLoading])
 
   const golfer = golfers?.find((golfer) => golfer.id == value)
 
