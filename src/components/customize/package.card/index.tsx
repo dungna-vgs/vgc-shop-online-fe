@@ -5,7 +5,7 @@ import styles from './style.module.css'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { TFeePackage } from '@/types/type'
-import { getMembershipPackageName } from '@/utils'
+import { formatCurrency, getMembershipPackageName } from '@/utils'
 import clsx from 'clsx'
 import { useTranslation } from 'react-i18next'
 
@@ -56,7 +56,7 @@ export default function PackageCard({
       {showBuyButton && (
         <div className=' bg-white shadow-lg rounded-b-2xl flex flex-col gap-2 justify-center items-center py-3 max-w-full'>
           <span className='flex justify-center font-semibold text-[16px] text-[#F7941B] lg:justify-start w-full px-4'>
-            {t('price', { price: membership.amount })}
+            {t('price', { price: formatCurrency(membership.amount) })}
           </span>
           <Link
             href={`/buy-package/${membership.id}`}
