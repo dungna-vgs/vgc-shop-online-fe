@@ -12,22 +12,39 @@ import {
   calculateDiscountAmount,
   calculateDiscountedPrice
 } from '@/utils'
-import { apiCheckDiscountCode } from '@/apis/internals/clients/check.discount'
+import {
+  apiCheckDiscountCode,
+  TParamsCheckDiscountCode
+} from '@/apis/internals/clients/check.discount'
 import React, { useEffect, useState } from 'react'
-import { useToastStore, useDiscountStore, useEmployeeStore } from '@/stores'
+import {
+  useGlobalStore,
+  useToastStore,
+  useDiscountStore,
+  useEmployeeStore
+} from '@/stores'
 import { useTranslation } from 'react-i18next'
+import { ETransactionProvider } from '@/types/transaction-provider'
 import axios from 'axios'
 
 type Props = {
   amount: number
   promotion: number
+  vgacode?: string
+  packageId?: string
 }
 
-export default function DummyInvoice({ amount, promotion }: Props) {
+export default function DummyInvoice({
+  amount,
+  promotion,
+  vgacode,
+  packageId
+}: Props) {
   const { t } = useTranslation('form')
   const [discountCode, setDiscountCode] = useState<string>('')
   const { discount, setDiscount } = useDiscountStore()
   const { employee, setEmployeeCode } = useEmployeeStore()
+  const { vga, feePackage } = useGlobalStore()
   const showToast = useToastStore((state) => state.showToast)
 
   useEffect(() => {
@@ -41,7 +58,26 @@ export default function DummyInvoice({ amount, promotion }: Props) {
       return
     }
     try {
-      const res = await apiCheckDiscountCode({ voucher_code: discountCode })
+      let bodyRequest: TParamsCheckDiscountCode = {
+        voucher_code: discountCode,
+        provider: ETransactionProvider.DIGITAL,
+        from: 'store'
+      }
+      if (vgacode && vga) {
+        bodyRequest = {
+          ...bodyRequest,
+          number: vga.id
+        }
+      }
+
+      if (packageId && feePackage) {
+        bodyRequest = {
+          ...bodyRequest,
+          provider: ETransactionProvider.UPGRADE_ACCOUNT,
+          upgrade_id: feePackage.id
+        }
+      }
+      const res = await apiCheckDiscountCode(bodyRequest)
       const { error_code } = res.data
       if (res.data.error_code === axios.HttpStatusCode.Ok) {
         showToast(t('apply-success'), 'success', 2000)
@@ -50,7 +86,9 @@ export default function DummyInvoice({ amount, promotion }: Props) {
         const errorMessage =
           error_code === axios.HttpStatusCode.Unauthorized
             ? t('again-later')
-            : t('invalid-code')
+            : error_code === axios.HttpStatusCode.UnprocessableEntity
+              ? t('invalid-type')
+              : t('invalid-code')
         showToast(errorMessage, 'error', 2000)
         resetDiscount()
       }
@@ -113,18 +151,33 @@ export default function DummyInvoice({ amount, promotion }: Props) {
               </div>
 
               {discount ? (
-                <div className='flex justify-between items-center'>
-                  <span className='text-[#545454]'>{t('discount')}</span>
-                  <span className='text-[#07AC39] font-semibold'>
-                    {formatCurrency(
-                      calculateDiscountAmount(
-                        amount,
-                        discount?.discount || 0,
-                        discount?.type || ''
-                      )
-                    )}
-                    đ
-                  </span>
+                <div>
+                  <div className='flex justify-between items-center'>
+                    <span className='text-[#545454]'>{t('discount')}</span>
+                    <span className='text-[#07AC39] font-semibold'>
+                      {formatCurrency(
+                        calculateDiscountAmount(
+                          amount,
+                          discount?.discount || 0,
+                          discount?.type || ''
+                        )
+                      )}
+                      đ
+                    </span>
+                  </div>
+                  {discount.membership_months != 0 && (
+                    <div className='flex justify-between items-center mt-4'>
+                      <span className='text-[#545454]'>
+                        {t('membership-fee-gift')}
+                      </span>
+                      <span className='text-[#07AC39] font-semibold'>
+                        {discount.membership_months}{' '}
+                        {discount.membership_months == 1
+                          ? t('month')
+                          : t('months')}
+                      </span>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div className='flex justify-between items-center'>

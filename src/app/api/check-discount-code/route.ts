@@ -9,11 +9,19 @@ import { getQueryRequest } from '@/utils/server'
 import { getIps } from '@/utils/server'
 type TParams = {
   voucher_code: string
+  from?: string
+  upgrade_id?: number
+  number?: number
+  provider: string
 }
 
 function validation(params: TParams) {
   const schema = Joi.object<TParams>({
-    voucher_code: Joi.string().required()
+    voucher_code: Joi.string().required(),
+    from: Joi.string(),
+    upgrade_id: Joi.number(),
+    number: Joi.number(),
+    provider: Joi.string()
   })
   return schema.validate(params)
 }

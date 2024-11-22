@@ -9,9 +9,33 @@ import {
 } from '@/types/type'
 import { create } from 'zustand'
 
+type TSearchVGA = TParamsSearchVGA & {
+  setVga: (vga: string) => void
+  setSignificanceId: (significance_id: number) => void
+  setMoney: (money_from?: number, money_to?: number) => void
+  setPage: (page: number, limit: number) => void
+  setDirection: (direction?: string) => void
+}
+
+export const useSearchVGA = create<TSearchVGA>((set) => ({
+  vga: undefined,
+  significance_id: -1,
+  money_to: undefined,
+  money_from: undefined,
+  page: 1,
+  limit: 24,
+  direction: undefined,
+  setVga: (vga: string) => set({ vga, page: 1 }),
+  setSignificanceId: (significance_id: number) =>
+    set({ significance_id, page: 1 }),
+  setMoney: (money_from?: number, money_to?: number) =>
+    set({ money_from, money_to, page: 1 }),
+  setPage: (page: number, limit: number) => set({ page, limit }),
+  setDirection: (direction?: string) => set({ direction, page: 1 })
+}))
+
 export type THomeStore = {
   vgas: TVga[]
-  searchVGA: TParamsSearchVGA
   fees: TFeePackage[]
   vgaSearchAll: TVga[]
   totalSearch: number | null
@@ -24,7 +48,6 @@ export type THomeStore = {
   paymentInfo: TPaymentInfo | null
   setVgas: (vgas: TVga[]) => void
   setFees: (fees: TFeePackage[]) => void
-  setSeachVGA: (searchVGA: TParamsSearchVGA) => void
   setSearchAll: ({
     vgaSearchAll,
     feeSearchAll,
@@ -43,7 +66,7 @@ export type THomeStore = {
   setKeyword: (keyword: string | null) => void
 }
 
-export const useGlobalStore = create<THomeStore>((set, get) => ({
+export const useGlobalStore = create<THomeStore>((set) => ({
   vgas: [],
   fees: [],
   vgaSearchAll: [],
@@ -58,28 +81,6 @@ export const useGlobalStore = create<THomeStore>((set, get) => ({
   paymentInfo: null,
   setVgas: (vgas) => set({ vgas }),
   setFees: (fees) => set({ fees }),
-  setSeachVGA: (searchVGA) => {
-    const oldSearchVGA = get().searchVGA
-    if (
-      Object.hasOwn(searchVGA, 'money_from') ||
-      Object.hasOwn(searchVGA, 'money_to')
-    ) {
-      delete oldSearchVGA.money_from
-      delete oldSearchVGA.money_to
-    }
-    if (!searchVGA.money_from) {
-      delete searchVGA.money_from
-    }
-    if (!searchVGA.money_to) {
-      delete searchVGA.money_to
-    }
-    set({
-      searchVGA: {
-        ...oldSearchVGA,
-        ...searchVGA
-      }
-    })
-  },
   setKeyword: (keyword: string | null) => set({ keyword }),
   setSearchAll: ({ vgaSearchAll, feeSearchAll, totalSearch, totalPage }) =>
     set({

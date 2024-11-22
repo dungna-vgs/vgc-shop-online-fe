@@ -21,6 +21,7 @@ export type TQueryParamsVGA = {
   significance_id?: number
   money_to?: number
   money_from?: number
+  direction?: string
 }
 
 type TApiVGAs = {
@@ -34,11 +35,11 @@ type TApiVGAs = {
 export const getVGAs = async (
   params: TQueryParamsVGA = {
     page: 1,
-    limit: 20
+    limit: 24
   }
 ): Promise<TApiVGAs> => {
   const [origin] = getStoreDomain()
-  console.log('origin: ', origin)
+  console.log('origin: ', params)
   try {
     if (origin) {
       const axiosInstance = createAxiosInstanceServer(origin)

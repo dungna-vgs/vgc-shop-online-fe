@@ -16,11 +16,12 @@ import Image from 'next/image'
 import MenuSerialNumber from '@/components/customize/menu.serialnumber'
 import Link from 'next/link'
 import { TTypeVGA, TVga } from '@/types/type'
-import { useGlobalStore, useLoading } from '@/stores'
-import { useCallback, useEffect, useState, useRef } from 'react'
+import { useGlobalStore, useLoading, useSearchVGA } from '@/stores'
+import { useEffect, useState } from 'react'
 import { apiSearchVGA } from '@/apis/internals/clients/search.vga'
 import { TParamsSearchVGA } from '@/apis/internals/clients/search.vga'
 import { useTranslation } from 'react-i18next'
+import SearchNotFound from '@/components/customize/search.not.found'
 type TSerialNumber = {
   typeVga: TTypeVGA[]
   infoVGA: {
@@ -36,60 +37,72 @@ export default function SerialNumber(props: TSerialNumber) {
   const { t } = useTranslation('common')
   const { setLoading } = useLoading()
   const [keyword, setKeyword] = useState<string>('')
-  const [isClient, setIsClient] = useState(false)
-  const prevSearchVGA = useRef<TParamsSearchVGA>({})
-  const { setVgas, vgas, searchVGA, setSeachVGA, vgaSearchAll, feeSearchAll } =
-    useGlobalStore()
+  const [isClient, setIsClient] = useState<boolean>(false)
+  const {
+    setMoney,
+    setDirection,
+    setVga,
+    page,
+    vga,
+    money_from,
+    money_to,
+    direction,
+    significance_id,
+    limit
+  } = useSearchVGA()
 
-  const handleSearchVGA = useCallback(
-    (params: TParamsSearchVGA) => {
+  const { setVgas, vgas, vgaSearchAll, feeSearchAll } = useGlobalStore()
+  useEffect(() => {
+    const handleSearchVGA = (params: TParamsSearchVGA) => {
       setLoading(true)
       apiSearchVGA(params)
         .then((res) => {
-          console.log(res.data)
           setVgas(res.data)
         })
         .finally(() => {
           setLoading(false)
         })
-    },
-    [setVgas, setLoading]
-  )
+    }
+
+    handleSearchVGA({
+      page,
+      vga,
+      money_from,
+      money_to,
+      direction,
+      significance_id,
+      limit
+    })
+  }, [
+    setLoading,
+    page,
+    vga,
+    money_from,
+    money_to,
+    direction,
+    setVgas,
+    significance_id,
+    limit
+  ])
 
   useEffect(() => {
-    // Check if searchVGA has changed before making the API call
-    if (JSON.stringify(searchVGA) !== JSON.stringify(prevSearchVGA.current)) {
-      handleSearchVGA(searchVGA)
-      prevSearchVGA.current = searchVGA
-    }
-  }, [handleSearchVGA, searchVGA])
-
-  let data = props.infoVGA.data
-  if (isClient && Object.keys(searchVGA).length) {
-    data = vgas
-  }
+    const id = setTimeout(() => {
+      setVga(keyword)
+    }, 300)
+    return () => clearTimeout(id)
+  }, [keyword, setVga])
 
   useEffect(() => {
     setIsClient(true)
-    const id = setTimeout(() => {
-      if (keyword != prevSearchVGA.current.vga) {
-        if (keyword?.trim()) {
-          setSeachVGA({ ...searchVGA, vga: keyword })
-        } else {
-          if (prevSearchVGA.current.vga && !keyword?.trim()) {
-            const copySearchVGA = { ...searchVGA }
-            prevSearchVGA.current.vga = undefined
-            delete copySearchVGA.vga
-            setSeachVGA(copySearchVGA)
-          }
-        }
-      }
-    }, 300)
-    return () => clearTimeout(id)
-  }, [keyword, searchVGA, setSeachVGA])
+    setVgas(props.infoVGA.data)
+  }, [props.infoVGA.data, setVgas])
 
   if (vgaSearchAll.length || feeSearchAll.length) return null
 
+  let data = props.infoVGA.data
+  if (isClient) {
+    data = vgas
+  }
   return (
     <div>
       <div className='p-0 py-0 lg:py-0 block lg:flex justify-between items-center w-full'>
@@ -110,11 +123,16 @@ export default function SerialNumber(props: TSerialNumber) {
           <div className='grid grid-cols-2 gap-4'>
             <Select
               onValueChange={(value) => {
-                const [min, max] = value.split('-')
-                setSeachVGA({
-                  money_from: parseInt(min),
-                  money_to: parseInt(max)
-                })
+                const [min, max]: string[] | undefined[] = value.split('-')
+                let validMin = undefined
+                if (parseInt(min)) {
+                  validMin = parseInt(min)
+                }
+                let validMax = undefined
+                if (parseInt(max)) {
+                  validMax = parseInt(max)
+                }
+                setMoney(validMin, validMax)
               }}
             >
               <SelectTrigger className='max-w-[226px]'>
@@ -138,9 +156,9 @@ export default function SerialNumber(props: TSerialNumber) {
                 <SelectItem value='300000000-'>&gt; 300.000.000đ</SelectItem>
               </SelectContent>
             </Select>
-            <Select onValueChange={(direction) => setSeachVGA({ direction })}>
+            <Select onValueChange={(direction) => setDirection(direction)}>
               <SelectTrigger className='max-w-[226px]'>
-                <SelectValue placeholder={t('high-to-low')} />
+                <SelectValue placeholder={t('low-to-high')} />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value='desc'> {t('high-to-low')}</SelectItem>
@@ -151,24 +169,10 @@ export default function SerialNumber(props: TSerialNumber) {
         </div>
       </div>
       <MenuSerialNumber typeVga={props.typeVga} />
-      {data.length === 0 && (
-        <div className='flex justify-center items-center py-3 w-full flex-col-reverse'>
-          <span className='text-xl font-semibold p-3 text-[#000]'>
-            {t('no-data')}
-          </span>
-          <Image
-            src='/images/search-not-found.png'
-            width={200}
-            height={200}
-            alt='Search Not Found'
-            quality={60}
-          />
-        </div>
-      )}
+      {data?.length === 0 && <SearchNotFound />}
       <div className='grid  grid-cols-2  md:grid-cols-3 xl:grid-cols-4 xl:gap-4 md:gap-3 gap-2 overflow-hidden'>
-        {data.map((vga, index) => (
-          <CardNumber vga={vga} key={index} />
-        ))}
+        {data?.length &&
+          data.map((vga, index) => <CardNumber vga={vga} key={index} />)}
       </div>
       <div className='flex justify-center items-center py-3'>
         <Link href='/vgacode'>

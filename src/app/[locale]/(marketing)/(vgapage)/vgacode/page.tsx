@@ -13,6 +13,7 @@ import ListVGAs from '@/components/customize/list.vgas'
 import PriceVGACode from '@/components/customize/price.vgacode'
 import styles from './style.module.css'
 import TitleVGA from '@/components/customize/title.vga'
+import Link from 'next/link'
 type TVGAPageProps = {
   searchParams: TQueryParamsVGA
   params: {
@@ -44,18 +45,20 @@ export default async function VGAPage(props: TVGAPageProps) {
               <FilterPrice />
               <FilterType significances={significances} />
               {ads.adsVGaLeft && (
-                <Image
-                  src={ads.adsVGaLeft.image}
-                  width={256}
-                  height={510}
-                  alt={ads.adsVGaLeft.title}
-                  quality={60}
-                  style={{
-                    width: '100%',
-                    height: 'auto',
-                    objectFit: 'cover'
-                  }}
-                />
+                <Link href={ads.adsVGaLeft.link} target='_blank'>
+                  <Image
+                    src={ads.adsVGaLeft.image}
+                    width={256}
+                    height={510}
+                    alt={ads.adsVGaLeft.title}
+                    quality={60}
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                      objectFit: 'cover'
+                    }}
+                  />
+                </Link>
               )}
             </div>
           </div>

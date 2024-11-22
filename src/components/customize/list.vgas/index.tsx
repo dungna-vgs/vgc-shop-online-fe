@@ -2,20 +2,18 @@
 import React, { useEffect, useState } from 'react'
 import CardNumber from '@/components/customize/number.card'
 import { TVga } from '@/types/type'
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious
-} from '@/components/ui/pagination'
-import { useGlobalStore, useLoading } from '@/stores'
+
+import { useGlobalStore, useLoading, useSearchVGA } from '@/stores'
 import {
   apiSearchVGA,
   TParamsSearchVGA
 } from '@/apis/internals/clients/search.vga'
+import SearchNotFound from '@/components/customize/search.not.found'
+import { Pagination, ConfigProvider } from 'antd'
+import viVN from 'antd/lib/locale/vi_VN'
+import enUS from 'antd/lib/locale/en_US'
+import '@/styles/style.css'
+import { getI18n } from 'react-i18next'
 type TListVGAsProps = {
   vgas: TVga[]
   pagination: {
@@ -29,15 +27,23 @@ type TListVGAsProps = {
 export default function ListVGAs(props: TListVGAsProps) {
   const [pagination, setPagination] = useState(props.pagination)
   const { setLoading } = useLoading()
-  const [isClient, setIsClient] = React.useState(false)
-  useEffect(() => setIsClient(true), [])
-  const { vgas, searchVGA, setVgas, setSeachVGA } = useGlobalStore()
+  const { vgas, setVgas } = useGlobalStore()
+  const i18n = getI18n()
+  const {
+    setPage,
+    page,
+    vga,
+    money_from,
+    money_to,
+    direction,
+    significance_id,
+    limit
+  } = useSearchVGA()
 
-  let data = props.vgas
-  if (isClient && Object.values(searchVGA).filter((value) => !!value).length) {
-    data = vgas
-  }
-
+  useEffect(() => {
+    setVgas(props.vgas)
+  }, [props.vgas, setVgas])
+  const data = vgas
   useEffect(() => {
     const handleSearchVGA = (params: TParamsSearchVGA) => {
       setLoading(true)
@@ -55,109 +61,61 @@ export default function ListVGAs(props: TListVGAsProps) {
           setLoading(false)
         })
     }
-    if (Object.keys(searchVGA).length) {
-      handleSearchVGA(searchVGA)
-    }
-  }, [searchVGA, setPagination, setVgas, setLoading])
+    handleSearchVGA({
+      page,
+      vga,
+      money_from,
+      money_to,
+      direction,
+      significance_id,
+      limit
+    })
+  }, [
+    setPagination,
+    setLoading,
+    page,
+    vga,
+    money_from,
+    money_to,
+    direction,
+    significance_id,
+    limit,
+    setVgas
+  ])
 
-  let page = searchVGA.page
-  if (page && parseInt(page.toString())) {
-    page = parseInt(page.toString())
-  } else {
-    page = 1
+  const handleChangePage = (page: number, limit: number) => {
+    window.scroll(0, 0)
+    setPage(page, limit)
   }
+
   return (
     <div>
+      {!data?.length && <SearchNotFound />}
       <div className='grid lg:grid-cols-3 grid-cols-2 gap-2 py-4'>
         {data?.map((vga: TVga, index: number) => (
           <CardNumber vga={vga} key={index} />
         ))}
       </div>
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious
-              className='cursor-pointer min-w-16'
-              href={`/vgacode?page=1`}
-              onClick={(e) => {
-                e.preventDefault()
-                setSeachVGA({ page: 1 })
-              }}
-            />
-          </PaginationItem>
-          {page > 3 && (
-            <PaginationItem>
-              <PaginationLink
-                className='cursor-pointer min-w-16'
-                onClick={(e) => {
-                  e.preventDefault()
-                  setSeachVGA({ page: page - 2 })
-                }}
-              >
-                <PaginationEllipsis />
-              </PaginationLink>
-            </PaginationItem>
-          )}
-          {page > 1 && (
-            <PaginationItem>
-              <PaginationLink
-                className='cursor-pointer min-w-16'
-                onClick={(e) => {
-                  e.preventDefault()
-                  setSeachVGA({ page: page - 1 })
-                }}
-              >
-                {page - 1}
-              </PaginationLink>
-            </PaginationItem>
-          )}
-          <PaginationItem>
-            <PaginationLink
-              className='cursor-pointer min-w-16'
-              onClick={(e) => {
-                e.preventDefault()
-              }}
-              href='#'
-              isActive
-            >
-              {page}
-            </PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink
-              className='cursor-pointer min-w-16'
-              onClick={(e) => {
-                e.preventDefault()
-                setSeachVGA({ page: page + 1 })
-              }}
-            >
-              {page + 1}
-            </PaginationLink>
-          </PaginationItem>
-          {page < pagination.last_page - 2 && (
-            <PaginationItem>
-              <PaginationLink
-                className='cursor-pointer min-w-16'
-                onClick={(e) => {
-                  e.preventDefault()
-                  setSeachVGA({ page: page + 2 })
-                }}
-              >
-                <PaginationEllipsis />
-              </PaginationLink>
-            </PaginationItem>
-          )}
-          <PaginationItem>
-            <PaginationNext
-              onClick={(e) => {
-                e.preventDefault()
-                setSeachVGA({ page: pagination.last_page })
-              }}
-              className='px-2 cursor-pointer min-w-16'
-            />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+      <div className='flex justify-center'>
+        <ConfigProvider
+          locale={i18n.language == 'vi' ? viVN : enUS}
+          theme={{
+            token: {
+              colorPrimary: '#4ac486'
+            }
+          }}
+        >
+          <Pagination
+            className='reset-pagination'
+            rootClassName='reset-pagination'
+            pageSize={limit}
+            current={page}
+            total={pagination.total}
+            onChange={handleChangePage}
+            pageSizeOptions={[12, 24, 48, 96]}
+          />
+        </ConfigProvider>
+      </div>
     </div>
   )
 }

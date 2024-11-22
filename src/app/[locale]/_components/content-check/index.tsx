@@ -147,6 +147,8 @@ const ContentCheck = ({ vgacode, packageId, setSteps, promotion }: Props) => {
           />
           <DummyInvoice
             promotion={promotion}
+            vgacode={vgacode}
+            packageId={packageId}
             amount={vga?.amount || feePackage?.amount || 0}
           />
         </div>

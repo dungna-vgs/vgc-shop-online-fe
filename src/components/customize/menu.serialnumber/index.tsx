@@ -1,5 +1,5 @@
 'use client'
-import { useGlobalStore } from '@/stores'
+import { useSearchVGA } from '@/stores'
 import { TTypeVGA } from '@/types/type'
 import clsx from 'clsx'
 import Image from 'next/image'
@@ -12,7 +12,7 @@ type TMenuSerialNumberProps = {
 }
 
 export default function MenuSerialNumber(props: TMenuSerialNumberProps) {
-  const { setSeachVGA, searchVGA } = useGlobalStore()
+  const { setSignificanceId, significance_id } = useSearchVGA()
   const { t } = useTranslation('common')
   const { t: tmenu } = useTranslation('filter-menu')
   return (
@@ -28,17 +28,15 @@ export default function MenuSerialNumber(props: TMenuSerialNumberProps) {
                 href={`/vgacode/?type=${type.id}`}
                 onClick={(e) => {
                   e.preventDefault()
-                  setSeachVGA({ significance_id: type.id })
+                  setSignificanceId(type.id)
                 }}
                 className={clsx(
                   'flex flex-col w-[112px] h-[128px] justify-center gap-1 items-center text-black rounded-[15px]',
                   {
                     'bg-[#4AC486] text-white':
-                      searchVGA.significance_id == -1 ||
-                      searchVGA.significance_id == undefined,
+                      significance_id == -1 || significance_id == undefined,
                     'bg-white hover:bg-[#F1F1F1] text-black':
-                      searchVGA.significance_id != -1 &&
-                      searchVGA.significance_id != undefined
+                      significance_id != -1 && significance_id != undefined
                   }
                 )}
               >
@@ -64,15 +62,13 @@ export default function MenuSerialNumber(props: TMenuSerialNumberProps) {
                 href={`/vgacode/?significance_id=${type.id}`}
                 onClick={(e) => {
                   e.preventDefault()
-                  setSeachVGA({ significance_id: type.id })
+                  setSignificanceId(type.id)
                 }}
                 className={clsx(
                   'flex flex-col w-[112px] h-[128px] justify-center gap-1 items-center text-black rounded-[15px]',
                   {
-                    'bg-[#4AC486] text-white':
-                      searchVGA.significance_id == type.id,
-                    'bg-white  hover:bg-[#F1F1F1]':
-                      searchVGA.significance_id != type.id
+                    'bg-[#4AC486] text-white': significance_id == type.id,
+                    'bg-white  hover:bg-[#F1F1F1]': significance_id != type.id
                   }
                 )}
               >
