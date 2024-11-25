@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import styles from './style.module.css'
 
@@ -7,6 +7,7 @@ import ContentFillForm from '@/components/customize/content.fill.form'
 import ContentCheck from '@/app/[locale]/_components/content-check'
 import Receipt from '@/app/[locale]/_components/receipt'
 import { useTranslation } from 'react-i18next'
+import { event } from '@/lib/gtag'
 
 type TTabsProps = {
   items: {
@@ -118,6 +119,13 @@ export default function TabBuyPackage({ params, promotion }: TBuyPackageProps) {
       )
     }
   ]
+  useEffect(() => {
+    const step = currentStep + 1
+    event(`membership_step_${step}`, {
+      event_category: 'Membership payment process',
+      event_label: `Step ${step}`
+    })
+  }, [currentStep])
   return (
     <div className={styles.containerBg}>
       <div className='w-full min-h-[100vh] py-12 lg:px-32 sm:px-8 px-4 text-black'>

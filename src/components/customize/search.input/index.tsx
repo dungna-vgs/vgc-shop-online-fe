@@ -26,10 +26,11 @@ export default function SearchInput() {
         setLoading(true)
       }
       setKeywordStore(keyword)
-      event({
-        action: 'search',
-        category: 'User Actions',
-        label: `Search query: ${keyword}`
+      event('search', {
+        event_category: 'User Actions',
+        event_label: 'Search Query',
+        value: keyword.length,
+        search_term: keyword
       })
     }, 2000)
     return () => clearTimeout(id)

@@ -5,6 +5,7 @@ import { TVga } from '@/types/type'
 import { formatCurrency } from '@/utils'
 import clsx from 'clsx'
 import { useTranslation } from 'react-i18next'
+import { event } from '@/lib/gtag'
 
 type TCardNumberProps = {
   vga: TVga
@@ -18,6 +19,12 @@ export default function CardNumber({
   className = ''
 }: TCardNumberProps) {
   const { t } = useTranslation('common')
+  const handleClickBuyButton = () => {
+    event('buy_vga', {
+      event_category: 'VGA',
+      event_label: `Number: ${vga.id}`
+    })
+  }
   return (
     <div className={clsx(styles.listCard, className)}>
       <div className=''>
@@ -56,7 +63,11 @@ export default function CardNumber({
             {formatCurrency(vga.amount)}đ
           </span>
           {showBuyButton && (
-            <Link href={`/buy-vga/${vga.id}`} className={styles.btnBuy}>
+            <Link
+              href={`/buy-vga/${vga.id}`}
+              onClick={handleClickBuyButton}
+              className={styles.btnBuy}
+            >
               {t('buy')}
             </Link>
           )}

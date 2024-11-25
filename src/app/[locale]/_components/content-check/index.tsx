@@ -18,8 +18,7 @@ import {
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger
+  AlertDialogTitle
 } from '@/components/ui/alert-dialog'
 import Loading from '@/components/ui/loading'
 import { apiCheckEmployeeCode } from '@/apis/internals/clients/check.employee'
@@ -171,14 +170,12 @@ const ContentCheck = ({ vgacode, packageId, setSteps, promotion }: Props) => {
         </Button>
 
         <AlertDialog open={confirm}>
-          <AlertDialogTrigger>
-            <Button
-              className='text-white leading-[64px] bg-gradient-to-r from-[#17573C] to-[#4AC486] disabled:bg-none disabled:!bg-[#979797] rounded-[6px] flex justify-center w-40 md:w-[250px] h-16 text-[16px]'
-              onClick={handleConfirmDiscount}
-            >
-              {t('next')}
-            </Button>
-          </AlertDialogTrigger>
+          <Button
+            className='text-white leading-[64px] bg-gradient-to-r from-[#17573C] to-[#4AC486] disabled:bg-none disabled:!bg-[#979797] rounded-[6px] flex justify-center w-40 md:w-[250px] h-16 text-[16px]'
+            onClick={handleConfirmDiscount}
+          >
+            {t('next')}
+          </Button>
           <AlertDialogContent>
             <AlertDialogHeader>
               <p className='w-full text-center font-bold text-black mb-3 uppercase'>
