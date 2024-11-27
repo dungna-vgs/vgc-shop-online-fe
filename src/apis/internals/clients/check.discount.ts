@@ -9,6 +9,10 @@ type TVoucherResponse = {
 }
 export type TParamsCheckDiscountCode = {
   voucher_code: string
+  from?: string
+  upgrade_id?: number
+  number?: number
+  provider: string
 }
 
 type TReturnDiscount = {

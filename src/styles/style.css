@@ -1,0 +1,19 @@
+.reset-pagination .ant-pagination-item:hover {
+  background-color: white !important;
+}
+
+.reset-pagination .ant-pagination-item-active {
+  border-color: #022f2d !important;
+  color: #022f2d !important;
+}
+
+.reset-pagination .ant-pagination-item-active a {
+  color: #022f2d !important;
+}
+
+:where(.css-dev-only-do-not-override-1x0dypw).ant-select-outlined:not(
+    .ant-select-disabled
+  ):not(.ant-select-customize-input):not(.ant-pagination-size-changer):hover
+  .ant-select-selector {
+  border-color: #022f2d !important;
+}

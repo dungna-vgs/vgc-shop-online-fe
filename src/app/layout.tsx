@@ -9,6 +9,9 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import GoogleAnalytics from '@/components/GoogleAnalytics'
 import i18nConfig from '@/i18nConfig'
+import { TYPE_ENVIRONMENT } from '@/configs'
+
+const isProduction = TYPE_ENVIRONMENT.PRODUCTION === process.env.ENVIROMENT
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -56,7 +59,11 @@ export const metadata: Metadata = {
   keywords: ['Next.js', 'React', 'Tailwind CSS', 'Vercel'],
   metadataBase: new URL(process.env.APP_URL!),
   themeColor: '#FFFFFF',
-  icons: '/favicon.ico'
+  icons: '/favicon.ico',
+  robots: {
+    index: isProduction,
+    follow: isProduction
+  }
 }
 
 export const viewport: Viewport = {

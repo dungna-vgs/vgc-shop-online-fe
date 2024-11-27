@@ -4,22 +4,24 @@ import React, { useCallback, useEffect, useState } from 'react'
 import CardNumber from '@/components/customize/number.card'
 import PackageCard from '@/components/customize/package.card'
 import { useTranslation } from 'react-i18next'
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious
-} from '@/components/ui/pagination'
+import { ConfigProvider, Pagination } from 'antd'
 import { useToastStore } from '@/stores'
-
 import { apiSearchAll } from '@/apis/internals/clients/search.all'
+import viVN from 'antd/lib/locale/vi_VN'
+import enUS from 'antd/lib/locale/en_US'
+import { getI18n } from 'react-i18next'
+
+import '@/styles/style.css'
+
 export default function ResultSearchAll() {
   const { setLoading } = useLoading()
   const { t } = useTranslation('common')
-  const [page, setPage] = useState(1)
+  const i18n = getI18n()
+
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 24
+  })
   const { showToast } = useToastStore()
 
   const {
@@ -35,17 +37,19 @@ export default function ResultSearchAll() {
     try {
       if (keyword) {
         setLoading(true)
-        const res = await apiSearchAll({ keyword, page })
-        if (res.data.vgas.length > 0 || res.data.membershipPackage.length > 0) {
-          setSearchAll({
-            vgaSearchAll: res.data.vgas,
-            feeSearchAll: res.data.membershipPackage,
-            totalSearch: res.data.total,
-            totalPage: res.data.page
-          })
-        } else {
+        const res = await apiSearchAll({ keyword, ...pagination })
+        if (
+          res.data.vgas.length == 0 &&
+          res.data.membershipPackage.length == 0
+        ) {
           showToast(t('not-found', { searchQuery: keyword }), 'error', 2000)
         }
+        setSearchAll({
+          vgaSearchAll: res.data.vgas,
+          feeSearchAll: res.data.membershipPackage,
+          totalSearch: res.data.total,
+          totalPage: res.data.page
+        })
       } else {
         setSearchAll({
           vgaSearchAll: [],
@@ -59,11 +63,11 @@ export default function ResultSearchAll() {
     } finally {
       setLoading(false)
     }
-  }, [keyword, page, t, showToast, setSearchAll, setLoading])
+  }, [keyword, pagination, t, showToast, setSearchAll, setLoading])
 
   useEffect(() => {
     handleChangePage()
-  }, [keyword, handleChangePage, page])
+  }, [keyword, handleChangePage, pagination])
 
   if (!vgaSearchAll.length && !feeSearchAll.length) return null
 
@@ -81,95 +85,29 @@ export default function ResultSearchAll() {
       <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 lg:gap-8'>
         <PackageCard memberships={feeSearchAll} />
       </div>
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious
-              className='cursor-pointer min-w-16'
-              href={`/?page=1`}
-              onClick={(e) => {
-                e.preventDefault()
-                setPage(1)
-              }}
-            />
-          </PaginationItem>
-          {page > 3 && (
-            <PaginationItem>
-              <PaginationLink
-                className='cursor-pointer min-w-16'
-                onClick={(e) => {
-                  e.preventDefault()
-                  setPage(page - 2)
-                }}
-              >
-                <PaginationEllipsis />
-              </PaginationLink>
-            </PaginationItem>
-          )}
-          {page > 1 && (
-            <PaginationItem>
-              <PaginationLink
-                className='cursor-pointer min-w-16'
-                onClick={(e) => {
-                  e.preventDefault()
-                  setPage(page - 1)
-                }}
-              >
-                {page - 1}
-              </PaginationLink>
-            </PaginationItem>
-          )}
-          <PaginationItem>
-            <PaginationLink
-              className='cursor-pointer min-w-16'
-              onClick={(e) => {
-                e.preventDefault()
-              }}
-              href='#'
-              isActive
-            >
-              {page}
-            </PaginationLink>
-          </PaginationItem>
-          {totalPage && page < totalPage && (
-            <PaginationItem>
-              <PaginationLink
-                className='cursor-pointer min-w-16'
-                onClick={(e) => {
-                  e.preventDefault()
-                  setPage(page + 1)
-                }}
-              >
-                {page + 1}
-              </PaginationLink>
-            </PaginationItem>
-          )}
-          {totalPage && page < totalPage - 1 && (
-            <PaginationItem>
-              <PaginationLink
-                className='cursor-pointer min-w-16'
-                onClick={(e) => {
-                  e.preventDefault()
-                  setPage(page + 2)
-                }}
-              >
-                <PaginationEllipsis />
-              </PaginationLink>
-            </PaginationItem>
-          )}
-          <PaginationItem>
-            <PaginationNext
-              onClick={(e) => {
-                e.preventDefault()
-                if (totalPage && page < totalPage) {
-                  setPage(totalPage)
-                }
-              }}
-              className='px-2 cursor-pointer min-w-16'
-            />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+      <div className='flex justify-center'>
+        <ConfigProvider
+          locale={i18n.language == 'vi' ? viVN : enUS}
+          theme={{
+            token: {
+              colorPrimary: '#fff'
+            }
+          }}
+        >
+          <Pagination
+            className='reset-pagination'
+            rootClassName='reset-pagination'
+            pageSize={pagination.limit}
+            current={pagination.page}
+            total={totalPage || 0}
+            onChange={(page: number, limit: number) => {
+              window.scroll(0, 0)
+              setPagination({ page, limit })
+            }}
+            pageSizeOptions={[12, 24, 48, 96]}
+          />
+        </ConfigProvider>
+      </div>
     </div>
   )
 }

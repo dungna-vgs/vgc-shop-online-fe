@@ -12,7 +12,7 @@ import clsx from 'clsx'
 import { SlidersHorizontal } from 'lucide-react'
 import { TTypeVGA } from '@/types/type'
 import { rangesVGA } from '@/constants/range'
-import { useGlobalStore } from '@/stores'
+import { useSearchVGA } from '@/stores'
 import { useTranslation } from 'react-i18next'
 
 const SHEET_SIDES = ['left'] as const
@@ -25,7 +25,8 @@ type TSheetSideProps = {
 export function SheetSide(props: TSheetSideProps) {
   const { t } = useTranslation('filter-menu')
   const { t: tcommon } = useTranslation('common')
-  const { searchVGA, setSeachVGA } = useGlobalStore()
+  const { setMoney, money_from, money_to, significance_id, setSignificanceId } =
+    useSearchVGA()
 
   const range = rangesVGA(tcommon('all'))
   return (
@@ -62,14 +63,10 @@ export function SheetSide(props: TSheetSideProps) {
                     <div className='flex items-center justify-start gap-2 pl-2 py-2'>
                       <Checkbox
                         onClick={() => {
-                          setSeachVGA({
-                            money_from: range.min,
-                            money_to: range.max
-                          })
+                          setMoney(range.min, range.max)
                         }}
                         checked={
-                          searchVGA.money_from == range.min &&
-                          searchVGA.money_to == range.max
+                          money_from == range.min && money_to == range.max
                         }
                         id={`price${index}`}
                       />
@@ -92,11 +89,9 @@ export function SheetSide(props: TSheetSideProps) {
                     <div className='flex items-center justify-start pl-2 gap-2 py-2'>
                       <Checkbox
                         id={`meaning${index}`}
-                        checked={searchVGA.significance_id == meaning.id}
+                        checked={significance_id == meaning.id}
                         onClick={() => {
-                          setSeachVGA({
-                            significance_id: meaning.id
-                          })
+                          setSignificanceId(meaning.id)
                         }}
                       />
                       <label

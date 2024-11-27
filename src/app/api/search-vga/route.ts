@@ -19,13 +19,13 @@ type TParams = {
 
 function validation(params: TParams) {
   const schema = Joi.object<TParams>({
-    page: Joi.number(),
+    page: Joi.number().default(1),
     limit: Joi.number().default(24),
     vga: Joi.string().allow(''),
     money_to: Joi.number(),
     money_from: Joi.number(),
     significance_id: Joi.number(),
-    direction: Joi.string().valid('asc', 'desc').default('desc')
+    direction: Joi.string().valid('asc', 'desc')
   })
   return schema.validate(params)
 }
@@ -57,10 +57,6 @@ export async function GET(request: NextRequest) {
   const res = await axiosInstance.get(API_ENDPOINT.SEARCH_VGA, {
     params
   })
-  console.log('JSON.stringify(params): ')
-  console.log(JSON.stringify(params))
-  console.log('JSON.stringify(res.data): ')
-  console.log(JSON.stringify(res.data))
   return NextResponse.json({
     success: true,
     data: res.data.data.data,

@@ -100,23 +100,35 @@ export default function VGABill({ promotion }: TVGABill) {
                   </span>
                 </div>
                 {discount ? (
-                  <div className='flex justify-between gap-2 items-center'>
-                    <span className='text-[#545454]'>{t('discount')}</span>
-                    <span className='text-[#07AC39]'>
-                      {' '}
-                      <span className=''>
-                        {discount
-                          ? formatCurrency(
-                              calculateDiscountAmount(
-                                money,
-                                discount.discount,
-                                discount.type
+                  <div>
+                    <div className='flex justify-between gap-2 items-center'>
+                      <span className='text-[#545454]'>{t('discount')}</span>
+                      <span className='text-[#07AC39]'>
+                        {' '}
+                        <span className=''>
+                          {discount
+                            ? formatCurrency(
+                                calculateDiscountAmount(
+                                  money,
+                                  discount.discount,
+                                  discount.type
+                                )
                               )
-                            )
-                          : 0}
-                        đ
+                            : 0}
+                          đ
+                        </span>
                       </span>
-                    </span>
+                    </div>
+                    {discount.membership_months != 0 && (
+                      <div className='flex justify-between items-center mt-4'>
+                        <span className='text-[#545454]'>
+                          {t('membership-fee-gift')}
+                        </span>
+                        <span className='text-[#07AC39] font-semibold'>
+                          {discount.membership_months} {t('months')}
+                        </span>
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <div className='flex justify-between gap-2 items-center'>

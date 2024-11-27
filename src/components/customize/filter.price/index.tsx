@@ -9,14 +9,14 @@ import {
 } from '@/components/ui/accordion'
 import { Checkbox } from '@/components/ui/checkbox'
 import { rangesVGA } from '@/constants/range'
-import { useGlobalStore } from '@/stores'
+import { useSearchVGA } from '@/stores'
 import { useTranslation } from 'react-i18next'
 
 export default function FilterPrice() {
   const { t } = useTranslation('filter-menu')
   const { t: tcommon } = useTranslation('common')
 
-  const { setSeachVGA, searchVGA } = useGlobalStore()
+  const { setMoney, money_from, money_to } = useSearchVGA()
 
   const range = rangesVGA(tcommon('all'))
   return (
@@ -28,19 +28,12 @@ export default function FilterPrice() {
             <div key={index} className=' flex py-2 gap-2 items-center'>
               <Checkbox
                 onClick={() => {
-                  setSeachVGA({
-                    money_from:
-                      range.min === searchVGA.money_from
-                        ? undefined
-                        : range.min,
-                    money_to:
-                      range.max === searchVGA.money_to ? undefined : range.max
-                  })
+                  const moneyFrom =
+                    range.min === money_from ? undefined : range.min
+                  const moneyTo = range.max === money_to ? undefined : range.max
+                  setMoney(moneyFrom, moneyTo)
                 }}
-                checked={
-                  searchVGA.money_from == range.min &&
-                  searchVGA.money_to == range.max
-                }
+                checked={money_from == range.min && money_to == range.max}
                 id={`price${index}`}
               />
               <div className='grid gap-1.5 leading-none'>

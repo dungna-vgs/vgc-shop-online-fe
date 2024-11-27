@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/accordion'
 import { Checkbox } from '@/components/ui/checkbox'
 import { TTypeVGA } from '@/types/type'
-import { useGlobalStore } from '@/stores'
+import { useSearchVGA } from '@/stores'
 import { useTranslation } from 'react-i18next'
 
 type TFilterType = {
@@ -16,9 +16,8 @@ type TFilterType = {
 }
 
 export default function FilterType(props: TFilterType) {
-  const { searchVGA, setSeachVGA } = useGlobalStore()
   const { t } = useTranslation('filter-menu')
-
+  const { setSignificanceId, significance_id } = useSearchVGA()
   return (
     <Accordion type='single' collapsible>
       <AccordionItem value='item-2'>
@@ -28,14 +27,11 @@ export default function FilterType(props: TFilterType) {
             <div key={index} className=' flex py-2 gap-2 items-center'>
               <Checkbox
                 onClick={() => {
-                  setSeachVGA({
-                    significance_id:
-                      significance.id === searchVGA.significance_id
-                        ? -1
-                        : significance.id
-                  })
+                  const significanceId =
+                    significance.id === significance_id ? -1 : significance.id
+                  setSignificanceId(significanceId)
                 }}
-                checked={significance.id == searchVGA.significance_id}
+                checked={significance.id == significance_id}
                 id={`meaning${index}`}
               />
               <div className='grid gap-1.5 leading-none'>

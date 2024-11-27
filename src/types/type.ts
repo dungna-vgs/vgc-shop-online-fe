@@ -137,6 +137,7 @@ export type TVoucher = {
   id: number
   type: string
   discount: number
+  membership_months: number
 }
 export type TEmployee = {
   id?: number

@@ -8,6 +8,7 @@ import { TFeePackage } from '@/types/type'
 import { formatCurrency, getMembershipPackageName } from '@/utils'
 import clsx from 'clsx'
 import { useTranslation } from 'react-i18next'
+import { event } from '@/lib/gtag'
 
 type TPackageCardProps = {
   memberships: TFeePackage[]
@@ -25,6 +26,12 @@ export default function PackageCard({
   textClassName = ''
 }: TPackageCardProps) {
   const { t } = useTranslation('common')
+  const handleClickBuyButton = (feePackage: TFeePackage) => {
+    event('select_membership', {
+      event_category: 'Membership',
+      event_label: `Package: ${feePackage.sub_name}`
+    })
+  }
   return memberships?.map((membership: TFeePackage, index: number) => (
     <div key={index}>
       <div className={clsx(styles.listCard, cardClassName)}>
@@ -62,6 +69,7 @@ export default function PackageCard({
           </span>
           <Link
             href={`/buy-package/${membership.id}`}
+            onClick={() => handleClickBuyButton(membership)}
             className={styles.btnBuy}
           >
             <span>{t('pay-now')}</span>

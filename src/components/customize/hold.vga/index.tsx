@@ -3,10 +3,8 @@ import {
   AlertDialogAction,
   AlertDialogContent,
   AlertDialogDescription,
-  AlertDialogHeader,
-  AlertDialogTrigger
+  AlertDialogHeader
 } from '@/components/ui/alert-dialog'
-import { Button } from '@/components/ui/button'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -19,11 +17,6 @@ export default function ExistAlert(props: TExistAlertProps) {
   return (
     <div>
       <AlertDialog open={props.open}>
-        <AlertDialogTrigger>
-          <Button className='text-white leading-[64px] bg-gradient-to-r from-[#17573C] to-[#4AC486] disabled:bg-none disabled:!bg-[#979797] rounded-[6px] flex justify-center w-40 md:w-[250px] h-16 text-[16px]'>
-            {t('next')}
-          </Button>
-        </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
             <p className='w-full text-center font-bold text-black mb-3 uppercase'>
