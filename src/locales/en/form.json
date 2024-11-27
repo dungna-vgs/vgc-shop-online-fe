@@ -76,5 +76,15 @@
   "promotion": "Promotion",
   "hold-or-purchased": "The VGA code does not exist or has been put on hold!",
   "hold": "VGA code is being held",
-  "hold-alert": "Sorry! This VGA code is currently on hold by another user. Please select a different VGA code and try again!"
+  "hold-alert": "Sorry! This VGA code is currently on hold by another user. Please select a different VGA code and try again!",
+  "contact-form": "Contact",
+  "contact-us": "Contact us for more promotional information and a better service experience.",
+  "fullname": "Fullname",
+  "phone-number": "Phone number",
+  "service": "Consultation service ?",
+  "beautiful-code": "Purchase beautiful VGA codes",
+  "pay-fee": "Pay membership fees",
+  "ads": "Advertisement",
+  "build-event": "Organize a Golf event",
+  "register": "Register"
 }

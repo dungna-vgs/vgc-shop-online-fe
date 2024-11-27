@@ -12,6 +12,7 @@ import { getMembersipPackages } from '@/apis/business/membership.package'
 import { getVGAs } from '@/apis/business/vga'
 import ResultSearchAll from '@/components/customize/result.search.all'
 import styles from './page.module.css'
+import ContactForm from './_components/contact.form'
 
 export const runtime = 'edge'
 
@@ -37,6 +38,7 @@ export default async function Home() {
         <SerialNumber infoVGA={vgas} typeVga={data} />
         <BannerImage banner={images.adsHomeCenter} />
         <MemberShip memberships={memberships.filter((m) => m.year_add <= 3)} />
+        <ContactForm/>
       </div>
     </div>
   )
