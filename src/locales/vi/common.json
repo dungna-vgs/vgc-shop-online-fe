@@ -22,5 +22,7 @@
   "notification": "Thông báo",
   "year-package": "Gói hội viên cao cấp {{year}} năm",
   "price": "Giá: {{price}}đ",
-  "result-search": "Tìm thấy {{total}} kết quả cho từ khoá {{keyword}}"
+  "result-search": "Tìm thấy {{total}} kết quả cho từ khoá {{keyword}}",
+  "maintenance":"Hệ thống đang bảo trì",
+  "404":"Không tìm thấy trang"
 }

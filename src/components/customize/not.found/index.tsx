@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import styles from './style.module.css'
+
 
 export default function NotFound() {
   return (
@@ -12,11 +14,11 @@ export default function NotFound() {
         alt='Not Found'
         quality={60}
       />
-      <p className='text-[36px]'>Không tìm thấy trang!</p>
-      <p>Tài nguyên yêu cầu không được tìm thấy trên máy chủ này!</p>
+      <p className='text-center text-[24px] lg:text-[36px]'>Không tìm thấy trang!</p>
+      <p className='text-center lg:text-[18px] text-[14px]'>Tài nguyên yêu cầu không được tìm thấy trên máy chủ này!</p>
       <Link
         href='/'
-        className='p-2 mt-2 bg-[#024542b9] font-bold text-white rounded-md'
+        className={styles.btnBuy}
       >
         Quay về trang chủ
       </Link>

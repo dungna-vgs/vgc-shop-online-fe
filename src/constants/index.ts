@@ -4,7 +4,7 @@ const ADDRESS_REGISTING_MARKETING =
 const APP_NAME = 'Ecommerce'
 
 const EMAIL_CONTACT = 'feedback@vgcorp.vn'
-const PHONE_CONTACT = '0899 955 599'
+const PHONE_CONTACT = '1900 2126'
 
 const LANGUAGES = [
   {

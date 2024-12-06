@@ -25,6 +25,8 @@ export default function CardNumber({
       event_label: `Number: ${vga.id}`
     })
   }
+
+  console.log('vga', vga)
   return (
     <div className={clsx(styles.listCard, className)}>
       <div className=''>
@@ -38,16 +40,16 @@ export default function CardNumber({
             width: '100%',
             height: 'auto'
           }}
-          className='min-w-[148px] min-h-[166px]'
+          className='min-w-[148px] min-h-[172px]'
         />
       </div>
       <div className='absolute top-0 right-0 left-0 bottom-0 p-2 sm:p-4 flex flex-col justify-center items-center sm:gap-2 lg:gap-2 gap-1'>
         <Image
-          src='/images/logo-handicap.png'
+          src='/images/logo-vgc.svg'
           width={40}
           height={37}
           alt='vHandicap'
-          quality={60}
+          quality={75}
         />
         <div className={styles.borderCode}>
           <span className='text-[24px] xl:text-[36px]'>{vga.id}</span>
@@ -59,9 +61,18 @@ export default function CardNumber({
             showBuyButton ? 'justify-between' : 'justify-center'
           )}
         >
-          <span className='block lg:text-[16px] text-[12px]'>
-            {formatCurrency(vga.amount)}đ
-          </span>
+          <div>
+            <span className='block lg:text-[16px] text-[12px]'>
+              {formatCurrency(vga.amount)}đ
+            </span>
+            <div className='flex gap-2 items-center'>
+              <span className='block text-[10px] font-medium text-[#CED6D2] line-through lg:text-[12px]'>
+                {formatCurrency(vga.amount)}đ
+              </span>
+              <span className='font-medium'>{vga.original_amount}</span>
+              <span className='font-medium text-[#00FF93] text-[12px]'>{vga.discount}%</span>
+            </div>
+          </div>
           {showBuyButton && (
             <Link
               href={`/buy-vga/${vga.id}`}
