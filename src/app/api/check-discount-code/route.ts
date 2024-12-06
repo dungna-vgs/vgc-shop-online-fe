@@ -13,6 +13,7 @@ type TParams = {
   upgrade_id?: number
   number?: number
   provider: string
+  user_id: number | undefined
 }
 
 function validation(params: TParams) {
@@ -21,7 +22,8 @@ function validation(params: TParams) {
     from: Joi.string(),
     upgrade_id: Joi.number(),
     number: Joi.number(),
-    provider: Joi.string()
+    provider: Joi.string(),
+    user_id: Joi.number()
   })
   return schema.validate(params)
 }

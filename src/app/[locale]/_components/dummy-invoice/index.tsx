@@ -44,7 +44,7 @@ export default function DummyInvoice({
   const [discountCode, setDiscountCode] = useState<string>('')
   const { discount, setDiscount } = useDiscountStore()
   const { employee, setEmployeeCode } = useEmployeeStore()
-  const { vga, feePackage } = useGlobalStore()
+  const { buyer, vga, feePackage } = useGlobalStore()
   const showToast = useToastStore((state) => state.showToast)
 
   useEffect(() => {
@@ -61,7 +61,8 @@ export default function DummyInvoice({
       let bodyRequest: TParamsCheckDiscountCode = {
         voucher_code: discountCode,
         provider: ETransactionProvider.DIGITAL,
-        from: 'store'
+        from: 'store',
+        user_id: buyer?.id
       }
       if (vgacode && vga) {
         bodyRequest = {

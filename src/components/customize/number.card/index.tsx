@@ -45,11 +45,11 @@ export default function CardNumber({
       </div>
       <div className='absolute top-0 right-0 left-0 bottom-0 p-2 sm:p-4 flex flex-col justify-center items-center sm:gap-2 lg:gap-2 gap-1'>
         <Image
-          src='/images/logo-handicap.png'
+          src='/images/logo-vgc.svg'
           width={40}
           height={37}
           alt='vHandicap'
-          quality={60}
+          quality={75}
         />
         <div className={styles.borderCode}>
           <span className='text-[24px] xl:text-[36px]'>{vga.id}</span>

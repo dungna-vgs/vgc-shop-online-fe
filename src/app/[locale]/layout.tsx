@@ -7,7 +7,6 @@ import {
 import clsx from 'clsx'
 import { poppins, yeseva } from 'fonts'
 import type { Metadata, Viewport } from 'next'
-import './globals.css'
 import Header from '@layout/header'
 import Footer from '@layout/footer'
 import BackToTop from '@/components/ui/scroll-to-top'
@@ -19,6 +18,8 @@ import initTranslations from '@/app/i18n'
 import Spinner from '@/components/customize/spinner'
 import i18nConfig from '@/i18nConfig'
 import '@/worker/index.js'
+import MetaPixel from '@/components/pixel'
+import './globals.css'
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -114,6 +115,7 @@ export default async function RootLayout({
             <BackToTop />
           </Suspense>
         </TranslationsProvider>
+        <MetaPixel pixelId={process.env.FACEBOOK_PIXEL_ID} />
       </body>
     </html>
   )

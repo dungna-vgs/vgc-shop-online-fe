@@ -38,7 +38,7 @@ export default async function Home() {
         <SerialNumber infoVGA={vgas} typeVga={data} />
         <BannerImage banner={images.adsHomeCenter} />
         <MemberShip memberships={memberships.filter((m) => m.year_add <= 3)} />
-        <ContactForm/>
+        <ContactForm />
       </div>
     </div>
   )
