@@ -46,7 +46,7 @@ export default function ContactForm() {
         {t('contact-form')}
       </p>
       <p className='text-center mt-1 mb-2 lg:mb-4 text-[16px] text-black leading-[27px]'>
-    {t('contact-us')}
+        {t('contact-us')}
       </p>
       <div>
         <Form {...form}>

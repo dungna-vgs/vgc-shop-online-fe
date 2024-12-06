@@ -13,6 +13,7 @@ export type TParamsCheckDiscountCode = {
   upgrade_id?: number
   number?: number
   provider: string
+  user_id: number | undefined
 }
 
 type TReturnDiscount = {

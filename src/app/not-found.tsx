@@ -1,9 +1,9 @@
 import React from 'react'
-import NotFoundContent from '@/components/customize/not.found'
 import Footer from '@layout/footer'
-import TranslationsProvider from '@/components/customize/languages/TranslationsProvider'
-import initTranslations from '@/app/i18n'
 import i18nConfig from '@/i18nConfig'
+import initTranslations from '@/app/i18n'
+import NotFoundContent from '@/components/customize/not.found'
+import TranslationsProvider from '@/components/customize/languages/TranslationsProvider'
 
 const i18nNamespaces = ['common', 'not-found']
 
@@ -13,16 +13,14 @@ export default async function NotFound() {
     i18nNamespaces
   )
   return (
-    <>
-      <TranslationsProvider
-        resources={resources}
-        locale={i18nConfig.defaultLocale}
-        namespaces={i18nNamespaces}
-      >
-        {/* <Header /> */}
-        <NotFoundContent />
-        <Footer />
-      </TranslationsProvider>
-    </>
+    <TranslationsProvider
+      resources={resources}
+      locale={i18nConfig.defaultLocale}
+      namespaces={i18nNamespaces}
+    >
+      {/* <Header /> */}
+      <NotFoundContent />
+      <Footer />
+    </TranslationsProvider>
   )
 }
