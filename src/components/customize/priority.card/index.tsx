@@ -18,7 +18,7 @@ type TPackageCardProps = {
   textClassName?: string
 }
 
-export default function PackageCard({
+export default function PriorityCard({
   memberships,
   showBuyButton = true,
   cardClassName = '',
@@ -37,10 +37,10 @@ export default function PackageCard({
       <div className={clsx(styles.listCard, cardClassName)}>
         <div>
           <Image
-            src='/images/bg-fee.png'
+            src='/images/prio.png'
             width={352}
             height={233}
-            alt='Background PackageCard'
+            alt='Background PriorityCard'
             quality={60}
             style={{
               width: '100%',
@@ -67,13 +67,6 @@ export default function PackageCard({
           <span className='flex justify-center font-semibold text-[16px] text-[#F7941B] lg:justify-start w-full px-4'>
             {t('price', { price: formatCurrency(membership.amount) })}
           </span>
-          <div className='flex justify-center lg:justify-start w-full px-4 gap-2 items-center'>
-              {/* <span className='block  font-medium text-[#CED6D2] line-through text-[12px]'>
-                {formatCurrency(membership.original_amount)}đ
-              </span> */}
-              <span className='block  font-medium text-[#CED6D2] line-through text-[12px] '>{membership.original_amount}</span>
-              <span className='font-medium text-[#FF0303] text-[12px]'>{membership.discount}%</span>
-              </div>
           <Link
             href={`/buy-package/${membership.id}`}
             onClick={() => handleClickBuyButton(membership)}

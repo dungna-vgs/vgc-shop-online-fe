@@ -22,5 +22,7 @@
   "year-package": "Premium membership package {{year}} year",
   "price": "Price: {{price}}đ",
   "not-found": "No search results for {{searchQuery}}. Please try again with a different keyword.",
-  "result-search": "Found {{total}} results for the keyword {{keyword}}."
+  "result-search": "Found {{total}} results for the keyword {{keyword}}.",
+  "maintenance":"The system is under maintenance.",
+  "404":"Page not found"
 }

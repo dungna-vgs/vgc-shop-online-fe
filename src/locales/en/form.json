@@ -90,5 +90,6 @@
   "pay-fee": "Pay membership fees",
   "ads": "Advertisement",
   "build-event": "Organize a Golf event",
-  "register": "Register"
+  "register": "Register",
+  "otp": "Send OTP"
 }
