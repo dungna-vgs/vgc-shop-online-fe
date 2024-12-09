@@ -1,16 +1,15 @@
 .btnOption {
-    color: black;
-    width: 224px !important;
-    text-transform: uppercase;
-    padding: 12px !important;
+  color: black;
+  width: 224px !important;
+  text-transform: uppercase;
+  padding: 12px !important;
 }
 
 @media only screen and (max-width: 984px) {
-
-    .btnOption {
-        color: black;
-        width: 224px !important;
-        text-transform: uppercase;
-        padding: 12px 12px;
-    }
+  .btnOption {
+    color: black;
+    width: 224px !important;
+    text-transform: uppercase;
+    padding: 12px 12px;
+  }
 }

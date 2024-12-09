@@ -10,12 +10,6 @@ import {
   FormItem,
   FormMessage
 } from '@/components/ui/form'
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSeparator,
-  InputOTPSlot
-} from '@/components/ui/input-otp'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import {
@@ -74,63 +68,14 @@ export default function ContactForm() {
                 </FormItem>
               )}
             />
-            <div className='flex justify-center items-center  gap-4'>
-              <div className='w-full'>
-                <FormField
-                  control={form.control}
-                  name='email'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input placeholder='Email' {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className='flex justify-center items-center md:mt-0 mt-4'>
-                <FormField
-                  control={form.control}
-                  name='email'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Button
-                          className='bg-gradient-to-r from-[#17573C] to-[#4AC486] py-6 '
-                          type='submit'
-                          {...field}
-                        >
-                          {t('otp')}
-                        </Button>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-            </div>
+
             <FormField
               control={form.control}
               name='email'
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <div className='flex items-center justify-center'>
-                      <InputOTP maxLength={6} className='flex justify-center' {...field}>
-                        <InputOTPGroup>
-                          <InputOTPSlot index={0} />
-                          <InputOTPSlot index={1} />
-                          <InputOTPSlot index={2} />
-                        </InputOTPGroup>
-                        <InputOTPSeparator />
-                        <InputOTPGroup>
-                          <InputOTPSlot index={3} />
-                          <InputOTPSlot index={4} />
-                          <InputOTPSlot index={5} />
-                        </InputOTPGroup>
-                      </InputOTP>
-                    </div>
+                    <Input placeholder='Email' {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

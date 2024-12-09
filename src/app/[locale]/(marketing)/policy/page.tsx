@@ -2,13 +2,21 @@
 import React from 'react'
 import { Tabs, Space } from 'antd'
 import Link from 'next/link'
+import useWindowDimensions from '@/hocs'
+import './style.scss'
+
 
 export default function PolicyPgae() {
+  const { width } = useWindowDimensions()
+
   return (
     <div className='max-w-[1200px] min-h-full mx-auto md:p-6 p-4'>
       <div>
         <Space size={30}>
-          <Tabs defaultActiveKey='tab1' tabPosition='left'>
+          <Tabs
+            defaultActiveKey='tab1'
+            tabPosition={width > 800 ? 'left' : 'top'}
+          >
             <Tabs.TabPane tab='Giới thiệu' key='tab1'>
               <div>
                 <ul className='text-justify list-disc'>
@@ -193,7 +201,7 @@ export default function PolicyPgae() {
                   </li>
                 </ul>
                 <ul>
-                 <strong> 1. Thu thập thông tin</strong>
+                  <strong> 1. Thu thập thông tin</strong>
                   <li>
                     VG Corp thu thập các thông tin cá nhân của Khách Hàng như
                     tên, số điện thoại, địa chỉ, email,... khi Khách Hàng truy
@@ -204,7 +212,7 @@ export default function PolicyPgae() {
                   </li>
                 </ul>
                 <ul>
-                 <strong> 2. Mục đích thu thập</strong>
+                  <strong> 2. Mục đích thu thập</strong>
                   <li>
                     Toàn bộ thông tin cá nhân thu thập được từ Khách Hàng chỉ
                     được VG Corp sử dụng cho một hoặc tất cả những mục đích sau
@@ -259,11 +267,13 @@ export default function PolicyPgae() {
                   </li>
                 </ul>
                 <ul>
-                <strong>  4. Phạm vi sử dụng thông tin</strong>
-                  <li>Nhằm thực hiện các mục đích và
-                  hoạt động xử lý thông tin cá nhân của Khách Hàng theo chính
-                  sách này, sẽ chỉ có những người hoặc tổ chức sau có thể tiếp
-                  cận được với thông tin Khách Hàng:</li> 
+                  <strong> 4. Phạm vi sử dụng thông tin</strong>
+                  <li>
+                    Nhằm thực hiện các mục đích và hoạt động xử lý thông tin cá
+                    nhân của Khách Hàng theo chính sách này, sẽ chỉ có những
+                    người hoặc tổ chức sau có thể tiếp cận được với thông tin
+                    Khách Hàng:
+                  </li>
                   <li>- Các đơn vị thành viên của VG Corp;</li>
                   <li>
                     - Bên thứ ba hỗ trợ xác minh thông tin cá nhân của Khách
@@ -281,9 +291,11 @@ export default function PolicyPgae() {
                   </li>
                 </ul>
                 <ul>
-                  <strong>5. Cam kết bảo mật thông tin</strong> 
-                  <li>VG Corp cam kết tuân thủ các
-                  nguyên tắc sau khi xử lý thông tin cá nhân của Khách Hàng:</li>
+                  <strong>5. Cam kết bảo mật thông tin</strong>
+                  <li>
+                    VG Corp cam kết tuân thủ các nguyên tắc sau khi xử lý thông
+                    tin cá nhân của Khách Hàng:
+                  </li>
                   <li>
                     a. VG Corp xử lý và bảo vệ thông tin cá nhân của Khách Hàng
                     phù hợp với quy định của pháp luật Việt Nam; tuân thủ đầy đủ
@@ -316,7 +328,7 @@ export default function PolicyPgae() {
                   </li>
                 </ul>
                 <ul>
-                 <strong> 6. Thông tin liên hệ</strong>
+                  <strong> 6. Thông tin liên hệ</strong>
                   <li>
                     Trường hợp Khách Hàng có bất kỳ câu hỏi nào liên quan đến
                     chính sách bảo mật thông tin của VG Corp, vui lòng liên hệ
@@ -387,21 +399,32 @@ export default function PolicyPgae() {
             <Tabs.TabPane tab='Phương thức thanh toán' key='tab5'>
               <div className='text-justify'>
                 <ul>
-                  Khách Hàng thanh toán đơn hàng bằng cách chuyển khoản vào tài
+                  Khách hàng thanh toán đơn hàng bằng cách chuyển khoản vào tài
                   khoản ngân hàng của Chúng tôi bằng cách quét mã QR tại bước
                   thanh toán hoặc nhập thông tin nhận thanh toán như sau:
                   <li>
                     <strong>1. Đối với Sản phẩm Mã đẹp VGA</strong>
                   </li>
-                  <li>- Ngân hàng thụ hưởng: <strong>NGÂN HÀNG TMCP NAM Á</strong></li>
-                  <li>- Số tài khoản: <strong>111797955</strong> </li>
-                  <li>- Tên người nhận: CÔNG TY CỔ PHẦN VIỆT NAM GOLF</li>
+                  <li>
+                    - Ngân hàng thụ hưởng: <strong>NGÂN HÀNG TMCP NAM Á</strong>
+                  </li>
+                  <li>
+                    - Số tài khoản: <strong>111797955</strong>{' '}
+                  </li>
+                  <li>- Tên người nhận: <strong>CÔNG TY CỔ PHẦN VIỆT NAM GOLF</strong> </li>
                 </ul>
                 <ul>
-                <strong>  2. Đối với Dịch vụ Phí Hội viên</strong>
-                  <li>- Ngân hàng thụ hưởng: <strong>NGÂN HÀNG TMCP NAM Á</strong></li>
-                  <li>- Số tài khoản: <strong>188889999</strong></li>
-                  <li>- Tên người nhận: <strong>CÔNG TY CỔ PHẦN VIỆT NAM GOLF</strong></li>
+                  <strong> 2. Đối với Dịch vụ Phí Hội viên</strong>
+                  <li>
+                    - Ngân hàng thụ hưởng: <strong>NGÂN HÀNG TMCP NAM Á</strong>
+                  </li>
+                  <li>
+                    - Số tài khoản: <strong>188889999</strong>
+                  </li>
+                  <li>
+                    - Tên người nhận:{' '}
+                    <strong>CÔNG TY CỔ PHẦN VIỆT NAM GOLF</strong>
+                  </li>
                   <li>
                     Sau khi Khách Hàng chuyển khoản thành công, VG Corp sẽ tiến
                     hành kiểm tra và xác nhận đơn hàng thanh toán thành công.
@@ -412,11 +435,12 @@ export default function PolicyPgae() {
                     Hàng cung cấp qua thông tin đơn hàng.
                   </li>
                   <li className='italic	'>
-                    <strong>Lưu ý:</strong> VG Corp không chịu trách nhiệm về sai sót trong quá
-                    trình chuyển khoản hoặc chuyển khoản sai thông tin. Trường
-                    hợp xảy ra sai sót, Khách Hàng nên chủ động làm việc trực
-                    tiếp với ngân hàng để giải quyết. Mọi chi tiết thắc mắc
-                    Khách Hàng có thể liên hệ hỗ trợ với Chúng tôi qua    <strong>Hotline:</strong>{' '}
+                    <strong>Lưu ý:</strong> VG Corp không chịu trách nhiệm về
+                    sai sót trong quá trình chuyển khoản hoặc chuyển khoản sai
+                    thông tin. Trường hợp xảy ra sai sót, Khách Hàng nên chủ
+                    động làm việc trực tiếp với ngân hàng để giải quyết. Mọi chi
+                    tiết thắc mắc Khách Hàng có thể liên hệ hỗ trợ với Chúng tôi
+                    qua <strong>Hotline:</strong>{' '}
                     <Link
                       className='text-green-700'
                       href='tel:+0899855599'

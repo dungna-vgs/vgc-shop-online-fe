@@ -24,5 +24,6 @@
   "not-found": "No search results for {{searchQuery}}. Please try again with a different keyword.",
   "result-search": "Found {{total}} results for the keyword {{keyword}}.",
   "maintenance":"The system is under maintenance.",
-  "404":"Page not found"
+  "404":"Page not found",
+  "private":"Privacy policy"
 }
