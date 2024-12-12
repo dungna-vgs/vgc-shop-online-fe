@@ -25,7 +25,6 @@ export default function CardNumber({
       event_label: `Number: ${vga.id}`
     })
   }
-
   return (
     <div className={clsx(styles.listCard, className)}>
       <div className=''>
@@ -62,15 +61,24 @@ export default function CardNumber({
         >
           <div>
             <span className='block lg:text-[16px] text-[12px]'>
-              {formatCurrency(vga.amount)}đ
+              {formatCurrency(vga.promotional_amount || vga.amount)}đ
             </span>
-            <div className='flex gap-2 items-center'>
-              <span className='block text-[10px] font-medium text-[#CED6D2] line-through lg:text-[12px]'>
-                {formatCurrency(vga.amount)}đ
-              </span>
-              <span className='font-medium'>{vga.original_amount}</span>
-              <span className='font-medium text-[#00FF93] text-[12px]'>{vga.discount}%</span>
-            </div>
+            {showBuyButton && (
+              <div
+                className={clsx('flex gap-2 items-center', {
+                  invisible:
+                    !vga.promotional_amount ||
+                    vga.promotional_amount === vga.amount
+                })}
+              >
+                <span className='block text-[10px] font-medium text-[#CED6D2] line-through lg:text-[12px]'>
+                  {formatCurrency(vga.amount)}đ
+                </span>
+                <span className='font-medium text-[#00FF93] text-[10px] lg:text-[12px]'>
+                  {vga.promotional_percentage}%
+                </span>
+              </div>
+            )}
           </div>
           {showBuyButton && (
             <Link

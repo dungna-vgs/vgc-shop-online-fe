@@ -4,6 +4,8 @@ export type TVga = {
   loai_ma: string | null
   original_amount?: number
   discount?: string
+  promotional_amount?: number
+  promotional_percentage?: number
 }
 
 export type TFeePackage = {
@@ -21,6 +23,7 @@ export type TFeePackage = {
   refund: number
   original_amount?: number
   discount?: string
+  savings_percentage?: number
 }
 
 export type TTypeVGA = {
