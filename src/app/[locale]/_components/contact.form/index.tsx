@@ -45,13 +45,11 @@ export default function ContactForm() {
 
     const raw = JSON.stringify(values)
 
-    const requestOptions: any = {
+    fetch('http://localhost:3000/api/form', {
       method: 'POST',
       headers: myHeaders,
       body: raw
-    }
-
-    fetch('http://localhost:3000/api/form', requestOptions)
+    })
       .then((response) => response.text())
       .then((result) => {
         console.log(result)
