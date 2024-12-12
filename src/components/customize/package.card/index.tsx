@@ -32,6 +32,7 @@ export default function PackageCard({
       event_label: `Package: ${feePackage.sub_name}`
     })
   }
+
   return memberships?.map((membership: TFeePackage, index: number) => (
     <div key={index}>
       <div className={clsx(styles.listCard, cardClassName)}>

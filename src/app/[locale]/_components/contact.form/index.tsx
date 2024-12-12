@@ -45,7 +45,7 @@ export default function ContactForm() {
 
     const raw = JSON.stringify(values)
 
-    fetch('http://localhost:3000/api/form', {
+    fetch('/api/form', {
       method: 'POST',
       headers: myHeaders,
       body: raw
