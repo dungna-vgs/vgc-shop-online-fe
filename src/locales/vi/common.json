@@ -24,5 +24,7 @@
   "price": "Giá: {{price}}đ",
   "result-search": "Tìm thấy {{total}} kết quả cho từ khoá {{keyword}}",
   "maintenance":"Hệ thống đang bảo trì",
-  "404":"Không tìm thấy trang"
+  "404":"Không tìm thấy trang",
+  "private":"Chính sách bảo mật",
+  "year-prio": "Gói hội viên ưu tiên {{year}} năm"
 }

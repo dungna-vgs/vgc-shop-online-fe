@@ -8,12 +8,7 @@ import clsx from 'clsx'
 export const GlobalToast = () => {
   const { t } = useTranslation('common')
   const { open, message, duration, type, hideToast } = useToastStore()
-  console.log('open: ', {
-    open,
-    message,
-    duration,
-    type
-  })
+ 
   useEffect(() => {
     if (open) {
       const timer = setTimeout(() => hideToast(), duration)
@@ -22,7 +17,6 @@ export const GlobalToast = () => {
   }, [open, duration, hideToast])
 
   const handleCloseToast = () => {
-    console.log('handleCloseToast')
     hideToast()
   }
 

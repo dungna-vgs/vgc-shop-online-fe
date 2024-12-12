@@ -13,7 +13,8 @@ export const getMembersipPackages = async () => {
     if (origin) {
       const axiosInstance = createAxiosInstanceServer(origin)
       const res = await axiosInstance.get<TMembershipPackageResponse>(
-        API_ENDPOINT.LIST_MEMBERSHIP_PACKAGES
+        API_ENDPOINT.LIST_MEMBERSHIP_PACKAGES,
+        { params: { page: 1, limit: 1000 } }
       )
       return res.data.data
     }

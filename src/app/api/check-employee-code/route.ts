@@ -45,10 +45,6 @@ export async function GET(request: NextRequest) {
   const res = await axiosInstance.get(API_ENDPOINT.CHECK_EMPLOYEE_CODE, {
     params
   })
-  console.log('JSON.stringify(params): ')
-  console.log(JSON.stringify(params))
-  console.log('JSON.stringify(res.data): ')
-  console.log(JSON.stringify(res.data))
   return NextResponse.json({
     success: true,
     data: res.data,

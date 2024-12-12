@@ -32,6 +32,7 @@ export default function PackageCard({
       event_label: `Package: ${feePackage.sub_name}`
     })
   }
+
   return memberships?.map((membership: TFeePackage, index: number) => (
     <div key={index}>
       <div className={clsx(styles.listCard, cardClassName)}>
@@ -68,27 +69,24 @@ export default function PackageCard({
             {t('price', { price: formatCurrency(membership.amount) })}
           </span>
           <div className='flex justify-center lg:justify-start w-full px-4 gap-2 items-center'>
-            {/* <span className='block  font-medium text-[#CED6D2] line-through text-[12px]'>
-                {formatCurrency(membership.original_amount)}đ
-              </span> */}
-            <span
-              className={clsx(
-                'block font-medium text-[#CED6D2] line-through text-[12px]',
-                { invisible: membership.original_amount === membership.amount }
-              )}
-            >
-              {membership.original_amount
+              <span className={clsx(
+                'block font-medium  text-[#CED6D2] line-through  text-[12px]',
+                {
+                  invisible: membership.original_amount === membership.amount
+                }
+              )}>
+                {membership.original_amount
                 ? formatCurrency(membership.original_amount)
-                : null}
-            </span>
-            <span
-              className={clsx('font-medium text-[#FF0303] text-[12px]', {
+                :null
+                }
+              </span>
+              <span 
+              className={clsx('font-medium text-[#FF0303]  text-[12px]', {
                 invisible: !membership.savings_percentage
-              })}
-            >
-              {membership.savings_percentage}%
-            </span>
-          </div>
+              })}>
+                {membership.savings_percentage}%
+              </span>
+              </div>
           <Link
             href={`/buy-package/${membership.id}`}
             onClick={() => handleClickBuyButton(membership)}

@@ -2,13 +2,20 @@
 import React from 'react'
 import { Tabs, Space } from 'antd'
 import Link from 'next/link'
+import useWindowDimensions from '@/hocs'
+import './style.scss'
 
 export default function PolicyPgae() {
+  const { width } = useWindowDimensions()
+
   return (
     <div className='max-w-[1200px] min-h-full mx-auto md:p-6 p-4'>
       <div>
         <Space size={30}>
-          <Tabs defaultActiveKey='tab1' tabPosition='left'>
+          <Tabs
+            defaultActiveKey='tab1'
+            tabPosition={width > 800 ? 'left' : 'top'}
+          >
             <Tabs.TabPane tab='Giới thiệu' key='tab1'>
               <div>
                 <ul className='text-justify list-disc'>
@@ -391,7 +398,7 @@ export default function PolicyPgae() {
             <Tabs.TabPane tab='Phương thức thanh toán' key='tab5'>
               <div className='text-justify'>
                 <ul>
-                  Khách Hàng thanh toán đơn hàng bằng cách chuyển khoản vào tài
+                  Khách hàng thanh toán đơn hàng bằng cách chuyển khoản vào tài
                   khoản ngân hàng của Chúng tôi bằng cách quét mã QR tại bước
                   thanh toán hoặc nhập thông tin nhận thanh toán như sau:
                   <li>
@@ -403,7 +410,10 @@ export default function PolicyPgae() {
                   <li>
                     - Số tài khoản: <strong>111797955</strong>{' '}
                   </li>
-                  <li>- Tên người nhận: CÔNG TY CỔ PHẦN VIỆT NAM GOLF</li>
+                  <li>
+                    - Tên người nhận:{' '}
+                    <strong>CÔNG TY CỔ PHẦN VIỆT NAM GOLF</strong>{' '}
+                  </li>
                 </ul>
                 <ul>
                   <strong> 2. Đối với Dịch vụ Phí Hội viên</strong>
