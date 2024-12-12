@@ -117,7 +117,11 @@ export default function ContactForm() {
                 <FormItem>
                   <FormControl>
                     <div className='flex items-center justify-center'>
-                      <InputOTP maxLength={6} className='flex justify-center' {...field}>
+                      <InputOTP
+                        maxLength={6}
+                        className='flex justify-center'
+                        {...field}
+                      >
                         <InputOTPGroup>
                           <InputOTPSlot index={0} />
                           <InputOTPSlot index={1} />

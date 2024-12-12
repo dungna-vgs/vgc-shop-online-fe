@@ -7,7 +7,6 @@ import Image from 'next/image'
 import React from 'react'
 import styles from './style.module.css'
 import { getMembersipPackages } from '@/apis/business/membership.package'
-import { TFeePackage } from '@/types/type'
 import { apiAds } from '@/apis/internals/server/ads'
 import Link from 'next/link'
 import { getConfigs } from '@/apis/business/configs'
@@ -17,11 +16,8 @@ import BenefitForm from '@/components/customize/benefit.form'
 import { Tabs, TabsContent } from '@/components/ui/tabs'
 import clsx from 'clsx'
 import TabsListMembership from '@/components/customize/tabs.membership'
-type TMemberShipProps = {
-  memberships: TFeePackage[]
-}
 
-export default async function MembershipFee(props: TMemberShipProps) {
+export default async function MembershipFee() {
   const configs = await getConfigs()
   if (configs.isMaintain) {
     return redirect('/maintainance')
@@ -41,21 +37,21 @@ export default async function MembershipFee(props: TMemberShipProps) {
             <div>
               <Tabs defaultValue='account'>
                 <div className='mb-6'>
-               <TabsListMembership />
+                  <TabsListMembership />
                 </div>
                 <TabsContent value='all'>
                   <div className='grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 lg:gap-8 mb-2 '>
-                    <PackageCard memberships={props.memberships} />
+                    <PackageCard memberships={memberships} />
                   </div>
                 </TabsContent>
                 <TabsContent value='premium'>
                   <div className='grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 lg:gap-8 mb-2 '>
-                    <PackageCard memberships={props.memberships} />
+                    <PackageCard memberships={memberships} />
                   </div>
                 </TabsContent>
                 <TabsContent value='priority'>
                   <div className='grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 lg:gap-8 mb-2 '>
-                    <PackageCard memberships={props.memberships} />
+                    <PackageCard memberships={memberships} />
                   </div>
                 </TabsContent>
               </Tabs>
