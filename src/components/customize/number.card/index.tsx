@@ -26,7 +26,6 @@ export default function CardNumber({
     })
   }
 
-  console.log('vga', vga)
   return (
     <div className={clsx(styles.listCard, className)}>
       <div className=''>

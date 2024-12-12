@@ -5,7 +5,6 @@ import Link from 'next/link'
 import useWindowDimensions from '@/hocs'
 import './style.scss'
 
-
 export default function PolicyPgae() {
   const { width } = useWindowDimensions()
 
@@ -411,7 +410,10 @@ export default function PolicyPgae() {
                   <li>
                     - Số tài khoản: <strong>111797955</strong>{' '}
                   </li>
-                  <li>- Tên người nhận: <strong>CÔNG TY CỔ PHẦN VIỆT NAM GOLF</strong> </li>
+                  <li>
+                    - Tên người nhận:{' '}
+                    <strong>CÔNG TY CỔ PHẦN VIỆT NAM GOLF</strong>{' '}
+                  </li>
                 </ul>
                 <ul>
                   <strong> 2. Đối với Dịch vụ Phí Hội viên</strong>

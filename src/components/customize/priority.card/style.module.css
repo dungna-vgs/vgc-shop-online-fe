@@ -1,9 +1,10 @@
 .listCard {
     position: relative;
+    overflow: hidden;
   }
   
   .titleCard {
-    background: linear-gradient(90deg, #cfab42 0%, #ebd977 50%, #81570d 100%);
+    background: white;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -13,7 +14,7 @@
     padding-bottom: 16px;
   }
   .packageCard {
-    background: linear-gradient(90deg, #cfab42 0%, #ebd977 50%, #81570d 100%);
+    background: white;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -28,7 +29,7 @@
   @media only screen and (max-width: 892px) {
     /* For desktop: */
     .titleCard {
-      background: linear-gradient(90deg, #cfab42 0%, #ebd977 50%, #81570d 100%);
+      background: white;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -41,7 +42,7 @@
   @media only screen and (max-width: 568px) {
     /* For desktop: */
     .titleCard {
-      background: linear-gradient(90deg, #cfab42 0%, #ebd977 50%, #81570d 100%);
+      background: white;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;

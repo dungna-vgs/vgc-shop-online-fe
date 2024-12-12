@@ -6,8 +6,6 @@ import { TRequest } from '@/utils'
 
 const getValidDomain = () => {
   const headersList = headers()
-  console.log('-----------------------------------------------')
-  console.log('headersList: ', headersList)
   const domainFromHost = headersList.get('host')
   const domainFromReferer = headersList.get('referer')
   const domainFromXForwardedHost = headersList.get('x-forwarded-host')
@@ -21,7 +19,6 @@ const getValidDomain = () => {
       return url.includes('vgcorp.vn') || url.includes('.shop')
     }
   })
-  console.log({ domain })
   if (!!domain) {
     if (!domain.includes('http')) {
       domain = `https://${domain}`

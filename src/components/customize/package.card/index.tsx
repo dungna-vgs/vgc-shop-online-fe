@@ -68,9 +68,6 @@ export default function PackageCard({
             {t('price', { price: formatCurrency(membership.amount) })}
           </span>
           <div className='flex justify-center lg:justify-start w-full px-4 gap-2 items-center'>
-              {/* <span className='block  font-medium text-[#CED6D2] line-through text-[12px]'>
-                {formatCurrency(membership.original_amount)}đ
-              </span> */}
               <span className='block  font-medium text-[#CED6D2] line-through text-[12px] '>{membership.original_amount}</span>
               <span className='font-medium text-[#FF0303] text-[12px]'>{membership.discount}%</span>
               </div>

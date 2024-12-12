@@ -10,7 +10,5 @@ export interface GAEventProps {
 export const event = (action: string, props: GAEventProps) => {
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', action, props)
-
-    console.log('gtag event:::', action, props)
   }
 }

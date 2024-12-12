@@ -27,8 +27,6 @@ export const apiSearchVGA = async (
   params: TParamsSearchVGA
 ): Promise<TReturnSeachAall> => {
   const axiosInstance = createAxiosInstanceClient(location.origin)
-  console.log('params: ')
-  console.log(params)
   const res = await axiosInstance.get<TReturnSeachAall>(
     API_INTERNAL_ENDPOINT.SEARCH_VGA,
     {

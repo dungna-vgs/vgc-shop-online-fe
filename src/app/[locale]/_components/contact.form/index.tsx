@@ -22,9 +22,9 @@ import {
 import { useTranslation } from 'react-i18next'
 
 const formSchema = z.object({
-  fullName: z.string().min(3).max(50),
+  name: z.string().min(3).max(50),
   email: z.string().email(),
-  phoneNumber: z.string(),
+  phone: z.string(),
   service: z.enum(['buy-vga', 'membership', 'ads', 'golf-event', 'livescore'])
 })
 
@@ -33,15 +33,33 @@ export default function ContactForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      fullName: '',
+      name: '',
       email: '',
-      phoneNumber: ''
+      phone: ''
     }
   })
 
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log({ values })
+    const myHeaders = new Headers()
+    myHeaders.append('Content-Type', 'application/json')
+
+    const raw = JSON.stringify(values)
+
+    const requestOptions: any = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw
+    }
+
+    fetch('http://localhost:3000/api/form', requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        console.log(result)
+        console.log('thanh cong r')
+      })
+      .catch((error) => console.error(error))
   }
+
   return (
     <div className='mt-[53px] mb-[87px] max-w-[721px] mx-auto px-4 lg:px-8 py-4 lg:py-8 bg-white rounded-xl shadow-lg'>
       <p className='text-center  text-black font-semibold text-[24px] md:text-[32px] lg:text-[40px] leading-tight uppercase mb-2 md:mb-4'>
@@ -55,14 +73,15 @@ export default function ContactForm() {
           <form
             onSubmit={form.handleSubmit(handleSubmit)}
             className='space-y-6'
+            action='https://script.google.com/macros/s/AKfycbxfPj2qg6EjzcWcq_ADfz2zCJj0aGULlgH6UezzCgma5KVlqmZOogJ_y-3a8Hnk-FKC/exec'
           >
             <FormField
               control={form.control}
-              name='fullName'
+              name='name'
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input placeholder={t('fullname')} {...field} />
+                    <Input placeholder={t('name')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -84,7 +103,7 @@ export default function ContactForm() {
 
             <FormField
               control={form.control}
-              name='phoneNumber'
+              name='phone'
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
