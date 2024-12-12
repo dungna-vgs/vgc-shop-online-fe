@@ -81,7 +81,7 @@ export default function ContactForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input placeholder={t('name')} {...field} />
+                    <Input placeholder={t('fullname')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
