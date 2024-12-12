@@ -39,7 +39,6 @@ export const getVGAs = async (
   }
 ): Promise<TApiVGAs> => {
   const [origin] = getStoreDomain()
-  console.log('origin: ', params)
   try {
     if (origin) {
       const axiosInstance = createAxiosInstanceServer(origin)

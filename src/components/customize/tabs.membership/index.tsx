@@ -1,10 +1,15 @@
 'use client'
 import { TabsList, TabsTrigger } from '@/components/ui/tabs'
 import React from 'react'
-import SearchBox from '../search.box'
 import { useTranslation } from 'react-i18next'
+import SearchMembership from '../search.membership'
 
-export default function TabsListMembership() {
+type TTabsListMembershipProps = {
+  keyword: string
+  onSearch: (keyword: string) => void
+}
+
+export default function TabsListMembership(props: TTabsListMembershipProps) {
   const { t } = useTranslation('common')
 
   return (
@@ -31,7 +36,9 @@ export default function TabsListMembership() {
             Priority
           </TabsTrigger>
         </div>
-        <SearchBox />
+        {/* TÌM KIẾM  MEMBERSHIP FEE */}
+        <SearchMembership {...props} />
+        {/* TÌM KIẾM  MEMBERSHIP FEE */}
       </TabsList>
     </div>
   )

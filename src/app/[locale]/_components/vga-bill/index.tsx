@@ -27,7 +27,6 @@ export default function VGABill({ promotion }: TVGABill) {
   if (!buyer || (!vga && !feePackage)) return null
 
   const money = vga?.amount || feePackage?.amount || 0
-  console.log({ employee })
   return (
     <div>
       <div className='px-0 lg:px-6 py-4'>

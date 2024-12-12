@@ -56,11 +56,6 @@ export async function GET(request: NextRequest) {
   const res = await axiosInstance.get(API_ENDPOINT.CHECK_DISCOUNT_CODE, {
     params
   })
-  console.log('JSON.stringify(params): ')
-  console.log(JSON.stringify(params))
-  console.log('JSON.stringify(res.data): ')
-  console.log(JSON.stringify(res.data))
-  console.log(origin)
   return NextResponse.json({
     success: true,
     data: res.data,

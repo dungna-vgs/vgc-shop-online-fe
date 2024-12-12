@@ -83,8 +83,12 @@ export function getMembershipPackageName(feePackage: TFeePackage) {
   if (feePackage.sub_name.startsWith('Pre')) {
     return `Premium ${feePackage.year_add}`
   }
+  if (feePackage.sub_name.startsWith('Prio')) {
+    return `Priority ${feePackage.year_add}`
+  }
   return feePackage.sub_name
 }
+
 
 export function generateVietQR({
   bank_account,

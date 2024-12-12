@@ -1,5 +1,5 @@
 'use client'
-import { MapPin, Mail, Phone } from 'lucide-react'
+import { MapPin, Mail, Phone, ShieldCheck } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
 import styles from './style.module.css'
@@ -143,6 +143,12 @@ const Footer: React.FC = () => {
               <Phone />
               <Link href='tel:+0899855599' target='_blank'>
                 1900 2126
+              </Link>
+            </div>
+            <div className='flex items-center gap-3 justify-start'>
+            <ShieldCheck />
+              <Link href='/policy' target='_blank'>
+                {t('private')}
               </Link>
             </div>
           </div>
