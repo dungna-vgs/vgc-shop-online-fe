@@ -57,7 +57,7 @@ export default function PriorityCard({
               height={117}
               alt='Icon Priotity'
               quality={60}
-              className='rounded-[16px] bg-transparent'
+              className='rounded-[16px] bg-transparent opacity-60'
             />
           </div>
         </div>
