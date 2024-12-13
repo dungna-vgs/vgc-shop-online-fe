@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import { z } from 'zod'
+import { useLoading } from '@/stores'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
@@ -30,6 +31,7 @@ const formSchema = z.object({
 })
 
 export default function ContactForm() {
+  const { setLoading } = useLoading()
   const { t } = useTranslation('form')
   const { showToast } = useToastStore()
   const form = useForm<z.infer<typeof formSchema>>({
@@ -47,6 +49,7 @@ export default function ContactForm() {
 
     const raw = JSON.stringify(values)
 
+    setLoading(true)
     fetch('/api/form', {
       method: 'POST',
       headers: myHeaders,
@@ -62,8 +65,10 @@ export default function ContactForm() {
         console.error(error)
         showToast(t('error'), 'error', 2000)
       })
+      .finally(() => {
+        setLoading(false)
+      })
   }
-
   return (
     <div className='mt-[53px] mb-[87px] max-w-[721px] mx-auto px-4 lg:px-8 py-4 lg:py-8 bg-white rounded-xl shadow-lg'>
       <p className='text-center  text-black font-semibold text-[24px] md:text-[32px] lg:text-[40px] leading-tight uppercase mb-2 md:mb-4'>

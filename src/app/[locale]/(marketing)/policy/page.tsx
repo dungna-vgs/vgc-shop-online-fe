@@ -14,7 +14,7 @@ export default function PolicyPgae() {
         <Space size={30}>
           <Tabs
             defaultActiveKey='tab1'
-            tabPosition={width > 800 ? 'left' : 'top'}
+            tabPosition={width < 800 ? 'top' : 'left'}
           >
             <Tabs.TabPane tab='Giới thiệu' key='tab1'>
               <div>
