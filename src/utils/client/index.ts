@@ -11,7 +11,6 @@ export function compareObjects<T extends object>(obj1: T, obj2: T): boolean {
   const keys2 = Object.keys(obj2)
 
   if (keys1.length !== keys2.length) {
-
     return true
   }
 

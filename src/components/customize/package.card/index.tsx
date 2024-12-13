@@ -69,24 +69,26 @@ export default function PackageCard({
             {t('price', { price: formatCurrency(membership.amount) })}
           </span>
           <div className='flex justify-center lg:justify-start w-full px-4 gap-2 items-center'>
-              <span className={clsx(
+            <span
+              className={clsx(
                 'block font-medium  text-[#CED6D2] line-through  text-[12px]',
                 {
                   invisible: membership.original_amount === membership.amount
                 }
-              )}>
-                {membership.original_amount
+              )}
+            >
+              {membership.original_amount
                 ? formatCurrency(membership.original_amount)
-                :null
-                }
-              </span>
-              <span 
+                : null}
+            </span>
+            <span
               className={clsx('font-medium text-[#FF0303]  text-[12px]', {
                 invisible: !membership.savings_percentage
-              })}>
-                {membership.savings_percentage}%
-              </span>
-              </div>
+              })}
+            >
+              {membership.savings_percentage}%
+            </span>
+          </div>
           <Link
             href={`/buy-package/${membership.id}`}
             onClick={() => handleClickBuyButton(membership)}

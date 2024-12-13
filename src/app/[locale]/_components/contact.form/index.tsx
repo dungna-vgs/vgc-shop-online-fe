@@ -20,6 +20,7 @@ import {
   SelectValue
 } from '@/components/ui/select'
 import { useTranslation } from 'react-i18next'
+import { useToastStore } from '@/stores'
 
 const formSchema = z.object({
   name: z.string().min(3).max(50),
@@ -30,6 +31,7 @@ const formSchema = z.object({
 
 export default function ContactForm() {
   const { t } = useTranslation('form')
+  const { showToast } = useToastStore()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -53,9 +55,13 @@ export default function ContactForm() {
       .then((response) => response.text())
       .then((result) => {
         console.log(result)
+        showToast(t('success-form'), 'success', 2000)
         console.log('thanh cong r')
       })
-      .catch((error) => console.error(error))
+      .catch((error) => {
+        console.error(error)
+        showToast(t('error'), 'error', 2000)
+      })
   }
 
   return (

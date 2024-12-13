@@ -1,9 +1,8 @@
 .btnBuy {
-    background: linear-gradient(90deg, #17573c 24.63%, #4ac486 100%) !important;
-    margin-top: 12px;
-    color: white;
-    padding: 8px 16px;
-    font-weight: 600;
-    border-radius: 8px;
-  }
-  
+  background: linear-gradient(90deg, #17573c 24.63%, #4ac486 100%) !important;
+  margin-top: 12px;
+  color: white;
+  padding: 8px 16px;
+  font-weight: 600;
+  border-radius: 8px;
+}

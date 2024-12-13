@@ -89,7 +89,6 @@ export function getMembershipPackageName(feePackage: TFeePackage) {
   return feePackage.sub_name
 }
 
-
 export function generateVietQR({
   bank_account,
   bank_code,

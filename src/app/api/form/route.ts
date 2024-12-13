@@ -24,7 +24,7 @@ type TData = {
 }
 const updateDataToGoogleSheet = async (data: TData) => {
   try {
-    const SHEET_ID = process.env.SHEET_ID!;
+    const SHEET_ID = process.env.SHEET_ID!
     const serviceAccountAuth = new JWT({
       email: ggKey.client_email,
       key: ggKey.private_key,

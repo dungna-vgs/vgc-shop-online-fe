@@ -34,9 +34,9 @@
   "recipient": "Người nhận",
   "total": "Tổng cộng",
   "discount": "Mã giảm giá",
-	"membership-fee-gift":"Phí hội viên tặng kèm",
-	"month":"Tháng",
-	"months":"Tháng",
+  "membership-fee-gift": "Phí hội viên tặng kèm",
+  "month": "Tháng",
+  "months": "Tháng",
   "amount": "Thành tiền",
   "staff-code": "Mã nhân viên tư vấn",
   "payment-information": "Thông tin thanh toán ",
@@ -91,5 +91,6 @@
   "ads": "Quảng cáo",
   "build-event": "Tổ chức sự kiện Golf",
   "register": "Đăng ký",
-  "otp": "Gửi mã OTP"
+  "otp": "Gửi mã OTP",
+  "success-form": "Cảm ơn bạn, thông tin đã được gửi thành công! Chúng tôi sẽ liên hệ lại sớm."
 }

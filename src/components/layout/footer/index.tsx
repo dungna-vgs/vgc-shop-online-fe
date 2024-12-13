@@ -51,7 +51,13 @@ const Footer: React.FC = () => {
                 1900 2126
               </Link>
             </div>
-            <div className='block md:hidden'>
+            <div className='flex items-center gap-3 justify-start lg:hidden'>
+              <ShieldCheck />
+              <Link href='/policy' target='_blank'>
+                {t('private')}
+              </Link>
+            </div>
+            <div className='block md:hidden '>
               <div className='flex w-full justify-end items-center gap-4'>
                 <Link
                   href='https://www.facebook.com/vgcorp.vn/'
@@ -146,7 +152,7 @@ const Footer: React.FC = () => {
               </Link>
             </div>
             <div className='flex items-center gap-3 justify-start'>
-            <ShieldCheck />
+              <ShieldCheck />
               <Link href='/policy' target='_blank'>
                 {t('private')}
               </Link>

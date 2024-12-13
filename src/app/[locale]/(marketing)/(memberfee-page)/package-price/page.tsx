@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
 import styles from './style.module.css'
-import { TFeePackage } from '@/types/type'
 import { getMembersipPackages } from '@/apis/business/membership.package'
 import { apiAds } from '@/apis/internals/server/ads'
 import Link from 'next/link'
@@ -11,11 +10,7 @@ import TitlePackage from '@/components/customize/title.package'
 import clsx from 'clsx'
 import MembershipComponent from './membership'
 
-type TMemberShipProps = {
-  memberships: TFeePackage[]
-}
-
-export default async function MembershipFee(props: TMemberShipProps) {
+export default async function MembershipFee() {
   const configs = await getConfigs()
   if (configs.isMaintain) {
     return redirect('/maintainance')
@@ -32,9 +27,7 @@ export default async function MembershipFee(props: TMemberShipProps) {
             <TitlePackage />
           </div>
           <div className={clsx(styles.customizeCard)}>
-            <MembershipComponent
-              memberships={props.memberships || memberships}
-            />
+            <MembershipComponent memberships={memberships} />
           </div>
         </div>
         {ads.adsMembershipCenter && (

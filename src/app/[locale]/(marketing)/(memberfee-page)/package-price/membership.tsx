@@ -21,6 +21,29 @@ type TMemberShipProps = {
 
 export default function MembershipComponent(props: TMemberShipProps) {
   const [keyword, searchKeyword] = useState('')
+
+  return (
+    <div className='grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 lg:gap-8 mb-2 '>
+      <PackageCard
+        memberships={(props.memberships || []).filter(
+          (membership) =>
+            membership.type_upgrade == TYPE_MEMBERSHIP_PACKAGE.PREMIUM &&
+            getMembershipPackageName(membership)
+              .toLowerCase()
+              .includes(keyword.toLowerCase())
+        )}
+      />
+      <PriorityCard
+        memberships={(props.memberships || []).filter(
+          (membership) =>
+            membership.type_upgrade == TYPE_MEMBERSHIP_PACKAGE.PRIORITY &&
+            getMembershipPackageName(membership)
+              .toLowerCase()
+              .includes(keyword.toLowerCase())
+        )}
+      />
+    </div>
+  )
   return (
     <div>
       <Tabs defaultValue='account'>

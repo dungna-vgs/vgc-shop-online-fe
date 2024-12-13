@@ -7,11 +7,10 @@ import Link from 'next/link'
 import { TFeePackage } from '@/types/type'
 import { useGlobalStore } from '@/stores'
 import { useTranslation } from 'react-i18next'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+// import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import clsx from 'clsx'
 import { TYPE_MEMBERSHIP_PACKAGE } from '@/constants'
 import PriorityCard from '@/components/customize/priority.card'
-import SearchMembership from '../search.membership'
 import { useState } from 'react'
 import { getMembershipPackageName } from '@/utils'
 
@@ -21,21 +20,24 @@ type TMemberShipProps = {
 export default function MemberShip(props: TMemberShipProps) {
   const { t } = useTranslation('common')
   const { vgaSearchAll, feeSearchAll } = useGlobalStore()
-  const [keyword, setKeyword] = useState<string>('')
+  const [keyword] = useState<string>('')
 
   if (vgaSearchAll.length || feeSearchAll.length) return null
-  console.log(props.memberships)
+
   return (
     <div className='mt-8'>
       <div className='flex justify-between items-center pb-4'>
         <h3 className='text-xl font-semibold text-[#000]'>{t('cost')}</h3>
       </div>
       <div className={clsx(styles.customizeCard)}>
-        <div>
-          <Tabs defaultValue='account'>
+        {/* <div>
+          <Tabs autoFocus defaultValue='account'>
             <div className='mb-6'>
-              <TabsList className='block mb-20 md:mb-0 md:flex justify-between gap-4 bg-transparent text-black'>
-                <div className='flex gap-4 items-cente'>
+              <TabsList
+                defaultValue='all'
+                className='block mb-20 md:mb-0 md:flex justify-between gap-4 bg-transparent text-black'
+              >
+                <div className='flex gap-4 items-center'>
                   <TabsTrigger
                     autoFocus
                     value='all'
@@ -56,10 +58,14 @@ export default function MemberShip(props: TMemberShipProps) {
                     Priority
                   </TabsTrigger>
                 </div>
-
-                {/* TÌM KIẾM  MEMBERSHIP FEE */}
-                <SearchMembership onSearch={setKeyword} keyword={keyword} />
-                {/* TÌM KIẾM  MEMBERSHIP FEE */}
+                <div className='relative right-2.5 top-0  ml-auto flex-1 md:grow-0 my-4 md:my-0'>
+                  <Search className='absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground ' />
+                  <Input
+                    type='search'
+                    placeholder={t('search')}
+                    className='text-sm w-full rounded-lg bg-[#F5F5F5] border-none pl-8 md:w-[200px] lg:w-[260px]'
+                  />
+                </div>
               </TabsList>
             </div>
             <TabsContent value='all'>
@@ -115,6 +121,27 @@ export default function MemberShip(props: TMemberShipProps) {
               </div>
             </TabsContent>
           </Tabs>
+        </div> */}
+
+        <div className='grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 lg:gap-8 mb-2 '>
+          <PriorityCard
+            memberships={props.memberships.filter(
+              (membership) =>
+                membership.type_upgrade == TYPE_MEMBERSHIP_PACKAGE.PRIORITY &&
+                getMembershipPackageName(membership)
+                  .toLowerCase()
+                  .includes(keyword.toLowerCase())
+            )}
+          />
+          <PackageCard
+            memberships={props.memberships.filter(
+              (membership) =>
+                membership.type_upgrade == TYPE_MEMBERSHIP_PACKAGE.PREMIUM &&
+                getMembershipPackageName(membership)
+                  .toLowerCase()
+                  .includes(keyword.toLowerCase())
+            )}
+          />
         </div>
       </div>
 
