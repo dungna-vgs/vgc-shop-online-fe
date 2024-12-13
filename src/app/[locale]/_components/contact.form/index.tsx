@@ -61,9 +61,6 @@ export default function ContactForm() {
         showToast(t('success-form'), 'success', 2000)
         console.log('thanh cong r')
       })
-      .finally(() => {
-        setLoading(false)
-      })
       .catch((error) => {
         console.error(error)
         showToast(t('error'), 'error', 2000)
