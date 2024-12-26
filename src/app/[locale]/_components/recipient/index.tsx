@@ -1,6 +1,8 @@
 import CardNumber from '@/components/customize/number.card'
 import PackageCard from '@/components/customize/package.card'
+import PriorityCard from '@/components/customize/priority.card'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
+import { TYPE_MEMBERSHIP_PACKAGE } from '@/constants'
 import { TFeePackage, TGolfer, TVga } from '@/types/type'
 import { formatCurrency, getMembershipPackageName } from '@/utils'
 import React from 'react'
@@ -14,6 +16,7 @@ type Props = {
 
 export default function RecipientCard({ golfer, vga, feePackage }: Props) {
   const { t } = useTranslation('form')
+  console.log('feePackage', feePackage)
   return (
     <div className='flex flex-col gap-8'>
       <div className='pb-4'>
@@ -49,15 +52,27 @@ export default function RecipientCard({ golfer, vga, feePackage }: Props) {
       {/* ĐÓNG PHÍ HỘI VIÊN */}
       {!!feePackage && (
         <div className=''>
-          <p className='text-[24px] mb-4 font-semibold'>Gói hội viên</p>
+          <p className='text-[24px] mb-4 font-semibold'>
+            {t('package-member')}
+          </p>
           <div className='block sm:flex min-w-[246px]  gap-4 justify-between'>
             <div className='flex justify-center'>
-              <PackageCard
-                memberships={[feePackage]}
-                showBuyButton={false}
-                cardClassName='max-w-64 rounded-[20px] overflow-hidden'
-                textClassName='!text-[2rem]'
-              />
+              {feePackage.type_upgrade === TYPE_MEMBERSHIP_PACKAGE.PRIORITY ? (
+                <PriorityCard
+                  hideIcon
+                  memberships={[feePackage]}
+                  showBuyButton={false}
+                  cardClassName='max-w-64 rounded-[20px] overflow-hidden'
+                  textClassName='!text-[2rem]'
+                />
+              ) : (
+                <PackageCard
+                  memberships={[feePackage]}
+                  showBuyButton={false}
+                  cardClassName='max-w-64 rounded-[20px] overflow-hidden'
+                  textClassName='!text-[2rem]'
+                />
+              )}
             </div>
             <div className='flex flex-1 justify-between gap-4 mt-4 md:mt-0 xl:justify-between items-center'>
               <span className='text-[16px] font-bold'>

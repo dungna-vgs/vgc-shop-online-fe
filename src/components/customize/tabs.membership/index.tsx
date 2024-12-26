@@ -22,11 +22,11 @@ export default function TabsListMembership(props: TTabsListMembershipProps) {
           <TabsTrigger
             autoFocus
             value='all'
-            className='w-20 sm:w-[128px] h-10 focus:outline-none hidden'
+            className='w-20 sm:w-[128px] h-10 focus:outline-none'
           >
             {t('all')}
           </TabsTrigger>
-          {/* <TabsTrigger
+          <TabsTrigger
             value='premium'
             className='w-20 sm:w-[128px] h-10 focus:outline-none'
           >
@@ -34,10 +34,10 @@ export default function TabsListMembership(props: TTabsListMembershipProps) {
           </TabsTrigger>
           <TabsTrigger
             value='priority'
-            className='w-20 sm:w-[128px] h-10 focus:outline-none hidden'
+            className='w-20 sm:w-[128px] h-10 focus:outline-none'
           >
             Priority
-          </TabsTrigger> */}
+          </TabsTrigger>
         </div>
         {/* TÌM KIẾM  MEMBERSHIP FEE */}
         <SearchMembership {...props} />

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 
 import { Tabs, TabsContent } from '@/components/ui/tabs'
@@ -9,6 +9,7 @@ import { TYPE_MEMBERSHIP_PACKAGE } from '@/constants'
 import { TFeePackage } from '@/types/type'
 import PriorityCard from '@/components/customize/priority.card'
 import { getMembershipPackageName } from '@/utils'
+import { useSearchParams } from 'next/navigation'
 
 const PackageCard = dynamic(
   () => import('@/components/customize/package.card'),
@@ -22,28 +23,15 @@ type TMemberShipProps = {
 export default function MembershipComponent(props: TMemberShipProps) {
   const [keyword, searchKeyword] = useState('')
 
-  return (
-    <div className='grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 lg:gap-8 mb-2 '>
-      <PackageCard
-        memberships={(props.memberships || []).filter(
-          (membership) =>
-            membership.type_upgrade == TYPE_MEMBERSHIP_PACKAGE.PREMIUM &&
-            getMembershipPackageName(membership)
-              .toLowerCase()
-              .includes(keyword.toLowerCase())
-        )}
-      />
-      <PriorityCard
-        memberships={(props.memberships || []).filter(
-          (membership) =>
-            membership.type_upgrade == TYPE_MEMBERSHIP_PACKAGE.PRIORITY &&
-            getMembershipPackageName(membership)
-              .toLowerCase()
-              .includes(keyword.toLowerCase())
-        )}
-      />
-    </div>
-  )
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    const code = searchParams.get('employee_code')
+    if (code) {
+      sessionStorage.setItem('employee_code', code)
+    }
+  }, [searchParams])
+
   return (
     <div>
       <Tabs defaultValue='account'>
@@ -52,19 +40,19 @@ export default function MembershipComponent(props: TMemberShipProps) {
         </div>
         <TabsContent value='all'>
           <div className='grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 lg:gap-8 mb-2 '>
-            <PackageCard
+            <PriorityCard
               memberships={(props.memberships || []).filter(
                 (membership) =>
-                  membership.type_upgrade == TYPE_MEMBERSHIP_PACKAGE.PREMIUM &&
+                  membership.type_upgrade == TYPE_MEMBERSHIP_PACKAGE.PRIORITY &&
                   getMembershipPackageName(membership)
                     .toLowerCase()
                     .includes(keyword.toLowerCase())
               )}
             />
-            <PriorityCard
+            <PackageCard
               memberships={(props.memberships || []).filter(
                 (membership) =>
-                  membership.type_upgrade == TYPE_MEMBERSHIP_PACKAGE.PRIORITY &&
+                  membership.type_upgrade == TYPE_MEMBERSHIP_PACKAGE.PREMIUM &&
                   getMembershipPackageName(membership)
                     .toLowerCase()
                     .includes(keyword.toLowerCase())

@@ -59,7 +59,8 @@ export default function PackageCard({
         </div>
         <div className='absolute text-[16px]  right-0 left-0 bottom-0 p-3 sm:p-4  flex justify-center  items-center'>
           <span className={clsx(styles.packageCard)}>
-            {t('year-package', { year: membership.year_add })}
+            {/* {t('year-package', { year: membership.year_add })} */}
+            {membership.option_name}
           </span>
         </div>
       </div>

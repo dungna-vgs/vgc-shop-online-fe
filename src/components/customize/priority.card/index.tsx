@@ -16,6 +16,7 @@ type TPackageCardProps = {
   cardClassName?: string
   imgClassName?: string
   textClassName?: string
+  hideIcon?: boolean
 }
 
 export default function PriorityCard({
@@ -23,7 +24,8 @@ export default function PriorityCard({
   showBuyButton = true,
   cardClassName = '',
   imgClassName = '',
-  textClassName = ''
+  textClassName = '',
+  hideIcon
 }: TPackageCardProps) {
   const { t } = useTranslation('common')
   const handleClickBuyButton = (feePackage: TFeePackage) => {
@@ -68,15 +70,19 @@ export default function PriorityCard({
         </div>
         <div className='absolute text-[16px]  right-0 left-0 bottom-0 p-3 sm:p-4  flex justify-center flex-col gap-2  items-center'>
           <span className={clsx(styles.packageCard)}>
-            {t('year-prio', { year: membership.year_add })}
+            {/* {t('year-prio', { year: membership.year_add })}
+             */}
+            {membership.option_name}
           </span>
-          <Image
-            src='/images/prio.svg'
-            width={38}
-            height={29}
-            alt='Icon Priotity'
-            quality={60}
-          />
+          {!hideIcon && (
+            <Image
+              src='/images/prio.svg'
+              width={38}
+              height={29}
+              alt='Icon Priotity'
+              quality={60}
+            />
+          )}
         </div>
       </div>
       {showBuyButton && (

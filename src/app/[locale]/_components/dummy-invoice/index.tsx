@@ -26,6 +26,7 @@ import {
 import { useTranslation } from 'react-i18next'
 import { ETransactionProvider } from '@/types/transaction-provider'
 import axios from 'axios'
+import { useSearchParams } from 'next/navigation'
 
 type Props = {
   amount: number
@@ -46,6 +47,20 @@ export default function DummyInvoice({
   const { employee, setEmployeeCode } = useEmployeeStore()
   const { buyer, vga, feePackage } = useGlobalStore()
   const showToast = useToastStore((state) => state.showToast)
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    let code = searchParams.get('employee_code')
+    if (code) {
+      sessionStorage.setItem('employee_code', code)
+      setEmployeeCode(code)
+    } else {
+      code = sessionStorage.getItem('employee_code')
+      if (code) {
+        setEmployeeCode(code)
+      }
+    }
+  }, [searchParams, setEmployeeCode])
 
   useEffect(() => {
     if (discount === undefined) {

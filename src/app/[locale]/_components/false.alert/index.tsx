@@ -60,7 +60,7 @@ export default function SuccessAlert() {
                   <li>{t('check-again')}</li>
                   <li>
                     {t('hotline')}
-                    <span className='text-[#17573C]'>0899.955.599</span>{' '}
+                    <span className='text-[#17573C]'>19002126</span>{' '}
                     {t('suport')}
                   </li>
                 </ul>

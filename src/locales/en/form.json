@@ -22,7 +22,7 @@
   "process": "Transaction is in process",
   "success": "Check successful",
   "successful": "Transaction status successful",
-  "check-account": "Please check the vHandicap account received.",
+  "check-account": "Please check your vHandicap account and contact customer service to receive the promotion.",
   "contact": "If you have any questions, please contact customer service via the hotline",
   "support": "for assistance",
   "home": "Home",
@@ -34,9 +34,9 @@
   "recipient": "Recipient",
   "total": "Total",
   "discount": "Discount",
-  "membership-fee-gift":"Membership Fee Gift",
-  "months":"Months",
-  "month":"Month",
+  "membership-fee-gift": "Membership Fee Gift",
+  "months": "Months",
+  "month": "Month",
   "amount": "Total amount",
   "staff-code": "Consultant staff code",
   "payment-information": "Payment information",
@@ -91,5 +91,6 @@
   "ads": "Advertisement",
   "build-event": "Organize a Golf event",
   "register": "Register",
-  "otp": "Send OTP"
+  "otp": "Send OTP",
+  "package-member": "Package"
 }

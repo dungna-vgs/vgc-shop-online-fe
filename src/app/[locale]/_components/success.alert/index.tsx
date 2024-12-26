@@ -86,10 +86,10 @@ export default function SuccessAlert({ transactionId }: Props) {
                 <li>
                   {t('contact')}{' '}
                   <a
-                    href='tel:0899955599'
+                    href='tel:19002126'
                     className='no-underline text-[#17573C]'
                   >
-                    0899.955.599
+                    19002126
                   </a>{' '}
                   {t('support')}
                 </li>
@@ -113,10 +113,10 @@ export default function SuccessAlert({ transactionId }: Props) {
                 <li>
                   {t('hotline')}{' '}
                   <a
-                    href='tel:0899955599'
+                    href='tel:19002126'
                     className='no-underline text-[#17573C]'
                   >
-                    0899.955.599
+                    19002126
                   </a>{' '}
                   {t('support')}
                 </li>

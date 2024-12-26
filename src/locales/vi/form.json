@@ -22,7 +22,7 @@
   "process": "Đang trong quá trình giao dịch",
   "success": "Kiểm tra thành công",
   "successful": "Trạng thái giao dịch thành công",
-  "check-account": "Vui lòng kiểm tra tài khoản vHandicap nhận.",
+  "check-account": "Vui lòng kiểm tra tài khoản vHandicap và liên hệ CSKH để nhận ưu đãi nhé.",
   "contact": "Nếu có bất kỳ thắc mắc nào, vui lòng liên hệ CSKH qua hotline",
   "support": "để được hỗ trợ",
   "home": "Trang chủ",
@@ -92,5 +92,7 @@
   "build-event": "Tổ chức sự kiện Golf",
   "register": "Đăng ký",
   "otp": "Gửi mã OTP",
-  "success-form": "Cảm ơn bạn, thông tin đã được gửi thành công! Chúng tôi sẽ liên hệ lại sớm."
+  "success-form": "Cảm ơn bạn, thông tin đã được gửi thành công! Chúng tôi sẽ liên hệ lại sớm.",
+  "package-member": "Gói hội viên"
+
 }

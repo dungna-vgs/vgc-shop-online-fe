@@ -165,10 +165,10 @@ export default function PolicyPgae() {
                     Nam. <strong>Hotline:</strong>{' '}
                     <Link
                       className='text-green-700'
-                      href='tel:+0899855599'
+                      href='tel:19002126'
                       target='_blank'
                     >
-                      1900 2126
+                      19002126
                     </Link>{' '}
                     hoặc <strong>Email:</strong>{' '}
                     <Link
@@ -336,10 +336,10 @@ export default function PolicyPgae() {
                     Hà Nội, Việt Nam. <strong>Hotline:</strong>{' '}
                     <Link
                       className='text-green-700'
-                      href='tel:+0899855599'
+                      href='tel:19002126'
                       target='_blank'
                     >
-                      1900 2126
+                      19002126
                     </Link>{' '}
                     hoặc <strong>Email:</strong>{' '}
                     <Link
@@ -378,10 +378,10 @@ export default function PolicyPgae() {
                     <strong>Hotline:</strong>{' '}
                     <Link
                       className='text-green-700'
-                      href='tel:+0899855599'
+                      href='tel:19002126'
                       target='_blank'
                     >
-                      1900 2126
+                      19002126
                     </Link>{' '}
                     hoặc <strong>Email:</strong>{' '}
                     <Link
@@ -445,10 +445,10 @@ export default function PolicyPgae() {
                     qua <strong>Hotline:</strong>{' '}
                     <Link
                       className='text-green-700'
-                      href='tel:+0899855599'
+                      href='tel:19002126'
                       target='_blank'
                     >
-                      1900 2126
+                      19002126
                     </Link>{' '}
                     hoặc <strong>Email:</strong>{' '}
                     <Link

@@ -14,6 +14,7 @@ import viVN from 'antd/lib/locale/vi_VN'
 import enUS from 'antd/lib/locale/en_US'
 import '@/styles/style.css'
 import { getI18n } from 'react-i18next'
+import { useSearchParams } from 'next/navigation'
 type TListVGAsProps = {
   vgas: TVga[]
   pagination: {
@@ -39,6 +40,15 @@ export default function ListVGAs(props: TListVGAsProps) {
     significance_id,
     limit
   } = useSearchVGA()
+
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    const code = searchParams.get('employee_code')
+    if (code) {
+      sessionStorage.setItem('employee_code', code)
+    }
+  }, [searchParams])
 
   useEffect(() => {
     setVgas(props.vgas)

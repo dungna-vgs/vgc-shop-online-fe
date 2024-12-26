@@ -21,9 +21,9 @@ export default async function MembershipFee() {
   ])
   return (
     <div className={styles.containerBg}>
-      <div className='mt-[84px] max-w-[1200px] mx-auto min-h-[100vh] py-6  px-4'>
+      <div className='mt-[84px] max-w-[1200px] mx-auto min-h-[100vh] py-6 px-4'>
         <div>
-          <div className='flex justify-between items-center pb-4'>
+          <div className='flex justify-between items-center'>
             <TitlePackage />
           </div>
           <div className={clsx(styles.customizeCard)}>

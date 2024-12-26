@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 export default function TitlePackage() {
   const { t } = useTranslation('common')
   return (
-    <div className='flex justify-between items-center pb-6'>
+    <div className='flex justify-between items-center pb-4'>
       <h3 className='text-xl font-semibold text-[#000]'>{t('cost')}</h3>
     </div>
   )

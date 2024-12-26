@@ -47,8 +47,8 @@ const Footer: React.FC = () => {
             </div>
             <div className='flex items-center gap-3 justify-start'>
               <Phone />
-              <Link href='tel:+0899955599' target='_blank' className=''>
-                1900 2126
+              <Link href='tel:19002126' target='_blank' className=''>
+                19002126
               </Link>
             </div>
             <div className='flex items-center gap-3 justify-start lg:hidden'>
@@ -147,8 +147,8 @@ const Footer: React.FC = () => {
             </div>
             <div className='flex items-center gap-3 justify-start'>
               <Phone />
-              <Link href='tel:+0899855599' target='_blank'>
-                1900 2126
+              <Link href='tel:19002126' target='_blank'>
+                19002126
               </Link>
             </div>
             <div className='flex items-center gap-3 justify-start'>

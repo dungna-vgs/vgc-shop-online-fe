@@ -27,6 +27,7 @@ export default function VGABill({ promotion }: TVGABill) {
   if (!buyer || (!vga && !feePackage)) return null
 
   const money = vga?.amount || feePackage?.amount || 0
+  const isPriority = feePackage?.sub_name.startsWith('Prio')
   return (
     <div>
       <div className='px-0 lg:px-6 py-4'>
@@ -55,18 +56,40 @@ export default function VGABill({ promotion }: TVGABill) {
               ) : !!feePackage ? (
                 <div className='flex p-4 gap-4 items-center rounded-[7px] border border-[#F1F1F1] bg-[#F6F6F6]'>
                   <div className='relative'>
-                    <Image
-                      src='/images/bg-fee.png'
-                      width={80}
-                      height={50}
-                      alt='Background PackageCard'
-                      quality={60}
-                    />
+                    {isPriority ? (
+                      <div className='relative overflow-hidden '>
+                        <Image
+                          src='/images/prio.png'
+                          width={80}
+                          height={60}
+                          alt='Background PriorityCard'
+                          quality={60}
+                        />
+                        <div className='absolute right-0 top-0 rounded-xl'>
+                          <Image
+                            src='/images/pngimg.svg'
+                            width={34}
+                            height={34}
+                            alt='Icon Priotity'
+                            quality={60}
+                            className='bg-transparent opacity-60'
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <Image
+                        src='/images/bg-fee.png'
+                        width={80}
+                        height={50}
+                        alt='Background PackageCard'
+                        quality={60}
+                      />
+                    )}
                     <div className='absolute top-0 right-0 left-0 bottom-0 w-full h-full flex justify-center items-center'>
                       <span
                         className={clsx(
                           'text-white font-bold uppercase text-xs mb-3 block',
-                          styles.title
+                          !isPriority && styles.title
                         )}
                       >
                         {feePackage.sub_name}
