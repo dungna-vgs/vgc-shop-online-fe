@@ -25,6 +25,6 @@
   "result-search": "Found {{total}} results for the keyword {{keyword}}.",
   "maintenance":"The system is under maintenance.",
   "404":"Page not found",
-  "private":"Privacy policy",
+  "private":"Customer policy",
   "year-prio": "Priority Membership Package {{year}} year"
 }
